@@ -32,6 +32,6 @@ The file name (without `.html`) is the page's URL. Then add a link to it from a 
 
 ## Preview locally (optional)
 ```
-python3 build.py --check      # needs only Python 3.8+
-python3 -m http.server -d dist
+python3 serve.py              # builds, serves http://localhost:8000, rebuilds when you save (needs only Python 3.8+)
+python3 build.py --check      # what CI runs: fails on broken internal links
 ```

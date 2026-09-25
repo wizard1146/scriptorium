@@ -1,5 +1,21 @@
-// Mobile sidebar toggle. Nothing else: the site works without JavaScript except search.
-document.querySelector('.site-header__menu-button')?.addEventListener('click', e => {
-  const open = document.body.classList.toggle('sidebar-open');
-  e.currentTarget.setAttribute('aria-expanded', open);
-});
+// Sidebar drawer (phones, < 768px). From 768px up the sidebar is a persistent rail and none of this runs.
+// Nothing else on the site needs JavaScript except search.
+(() => {
+  const openBtn = document.getElementById('nav-open-button');
+  const closeBtn = document.getElementById('nav-close-button');
+  const backdrop = document.getElementById('site-backdrop');
+  const sidebar = document.getElementById('site-sidebar');
+  if (!openBtn || !sidebar) return;
+  const set = open => {
+    document.body.classList.toggle('sidebar-open', open);
+    openBtn.setAttribute('aria-expanded', open);
+    if (backdrop) backdrop.hidden = !open;
+    if (open) closeBtn?.focus(); else if (document.activeElement && sidebar.contains(document.activeElement)) openBtn.focus();
+  };
+  openBtn.addEventListener('click', () => set(true));
+  closeBtn?.addEventListener('click', () => set(false));
+  backdrop?.addEventListener('click', () => set(false));
+  sidebar.addEventListener('click', e => { if (e.target.closest('.nav-group a')) set(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') set(false); });
+  window.matchMedia('(min-width: 48rem)').addEventListener('change', e => { if (e.matches) set(false); });
+})();

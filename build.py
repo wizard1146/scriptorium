@@ -8,6 +8,10 @@ A content file is an HTML fragment that starts with a metadata comment:
 
     <!--
     title: Game Rules
+    status: needs-update                  (optional; needs-update or retired; see STATUSES below)
+    status_note: Formula changed in Age 110   (optional; added to the banner)
+    tab_title: Game Rules - Scriptorium   (optional; the browser-tab text)
+    hide_title: yes                       (optional; hides the visible heading)
     category: Guides, Rules
     credits: Puppy101, Eucariot
     -->
@@ -40,6 +44,10 @@ def parse_page(path):
         "categories": [c.strip() for c in meta.get("category", "").split(",") if c.strip()],
         "credits": [c.strip() for c in meta.get("credits", "").split(",") if c.strip()],
         "updated": meta.get("updated", ""),
+        "hide_title": meta.get("hide_title", "").lower() in ("yes", "true", "1"),   # optional: visually hide the page heading (still read by screen readers)
+        "tab_title": meta.get("tab_title", ""),
+        "status": meta.get("status", "").lower(),
+        "status_note": meta.get("status_note", ""),   # optional: overrides the browser-tab text (default "<title> · Scriptorium")
     }
 
 
@@ -67,6 +75,16 @@ class Links(HTMLParser):
         if a.get("href"): self.hrefs.append(a["href"])
         if a.get("id"): self.ids.add(a["id"])
 
+
+# Page status, set with `status:` in a page's header comment. Optional `status_note:` adds a sentence to the banner.
+STATUSES = {
+    "needs-update": {"label": "Needs update", "list_slug": "needs-update", "list_title": "Pages that need an update",
+                     "banner": "This page may contain out-of-date information.",
+                     "blurb": "These pages are still useful but contain information that is out of date or incomplete. If you know the current numbers or rules, please update them."},
+    "retired": {"label": "Retired", "list_slug": "retired", "list_title": "Retired pages",
+                "banner": "This page is no longer relevant to the current game. It is kept for historical reference.",
+                "blurb": "These pages describe things that are no longer part of the current game. They are kept for history and rank below live pages in search."},
+}
 
 TABLE_WRAP = re.compile(r'<div class="table-scroll"([^>]*)>')
 
@@ -120,9 +138,17 @@ def render(template, nav, page, extra_body=""):
         names = ", ".join(html.escape(c) for c in page["credits"])
         credits = (f'<details class="page__credits"><summary>Contributors ({len(page["credits"])})</summary>'
                    f'<p>Written by the Utopia community on the original wiki: {names}.</p></details>')
+    nav = nav.replace(f'href="{page["url"]}"', f'href="{page["url"]}" aria-current="page"')   # highlights the current page in the sidebar
     body, _ = add_data_notes(page)
+    st = STATUSES.get(page.get("status", ""))
+    if st:
+        note = f' {html.escape(page["status_note"])}' if page.get("status_note") else ""
+        help_link = ' <a href="contribute.html">Help update it</a>.' if page["status"] == "needs-update" else f' <a href="{st["list_slug"]}.html">All retired pages</a>.'
+        body = (f'<aside class="status-banner status-banner--{page["status"]}" role="note">'
+                f'<strong class="status-banner__label">{st["label"]}.</strong> {st["banner"]}{note}{help_link}</aside>\n') + body
     body += extra_body
-    return fill(template, title=html.escape(page["title"]), body=body, nav=nav, categories=cats, credits=credits,
+    tab = page.get("tab_title") or f'{page["title"]} · Scriptorium'
+    return fill(template, title_class=" page__title--hidden" if page.get("hide_title") else "", tab_title=html.escape(tab), title=html.escape(page["title"]), body=body, nav=nav, categories=cats, credits=credits,
                 description=html.escape(plain(page["body"])[:160]))
 
 
@@ -144,13 +170,21 @@ def main():
     for c, members in sorted(by_cat.items()):
         items = "".join(f'<li><a href="{m["url"]}">{html.escape(m["title"])}</a></li>' for m in sorted(members, key=lambda m: m["title"].lower()))
         generated.append({"slug": category_slug(c), "url": category_slug(c) + ".html", "title": f"Category: {c}",
-                          "body": f'<ul class="page-list">{items}</ul>', "categories": [], "credits": []})
-    items = "".join(f'<li><a href="{p["url"]}">{html.escape(p["title"])}</a></li>' for p in sorted(pages, key=lambda p: p["title"].lower()))
+                          "body": f'<ul class="page-list">{items}</ul>', "categories": [], "credits": [], "status": "", "status_note": ""})
+    def badge(p):
+        st = STATUSES.get(p["status"])
+        return f' <span class="status-badge status-badge--{p["status"]}">{st["label"].lower()}</span>' if st else ""
+    for key, st in STATUSES.items():
+        members = sorted((p for p in pages if p["status"] == key), key=lambda p: p["title"].lower())
+        lis = "".join(f'<li><a href="{m["url"]}">{html.escape(m["title"])}</a>' + (f' <span class="page-list__note">{html.escape(m["status_note"])}</span>' if m["status_note"] else "") + "</li>" for m in members)
+        generated.append({"slug": st["list_slug"], "url": st["list_slug"] + ".html", "title": st["list_title"], "categories": [], "credits": [], "status": "", "status_note": "",
+                          "body": f'<p>{st["blurb"]}</p>' + (f'<ul class="page-list">{lis}</ul>' if members else '<p><em>None right now.</em></p>')})
+    items = "".join(f'<li><a href="{p["url"]}">{html.escape(p["title"])}</a>{badge(p)}</li>' for p in sorted(pages, key=lambda p: p["title"].lower()))
     generated.append({"slug": "all-pages", "url": "all-pages.html", "title": "All pages",
-                      "body": f'<ul class="page-list page-list--all">{items}</ul>', "categories": [], "credits": []})
+                      "body": f'<ul class="page-list page-list--all">{items}</ul>', "categories": [], "credits": [], "status": "", "status_note": ""})
     generated.append({"slug": "404", "url": "404.html", "title": "Page not found",
                       "body": '<p>That page does not exist (yet). Try the search box, or see <a href="all-pages.html">all pages</a>.</p>',
-                      "categories": [], "credits": []})
+                      "categories": [], "credits": [], "status": "", "status_note": ""})
 
     everything = pages + generated
     known = {p["url"] for p in everything} | {"search-index.json"}
@@ -165,9 +199,12 @@ def main():
     for p in pages:
         undated = add_data_notes(p)[1]
         if undated: print(f"WARNING: {p['slug']}: {undated} table(s) have no date (add 'updated: YYYY-MM-DD' to the page header)", file=sys.stderr)
+    for p in pages:
+        if p["status"] and p["status"] not in STATUSES:
+            print(f"WARNING: {p['slug']}: unknown status '{p['status']}' (use: {', '.join(STATUSES)})", file=sys.stderr)
     if "index" not in by_slug: print("WARNING: no content/index.html (home page)", file=sys.stderr)
 
-    index = [{"t": p["title"], "u": p["url"], "x": plain(p["body"])} for p in pages]
+    index = [{"t": p["title"], "u": p["url"], "x": plain(p["body"]), **({"s": STATUSES[p["status"]]["label"]} if p["status"] in STATUSES else {})} for p in pages]
     (DIST / "search-index.json").write_text(json.dumps(index, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     (DIST / ".nojekyll").write_text("")
 

@@ -21,11 +21,13 @@ Every part of the site has one stable name. Use these names in issues, PRs and c
 
 | Name | What it is | Where |
 |---|---|---|
-| `site-header` | Sticky top bar | `site/template.html` |
-| `site-header__brand` | Logo + tagline link to the home page | template |
-| `site-header__menu-button` | ☰ button, mobile only | template + `site.js` |
+| `site-header` | Sticky bar above the page: menu button (phones), search, Play Utopia link | `site/template.html` |
+| `site-header__play-link` | "Play Utopia ↗" link to the game itself | template |
+| `site-backdrop` | Dark overlay behind the open drawer (phones / portrait tablets); tapping it closes the drawer | template + `site.js` |
 | `site-search` | Search box + dropdown (`site-search__input`, `site-search__results`, `search-result`) | template + `search.js` |
-| `site-sidebar` | Left navigation | `content/_nav.html` |
+| `site-sidebar` | Left rail: brand block (`site-sidebar__brand`: `-mark`, `-name`, `-tagline`) + navigation. A drawer below 768px | template + `content/_nav.html` |
+| `site-nav` | The nav inside the sidebar; `nav-group--pinned` keeps a group at the bottom | `content/_nav.html` |
+| `nav-open-button` / `nav-close-button` | ☰ in the header / ✕ in the drawer (phones only) | template + `site.js` |
 | `nav-group` | One titled block of sidebar links (`nav-group__title`, `nav-group__list`) | `_nav.html` |
 | `page` | Main column | template |
 | `page__title` | The page's `<h1>`, filled from the `title:` metadata | template |
@@ -74,7 +76,37 @@ Every part of the site has one stable name. Use these names in issues, PRs and c
 `<a href="magic-formulas.html">Magic Formulas</a>` or with an anchor: `href="mystics.html#Animate_Dead"`.
 `python3 build.py --check` fails if any link points nowhere.
 
+## Page status
+
+Add `status: needs-update` or `status: retired` to a page's header comment (optionally `status_note: why`).
+
+| Name | What it is |
+|---|---|
+| `status-banner` (`--needs-update`, `--retired`) | Notice at the top of the page |
+| `status-badge` | Small pill next to the title in All pages and search results |
+| `needs-update.html`, `retired.html` | Auto-generated lists (linked from the nav). Retired pages rank below live pages in search. |
+
+## Logo and icons
+
+`site/assets/logo.svg` is the mark (plum tile, parchment "S" built from two arcs). `favicon.svg`, `favicon-32.png`, `favicon.ico`
+and `apple-touch-icon.png` are derived from it. The mark is pure geometry, so edit the SVG and re-export the PNGs.
+
+## Screen sizes
+
+| Name | Width | Navigation |
+|---|---|---|
+| phone | under 40rem (640px) | drawer, tight padding |
+| tablet portrait | 40rem – 52rem | drawer, roomy padding, centred column |
+| tablet landscape | 52rem – 75rem | persistent narrower `site-sidebar` |
+| desktop | over 75rem | full layout |
+
+Touch screens (`pointer: coarse`) also get larger tap targets.
+
 ## Colours and fonts
+
+Headings (`--font-heading`): IM Fell English (vendored in `site/assets/fonts/`), then Charter, then system serifs. Headings use weight 400 because IM Fell has no bold.
+Body (`--font-body`): Lora (vendored), then Iowan Old Style, then system serifs. `python3 serve.py` adds an "Aa" font tester for trying alternatives.
+
 
 All colours are variables at the top of `site/assets/style.css` (`--bg`, `--accent`, `--yes-bg`, …)
 with a dark-mode set under `prefers-color-scheme: dark`. Change a variable, not individual rules.
