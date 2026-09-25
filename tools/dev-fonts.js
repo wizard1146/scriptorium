@@ -62,7 +62,7 @@
   panel.id = 'dev-font-panel';
   panel.innerHTML = `
     <style>
-      #dev-font-panel { position: fixed; right: 14px; bottom: 14px; z-index: 99999; font: 13px/1.4 system-ui, sans-serif; color: #222; }
+      #dev-font-panel { position: fixed; left: 14px; bottom: 14px; z-index: 99999; font: 13px/1.4 system-ui, sans-serif; color: #222; }
       #dev-font-panel button.toggle { width: 44px; height: 44px; border-radius: 50%; border: 0; background: #6b2d5c; color: #fff; font: 700 17px Georgia, serif; cursor: pointer; box-shadow: 0 4px 14px #0005; }
       #dev-font-panel .box { display: none; width: 290px; padding: 12px; margin-bottom: 10px; background: #fff; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 8px 28px #0004; }
       #dev-font-panel.open .box { display: block; }
@@ -73,6 +73,7 @@
       #dev-font-panel .row button { flex: 1; padding: 5px; cursor: pointer; }
       #dev-font-panel small { display: block; margin-top: 6px; color: #666; }
       #dev-font-panel .title { font-weight: 700; }
+      @media (min-width: 48rem) { #dev-font-panel { left: calc(15.5rem + 14px); } }   /* sits over the main column, clear of the sidebar; the bottom-right corner belongs to the scroll-to-top button */
     </style>
     <div class="box">
       <div class="title">Font tester (dev only)</div>

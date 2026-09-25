@@ -24,6 +24,7 @@ Every part of the site has one stable name. Use these names in issues, PRs and c
 | `site-header` | Sticky bar above the page: menu button (phones), search, Play Utopia link | `site/template.html` |
 | `site-header__play-link` | "Play Utopia ↗" link to the game itself | template |
 | `site-backdrop` | Dark overlay behind the open drawer (phones / portrait tablets); tapping it closes the drawer | template + `site.js` |
+| `scroll-top` | Round up-arrow button, bottom-right; fades in after scrolling ~400px, scrolls smoothly to the top (instant if the visitor prefers reduced motion) | template + `site.js` |
 | `site-search` | Search box + dropdown (`site-search__input`, `site-search__results`, `search-result`) | template + `search.js` |
 | `site-sidebar` | Left rail: brand block (`site-sidebar__brand`: `-mark`, `-name`, `-tagline`) + navigation. A drawer below 768px | template + `content/_nav.html` |
 | `site-nav` | The nav inside the sidebar; `nav-group--pinned` keeps a group at the bottom | `content/_nav.html` |
@@ -44,6 +45,7 @@ Every part of the site has one stable name. Use these names in issues, PRs and c
 |---|---|
 | *(none)* | Plain `<table>` is styled automatically inside the page body (full width, borders, blue header cells); no class needed |
 | `wiki-table--center` | Centre all cells |
+| `table--mono` | Monospace font (system stack, `--font-mono`) for the whole table. Put it on the `<table>`. Used on Current Changes |
 | `table-scroll` | Wrapper div that lets wide tables scroll sideways on phones |
 | `cell-yes` / `cell-no` | Bold green "Yes" / red "No" cells |
 | `cell-good` / `cell-bad` | Soft green / red background (bonuses / penalties) |

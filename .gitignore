@@ -2,3 +2,6 @@ dist/
 data/rendered/
 __pycache__/
 .DS_Store
+
+# source documents from the game (not ours to redistribute)
+*.pdf

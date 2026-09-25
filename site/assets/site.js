@@ -34,3 +34,17 @@
   const toc = document.getElementById('toc');
   if (toc && matchMedia('(max-width: 47.99rem)').matches) toc.removeAttribute('open');
 })();
+
+// Scroll-to-top button: appears once you are a screenful or so down the page.
+(() => {
+  const btn = document.getElementById('scroll-top');
+  if (!btn) return;
+  let queued = false;
+  const update = () => { btn.classList.toggle('is-visible', window.scrollY > 400); queued = false; };
+  addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
+  btn.addEventListener('click', () => {
+    const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    scrollTo({ top: 0, behavior: calm ? 'auto' : 'smooth' });
+  });
+  update();
+})();
