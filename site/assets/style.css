@@ -35,10 +35,10 @@
   --surface: #ffffff;
   --sidebar-bg: #f1ece0;    /* a shade deeper than the page */
   --text-dim: #4a463d;
-  --text: #22201b;
+  --text: #29261c;          /* dark end of the Play Utopia gradient */
   --muted: #6b6558;
   --border: #ddd5c3;
-  --accent: #6b2d5c;        /* plum */
+  --accent: #6f674a;        /* olive khaki: the Play Utopia gradient's centre (#7b7354), darkened slightly so small text passes AA contrast */
   --accent-text: #ffffff;
   --link: #2a5d9f;
   --link-visited: #6b3fa0;
@@ -55,6 +55,8 @@
   --warn-bg: #fff3cd; --warn-border: #e2c96f; --warn-text: #5c4400;
   --dark-bg: #000; --dark-text: #fff;
 
+  --header-h: 3.6rem;        /* fixed height of the sticky header; the sticky page title pins just below it */
+  --page-pad: 2rem;          /* horizontal padding of the page column (smaller on tablets and phones) */
   --sidebar-w: 15.5rem;      /* 248px persistent rail (768px and up) */
   --content-w: 62rem;
   --font-heading: "IM Fell English", Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;   /* brand name, page title, h2: vendored font, then Charter, then system serif */
@@ -66,7 +68,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #17141a; --surface: #201c25; --sidebar-bg: #100d13; --text-dim: #c9c3d2; --text: #e9e4ee; --muted: #a59fb0; --border: #3a3342;
-    --accent: #c78bb6; --accent-text: #17141a; --link: #8fb8f0; --link-visited: #b89bea;
+    --accent: #c2b78a; --accent-text: #17141a; --link: #8fb8f0; --link-visited: #b89bea;
     --header-bg: #0f0c12; --header-text: #f3e9d2;
     --yes-bg: #1c3d2a; --yes-text: #b7f0c9; --no-bg: #4a1f26; --no-text: #f6c4ca;
     --good-bg: #1d3b25; --bad-bg: #472228; --head-bg: #2c3a52; --head-text: #dbe6f7; --band-bg: #2a2532;
@@ -76,7 +78,7 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-padding-top: 4.5rem; }
+html { scroll-padding-top: calc(var(--header-h) + 4.5rem); }   /* anchor links land below the header and the pinned title */
 body { margin: 0; background: var(--bg); color: var(--text); font: 1rem/1.6 var(--font-body); }
 a { color: var(--link); }
 a:visited { color: var(--link-visited); }
@@ -87,8 +89,8 @@ a:visited { color: var(--link-visited); }
 .site-main > .page { flex: 1; width: 100%; }
 
 /* ---- site-sidebar: brand block, grouped nav, pinned group at the bottom ---- */
-.site-sidebar { position: sticky; top: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; gap: 1.3rem; padding: 1.4rem 0 1rem; background: var(--sidebar-bg); border-right: 1px solid var(--border); }
-.site-sidebar__brand { display: flex; align-items: flex-start; justify-content: space-between; gap: .5rem; padding: 0 1.3rem; }
+.site-sidebar { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; background: var(--sidebar-bg); border-right: 1px solid var(--border); }   /* the sidebar itself never scrolls: the brand stays put, only .site-nav scrolls */
+.site-sidebar__brand { flex: none; display: flex; align-items: flex-start; justify-content: space-between; gap: .5rem; padding: 1.4rem 1.3rem .9rem; border-bottom: 1px solid var(--border); }   /* pinned to the top of the sidebar */
 .site-sidebar__brand-link, .site-sidebar__brand-link:visited { display: flex; align-items: center; gap: .65rem; text-decoration: none; color: var(--accent); line-height: 1.2; }
 .site-sidebar__brand-mark { flex: none; border-radius: 9px; }
 .site-sidebar__brand-text { display: flex; flex-direction: column; }
@@ -97,7 +99,7 @@ a:visited { color: var(--link-visited); }
 .site-sidebar__close { display: none; background: none; border: 0; color: var(--muted); padding: .4rem; margin: -.3rem -.4rem 0 0; cursor: pointer; }
 .site-sidebar__close:hover { color: var(--text); }
 
-.site-nav { flex: 1; display: flex; flex-direction: column; gap: 1.1rem; padding: 0 .7rem; font-size: .92rem; }
+.site-nav { position: relative; flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; display: flex; flex-direction: column; gap: 1.1rem; padding: 1rem .7rem; font-size: .92rem; }   /* scrolls independently; position is remembered across pages (see the inline script in template.html) */
 .nav-group__title { margin: 0 0 .25rem; padding: 0 .7rem; font-size: .7rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); }   /* same plum as the Play Utopia button */
 .nav-group__list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 1px; }
 .nav-group__list a, .nav-group__list a:visited { display: block; padding: .42rem .7rem; border-radius: .3rem; text-decoration: none; color: var(--text-dim); transition: background-color .12s, color .12s; }
@@ -106,9 +108,9 @@ a:visited { color: var(--link-visited); }
 .nav-group--pinned { margin-top: auto; padding-top: .9rem; border-top: 1px solid var(--border); }   /* stays at the bottom of the rail, like Settings in Hegemoney */
 
 /* ---- site-header: sticky bar above the page ---- */
-.site-header { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: .8rem; padding: .7rem 2rem; background: var(--bg); border-bottom: 1px solid var(--border); }
+.site-header { position: sticky; top: 0; z-index: 20; height: var(--header-h); display: flex; align-items: center; gap: .8rem; padding: .7rem 2rem; background: var(--bg); border-bottom: 1px solid var(--border); }
 .site-header__menu-button { display: none; background: none; border: 0; color: var(--text); padding: .4rem; margin-left: -.4rem; cursor: pointer; }
-.site-header__play-link, .site-header__play-link:visited { margin-left: auto; padding: .38rem .95rem; border-radius: .4rem; background: var(--accent); color: var(--accent-text); font-size: .85rem; font-weight: 600; white-space: nowrap; text-decoration: none; }
+.site-header__play-link, .site-header__play-link:visited { margin-left: auto; padding: .38rem .95rem; border-radius: .4rem; background: radial-gradient(ellipse at center, #7b7354 0%, #29261c 100%); color: #fff; font-size: .85rem; font-weight: 600; white-space: nowrap; text-decoration: none; }
 .site-header__play-link:hover, .site-header__play-link:visited:hover, .site-header__play-link:focus-visible { background: var(--surface); color: var(--accent); box-shadow: inset 0 0 0 1.5px var(--accent); }   /* inverts on hover: light fill, accent text + outline */
 
 /* ---- site-search ---- */
@@ -125,8 +127,11 @@ a:visited { color: var(--link-visited); }
 .search-result--empty { padding: .5rem .6rem; color: var(--muted); }
 
 /* ---- page ---- */
-.page { padding: 1.75rem 2rem 3rem; min-width: 0; }
-.page__title { margin: 0 0 1rem; font: 400 2rem/1.2 var(--font-heading); padding-bottom: .4rem; border-bottom: 2px solid var(--accent); }
+.page { padding: 1.75rem var(--page-pad) 3rem; min-width: 0; }
+.page__title { margin: 0 calc(-1 * var(--page-pad)) 1rem; padding: .5rem var(--page-pad) .4rem; font: 400 2rem/1.2 var(--font-heading); background: var(--bg); border-bottom: 2px solid var(--accent); }
+/* The title scrolls with the page, then pins just under the header. Skipped on short windows (e.g. a phone held sideways),
+   where a pinned bar would take too much of the screen. */
+@media (min-height: 32rem) { .page__title:not(.page__title--hidden) { position: sticky; top: var(--header-h); z-index: 10; } }
 .page__title--hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }   /* visually hidden, still exposed to screen readers */
 .page__body h2 { margin: 2rem 0 .6rem; font: 400 1.5rem var(--font-heading); border-bottom: 1px solid var(--border); padding-bottom: .2rem; }
 .page__body h3 { margin: 1.5rem 0 .4rem; font-size: 1.2rem; }
@@ -157,14 +162,14 @@ a:visited { color: var(--link-visited); }
 .site-footer { padding: 1.5rem 1rem; text-align: center; font-size: .8rem; color: var(--muted); border-top: 1px solid var(--border); }
 .site-footer p { margin: .2rem 0; }
 
-/* ---- content vocabulary: tables ---- */
-.wiki-table { border-collapse: collapse; margin: 1rem 0; max-width: 100%; font-size: .92rem; background: var(--surface); }
-.wiki-table th, .wiki-table td { padding: .35rem .6rem; border: 1px solid var(--border); vertical-align: top; }
-.wiki-table th { background: var(--head-bg); color: var(--head-text); text-align: center; }
+/* ---- content vocabulary: tables ----
+   Every <table> inside .page__body is styled automatically; no class needed. Modifiers are optional classes. */
+.page__body table { border-collapse: collapse; margin: 1rem 0; width: 100%; max-width: 100%; font-size: .92rem; background: var(--surface); }
+.page__body table th, .page__body table td { padding: .35rem .6rem; border: 1px solid var(--border); vertical-align: top; }
+.page__body table th { background: var(--head-bg); color: var(--head-text); text-align: center; }
 .table-scroll { overflow-x: auto; margin: 1rem 0; }
-.table-scroll > .wiki-table { margin: 0; }
+.page__body .table-scroll > table { margin: 0; }
 .wiki-table--center td { text-align: center; }
-.wiki-table--wide { width: 100%; }
 
 .cell-yes  { background: var(--yes-bg); color: var(--yes-text); text-align: center; font-weight: 600; }
 .cell-no   { background: var(--no-bg);  color: var(--no-text);  text-align: center; font-weight: 600; }
@@ -191,6 +196,34 @@ a:visited { color: var(--link-visited); }
 .status-badge--retired { background: var(--band-bg); color: var(--muted); border: 1px solid var(--border); }
 .page-list__note { color: var(--muted); font-size: .85rem; }
 
+/* toc: "On this page". Built by build.py when a page has enough h2/h3 headings (see TOC_MIN_HEADINGS).
+   A compact box floated top-right on wide screens; full width, and collapsed on phones, below that.
+   toc--block: full width on pages that open with a table (a table can't sit beside a floated box). */
+.page__body .toc { float: right; width: 15rem; max-height: 24rem; overflow-y: auto; margin: 0 0 1rem 1.5rem; padding: .6rem .8rem; background: var(--surface); border: 1px solid var(--border); border-radius: .4rem; font-size: .85rem; line-height: 1.4; }
+.page__body .toc > summary.toc__title { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); }
+.toc__list, .toc__sublist { margin: .4rem 0 0; padding: 0; list-style: none; }
+.toc__sublist { margin: .1rem 0 .3rem; padding-left: .9rem; }
+.page__body .toc li { max-width: none; }
+.toc__link, .toc__link:visited { display: block; padding: .18rem 0; color: var(--text-dim); text-decoration: none; }
+.toc__link:hover, .toc__link:focus-visible { color: var(--link); text-decoration: underline; }
+.page__body .toc--block { float: none; width: auto; max-height: none; margin: 0 0 1.2rem; }
+@media (max-width: 63.99rem) { .page__body .toc { float: none; width: auto; max-height: none; margin: 0 0 1.2rem; } }
+.status-banner { overflow: hidden; }     /* so a floated table of contents sits beside the banner instead of underneath it */
+
+/* faq-item: one collapsible question/answer (native <details>, no JavaScript). Used on the FAQ page. */
+.page__body .faq-item { margin: .5rem 0; padding: 0; background: var(--surface); border: 1px solid var(--border); border-radius: .5rem; overflow: hidden; }
+.page__body .faq-item > summary { position: relative; padding: .8rem 2.6rem .8rem 1rem; font-weight: 600; cursor: pointer; list-style: none; }
+.page__body .faq-item > summary::-webkit-details-marker { display: none; }
+.page__body .faq-item > summary::after { content: ""; position: absolute; right: 1.1rem; top: 50%; width: .5rem; height: .5rem; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: translateY(-70%) rotate(45deg); transition: transform .15s; }
+.page__body .faq-item[open] > summary::after { transform: translateY(-25%) rotate(-135deg); }
+.page__body .faq-item > summary:hover { background: var(--band-bg); }
+.page__body .faq-item > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.page__body .faq-item[open] > summary { color: var(--accent); border-bottom: 1px solid var(--border); }
+.faq-item__answer { padding: .3rem 1rem .9rem; }
+.faq-item__answer > :first-child { margin-top: .6rem; }
+.faq-item__answer > :last-child { margin-bottom: 0; }
+@media (prefers-reduced-motion: reduce) { .page__body .faq-item > summary::after { transition: none; } }
+
 /* ---- content vocabulary: boxes ---- */
 .infobox { float: right; clear: right; margin: 0 0 1rem 1.5rem; width: min(22rem, 100%); }
 .callout { margin: 1rem 0; padding: .7rem 1rem; border-left: 4px solid var(--accent); background: var(--band-bg); border-radius: 0 .4rem .4rem 0; }
@@ -208,9 +241,9 @@ a:visited { color: var(--link-visited); }
    desktop > 64rem           full layout                                                        */
 @media (min-width: 48rem) and (max-width: 64rem) {
   .site-header { padding: .7rem 1.5rem; }
-  .page { padding: 1.5rem 1.5rem 2.5rem; }
-  .wiki-table { font-size: .88rem; }
-  .wiki-table th, .wiki-table td { padding: .3rem .5rem; }
+  .page { --page-pad: 1.5rem; padding: 1.5rem var(--page-pad) 2.5rem; }
+  .page__body table { font-size: .88rem; }
+  .page__body table th, .page__body table td { padding: .3rem .5rem; }
 }
 
 @media (max-width: 47.99rem) {
@@ -220,7 +253,7 @@ a:visited { color: var(--link-visited); }
   body.sidebar-open { overflow: hidden; }
   .site-sidebar__close, .site-header__menu-button { display: block; }
   .site-header { padding: .55rem .8rem; }
-  .page { padding: 1.25rem 1rem 2.5rem; }
+  .page { --page-pad: 1rem; padding: 1.25rem var(--page-pad) 2.5rem; }
   .page__title { font-size: 1.6rem; }
   .infobox { float: none; margin: 1rem 0; width: 100%; }
 }

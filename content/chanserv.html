@@ -44,8 +44,8 @@ channel, you may share the password you used to create the channel with them (pl
 <p>Allows the channel founder to set various channel options (registered channels).</p>
 
 <div class="table-scroll">
-<table class="wiki-table">
-<table class="wiki-table">
+<table>
+<table>
 <tr><td class="cell-dark"><b>SET</b></td><td class="cell-dark"><b>Command</b></td><td class="cell-dark"><b>Description</b></td></tr>
 <tr><td><b>FOUNDER</b></td><td>/cs SET #channel founder &lt;nick&gt;</td><td><i>Sets &lt;nick&gt; as founder for the channel</i></td></tr>
 <tr><td><b>PASSWORD</b></td><td>/cs SET #channel password &lt;newpass&gt;</td><td><i>Changes the existing FOUNDER password to the channel</i></td></tr>
@@ -69,8 +69,8 @@ channel, you may share the password you used to create the channel with them (pl
 <pre>Returns the current access level of the given nickname on the given channel.
 </pre>
 <h4 id="AKICK_COMMANDS">AKICK COMMANDS</h4>
-<table class="wiki-table">
-<table class="wiki-table">
+<table>
+<table>
 <tr><td class="cell-dark"><b>AKICK</b></td><td class="cell-dark"><b>Command</b></td><td class="cell-dark"><b>Description</b></td></tr>
 <tr><td><b>ADD</b></td><td>/cs akick #channel add <u>mask</u> [<u>reason</u>]</td><td><i>The AKICK ADD command adds the given user@host or nick!user@host mask to the autokick list.  If a reason is given with the command, that reason will be used when the user is kicked; if not, the default reason is "You have been banned from the channel".</i></td></tr>
 <tr><td><b>DEL</b></td><td>/cs AKICK #channel del &lt;mask&gt;</td><td><i>The AKICK DEL command removes the given mask from the autokick list.  It does not, however, remove any bans placed by an autokick; those must be removed manually.</i></td></tr>
@@ -78,8 +78,8 @@ channel, you may share the password you used to create the channel with them (pl
 <tr><td><b>ENFORCE</b></td><td>/cs AKICK #channel enforce</td><td><i> ChanServ will enforce the current autokick list by removing those users who match an autokick mask.</i></td></tr>
 <tr><td><b>COUNT</b></td><td>/cs AKICK #channel count</td><td><i>The AKICK COUNT command returns how many entries there are on the autokick list.</i></td></tr></table>
 <h4 id="CLEAR_COMMANDS">CLEAR COMMANDS</h4>
-<table class="wiki-table">
-<table class="wiki-table">
+<table>
+<table>
 <tr><td class="cell-dark"><b>CLEAR</b></td><td class="cell-dark"><b>Command</b></td><td class="cell-dark"><b>Description</b></td></tr>
 <tr><td><b>MODES</b></td><td>/cs CLEAR #channel modes</td><td><i>Clears all modes on the channel except those set in the channel's mlock.</i></td></tr>
 <tr><td><b>BANS</b></td><td>/cs CLEAR #channel bans</td><td><i>Clears all bans on a channel.</i></td></tr>
@@ -138,8 +138,8 @@ and successor will also be displayed.
    ACCESS #channel COUNT
 </pre>
 <h3 id="Defaults">Defaults</h3>
-<table class="wiki-table">
-<table class="wiki-table">
+<table>
+<table>
 <tr><td class="cell-dark"><b>ACCESS TYPE</b></td><td class="cell-dark"><b>Command</b></td><td class="cell-dark"><b>Description</b></td><td class="cell-dark"><b>Privileges</b></td></tr>
 <tr><td><b>SOP</b></td><td><p><b>SOP #channel ADD/DEL nickname</b></p>
 <p><b>SOP #channel LIST [mask | list]</b></p>
@@ -182,8 +182,8 @@ identified. HOP may be conferred by
 AOPs, SOPs and owners.</p></td></tr></table>
 <h2 id="CHANGING_A_CHANNEL_OP_LIST_.28TEMPORARY.29">CHANGING A CHANNEL OP LIST (TEMPORARY)</h2>
 <p><i>Used to confer or take away ops from a user in the channel. However, this does not affect the access list.</i></p>
-<table class="wiki-table">
-<table class="wiki-table">
+<table>
+<table>
 <tr><td class="cell-dark"><b>COMMAND</b></td><td class="cell-dark"><b>SYNTAX</b></td><td class="cell-dark"><b>DESCRIPTION</b></td></tr>
 <tr><td><b>PROTECT</b></td><td>/cs protect #channel &lt;nick&gt;</td><td><i>Gives channel protection to a selected nickname.</i></td></tr>
 <tr><td><b>DEPROTECT</b></td><td>/cs deprotect #channel &lt;nick&gt;</td><td><i>Removes channel protection from a selected nickname.</i></td></tr>
@@ -212,8 +212,8 @@ do not play around with these commands, and leave them as the default.
 <b>LEVELS LIST</b> shows the current levels for each function or group of functions. 
 <b>LEVELS RESET</b> resets the levels to the default levels of a newly-created channel (see <a href="chanserv.html#Default_Channel_Access_Levels">Default Channel Access Levels</a>).
 </pre>
-<table class="wiki-table">
-<table class="wiki-table">
+<table>
+<table>
 <tr><td class="cell-dark"><b>TYPE</b></td><td class="cell-dark"><b>DEFAULT LEVEL</b></td><td class="cell-dark"><b>DESCRIPTION</b></td></tr>
 <tr><td><b>AUTOPROTECT</b></td><td>100</td><td><i>Auto +a status on joining</i></td></tr>
 <tr><td><b>AUTO OP</b></td><td>50</td><td><i>Auto +o status on joining</i></td></tr>

@@ -38,6 +38,17 @@
     <nav class="site-nav" id="site-nav">
 {{nav}}
     </nav>
+    <script>
+      /* Restore the nav's scroll position before first paint, so clicking a link doesn't send the sidebar back to the top.
+         First visit in a tab: centre the current page's link instead. */
+      (function () {
+        try {
+          var nav = document.getElementById('site-nav'), y = sessionStorage.getItem('scriptorium-nav-scroll');
+          if (y !== null) nav.scrollTop = +y;
+          else { var a = nav.querySelector('[aria-current="page"]'); if (a) nav.scrollTop = a.offsetTop - nav.clientHeight / 2 + a.offsetHeight / 2; }
+        } catch (e) {}
+      })();
+    </script>
   </aside>
 
   <div class="site-main" id="site-main">
@@ -52,13 +63,14 @@
         <input class="site-search__input" type="search" placeholder="Search the wiki…" aria-label="Search" autocomplete="off">
         <ol class="site-search__results" hidden></ol>
       </form>
-      <a class="site-header__play-link" href="https://utopia-game.com/" target="_blank" rel="noopener">Play Utopia <span aria-hidden="true">↗</span></a>
+      <a class="site-header__play-link" href="https://utopia-game.com/" target="_blank" rel="noopener" aria-label="Play Utopia (opens in a new tab)">Play Utopia</a>
     </header>
 
     <!-- REGION: page -->
     <main class="page" id="page">
       <h1 class="page__title{{title_class}}">{{title}}</h1>
       <article class="page__body">
+{{toc}}
 {{body}}
       </article>
       <!-- REGION: page-footer -->

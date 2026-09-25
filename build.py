@@ -12,6 +12,7 @@ A content file is an HTML fragment that starts with a metadata comment:
     status_note: Formula changed in Age 110   (optional; added to the banner)
     tab_title: Game Rules - Scriptorium   (optional; the browser-tab text)
     hide_title: yes                       (optional; hides the visible heading)
+    toc: no                               (optional; "no" hides the table of contents, "yes" forces it)
     category: Guides, Rules
     credits: Puppy101, Eucariot
     -->
@@ -46,6 +47,7 @@ def parse_page(path):
         "updated": meta.get("updated", ""),
         "hide_title": meta.get("hide_title", "").lower() in ("yes", "true", "1"),   # optional: visually hide the page heading (still read by screen readers)
         "tab_title": meta.get("tab_title", ""),
+        "toc": meta.get("toc", "").lower(),          # optional: "no" hides the table of contents, "yes" shows it even on short pages
         "status": meta.get("status", "").lower(),
         "status_note": meta.get("status_note", ""),   # optional: overrides the browser-tab text (default "<title> · Scriptorium")
     }
@@ -118,6 +120,74 @@ def add_data_notes(page):
     return "".join(out), undated
 
 
+TOC_MIN_HEADINGS = 4     # a table of contents appears when a page has at least this many h2/h3 headings (page header `toc: no|yes` overrides)
+TOC_SCAN = re.compile(r"<(/?)(table|details)\b[^>]*>|<(h[23])\b([^>]*)>(.*?)</\3>", re.S)
+
+
+def leading_tables_end(body):
+    """Index just past the run of <div class="table-scroll"> wrappers a page opens with (0 if it doesn't open with one)."""
+    pos = 0
+    while True:
+        m = re.match(r'\s*<div class="table-scroll"[^>]*>', body[pos:])
+        if not m: return pos
+        depth, end = 1, None
+        for tok in re.finditer(r"<div\b|</div>", body[pos + m.end():]):
+            depth += 1 if tok.group() == "<div" else -1
+            if depth == 0: end = pos + m.end() + tok.end(); break
+        if end is None: return pos
+        pos = end
+
+
+def add_toc(page):
+    """Give every h2/h3 an id and, if the page has enough of them, build a table of contents.
+    Headings inside tables or <details> are skipped (layout boxes / collapsed content). Returns (body, toc_html)."""
+    body = page["body"]
+    used = set(re.findall(r'\bid="([^"]+)"', body))
+    out, pos, depth, items = [], 0, 0, []
+    for m in TOC_SCAN.finditer(body):
+        if m.group(2):                                   # entering / leaving a table or <details>
+            depth += -1 if m.group(1) else 1
+            continue
+        if depth > 0: continue
+        tag, attrs, inner = m.group(3), m.group(4), m.group(5)
+        text = plain(inner)
+        if not text: continue
+        found = re.search(r'\bid="([^"]+)"', attrs)
+        if found:
+            hid = found.group(1)
+        else:
+            base = re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-") or "section"
+            hid, n = base, 2
+            while hid in used: hid, n = f"{base}-{n}", n + 1
+            used.add(hid)
+            out.append(body[pos:m.start()]); out.append(f'<{tag}{attrs} id="{hid}">{inner}</{tag}>'); pos = m.end()
+        items.append((tag, hid, text))
+    out.append(body[pos:])
+    body = "".join(out)
+
+    mode = page.get("toc", "")
+    if mode == "no" or len(items) < (2 if mode == "yes" else TOC_MIN_HEADINGS):
+        return body, ""
+    rows, sub_open = [], False
+    for tag, hid, text in items:
+        link = f'<a class="toc__link" href="#{hid}">{html.escape(text)}</a>'
+        if tag == "h3" and rows:                         # nest under the previous h2
+            if not sub_open: rows[-1] = rows[-1][:-5] + '<ol class="toc__sublist">'; sub_open = True
+            rows.append(f'<li class="toc__item toc__item--sub">{link}</li>')
+        else:
+            if sub_open: rows.append("</ol></li>"); sub_open = False
+            rows.append(f'<li class="toc__item">{link}</li>')
+    if sub_open: rows.append("</ol></li>")
+    toc = (f'<details class="toc" id="toc" open><summary class="toc__title">On this page</summary>'
+           f'<ol class="toc__list">{"".join(rows)}</ol></details>')
+    # Float the box beside the first real text: after any leading tables (intro boxes), which can't sit beside a float.
+    # If the page is nothing but tables, put it on top at full width instead.
+    off = leading_tables_end(body)
+    if off and len(plain(body[off:])) < 200:
+        toc, off = toc.replace('class="toc"', 'class="toc toc--block"', 1), 0
+    return body[:off] + toc + "\n" + body[off:], ""
+
+
 def category_slug(name):
     return "category-" + re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
 
@@ -129,6 +199,8 @@ def fill(template, **values):
 
 
 def render(template, nav, page, extra_body=""):
+    page = dict(page)
+    page["body"], toc = add_toc(page)
     cats = ""
     if page["categories"]:
         links = " ".join(f'<a class="category-tag" href="{category_slug(c)}.html">{html.escape(c)}</a>' for c in page["categories"])
@@ -148,7 +220,7 @@ def render(template, nav, page, extra_body=""):
                 f'<strong class="status-banner__label">{st["label"]}.</strong> {st["banner"]}{note}{help_link}</aside>\n') + body
     body += extra_body
     tab = page.get("tab_title") or f'{page["title"]} · Scriptorium'
-    return fill(template, title_class=" page__title--hidden" if page.get("hide_title") else "", tab_title=html.escape(tab), title=html.escape(page["title"]), body=body, nav=nav, categories=cats, credits=credits,
+    return fill(template, toc=toc, title_class=" page__title--hidden" if page.get("hide_title") else "", tab_title=html.escape(tab), title=html.escape(page["title"]), body=body, nav=nav, categories=cats, credits=credits,
                 description=html.escape(plain(page["body"])[:160]))
 
 

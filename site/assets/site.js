@@ -19,3 +19,18 @@
   document.addEventListener('keydown', e => { if (e.key === 'Escape') set(false); });
   window.matchMedia('(min-width: 48rem)').addEventListener('change', e => { if (e.matches) set(false); });
 })();
+
+// Remember the nav's scroll position for the next page (restored by the inline script in template.html).
+(() => {
+  const nav = document.getElementById('site-nav');
+  if (!nav) return;
+  const save = () => { try { sessionStorage.setItem('scriptorium-nav-scroll', nav.scrollTop); } catch {} };
+  nav.addEventListener('scroll', save, { passive: true });
+  addEventListener('pagehide', save);
+})();
+
+// The table of contents starts collapsed on phones so it doesn't push the article down the screen.
+(() => {
+  const toc = document.getElementById('toc');
+  if (toc && matchMedia('(max-width: 47.99rem)').matches) toc.removeAttribute('open');
+})();

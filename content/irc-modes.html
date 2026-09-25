@@ -7,8 +7,8 @@ credits: Bishop, Puppy101
 <h2 id="List_of_User_Commands">List of User Commands</h2>
 
 <div class="table-scroll" data-updated="none">
-<table class="wiki-table">
-<table class="wiki-table">
+<table>
+<table>
 <tr><td class="cell-dark"><b>TYPE</b></td><td class="cell-dark"><b>SYNTAX</b></td><td class="cell-dark"><b>DESCRIPTION</b></td></tr>
 <tr><td><b>KNOCK</b></td><td><i>/knock #channel &lt;reason&gt;</i></td><td>Knock on a channel to request an invite (+i only channels)</td></tr>
 <tr><td><b>NOTICE</b></td><td><i>/notice &lt;nick&gt;/#&lt;chan&gt; &lt;message&gt;</i></td><td>Sends a notice to the specified target.</td></tr>
@@ -40,8 +40,8 @@ credits: Bishop, Puppy101
 <h2 id="List_of_User_Modes">List of User Modes</h2>
 <dl>
 <dd><span><b>Syntax</b></span> <i>/mode &lt;yournickname&gt; +/-&lt;type&gt;</i> </dd></dl>
-<table class="wiki-table">
-<table class="wiki-table">
+<table>
+<table>
 <tr><td class="cell-dark"><b>Type</b></td><td class="cell-dark"><b>Decription</b></td></tr>
 <tr><td><b>B</b></td><td>Marks you as a bot
 
@@ -55,7 +55,7 @@ credits: Bishop, Puppy101
 <pre><b>/mode #channel +/-modeletter parameters</b>
 </pre>
 <p><b>%</b> requires at least halfop, <b>@</b> requires at least chanop, <b>~</b> requires owner</p>
-<table class="wiki-table">
+<table>
 <tr><th>Modeletter</th><th>Access Required</th><th>Description</th></tr>
 <tr><td>a &lt;nickname&gt;</td><td>~</td><td>Gives channel admin(+a) to the user</td></tr>
 <tr><td>b &lt;mask&gt;</td><td>%</td><td>Bans users matching the ban mask from the channel</td></tr>
@@ -91,8 +91,8 @@ credits: Bishop, Puppy101
 <p>Bans that match against IP addresses are also available (eg: *!*@128.*) and are also always checked.</p>
 <h4 id="Extended_bantypes">Extended bantypes</h4>
 <p>Extended bans look like <i>~&lt;prefix&gt;:&lt;mask,nick,etc&gt;</i>.</p>
-<table class="wiki-table">
-<table class="wiki-table">
+<table>
+<table>
 <tr><td class="cell-dark"><b>Prefix</b></td><td class="cell-dark"><b>Ban Type</b></td><td class="cell-dark"><b>Explanation</b></td></tr>
 <tr><td><b>~q</b></td><td>quiet</td><td>People matching these bans can join but are unable to speak, unless they have +v or higher. <i>E.g.: ~q:&lt;nick&gt;/&lt;mask&gt;</i></td></tr>
 <tr><td><b>~n</b></td><td>nickchange</td><td>People matching these bans cannot change nicks, unless they have +v or higher. <i>E.g.: ~n:&lt;mask&gt;/&lt;nick&gt;</i></td></tr>
@@ -104,8 +104,8 @@ credits: Bishop, Puppy101
 <pre>This means 10 joins per 15 seconds are allowed in the channel. If the limit is hit, 
 the channel will automatically be set +i, the default action for the j floodtype.
 </pre>
-<table class="wiki-table">
-<table class="wiki-table">
+<table>
+<table>
 <tr><td class="cell-dark"><b>Type</b></td><td class="cell-dark"><b>Decription</b></td><td class="cell-dark"><b>Default Action</b></td></tr>
 <tr><td><b>c</b></td><td>CTCPs</td><td>Auto +C</td></tr>
 <tr><td><b>j</b></td><td>Joins</td><td>Auto +i</td></tr>

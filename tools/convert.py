@@ -5,7 +5,7 @@ metadata comment (hand-written pages) and _nav.html. Once content/ is committed,
 
 What it does to each page:
   * inline styles -> semantic classes (cell-good, cell-bad, cell-head, ...); every other style/attr is dropped
-  * <table> -> <div class="table-scroll"><table class="wiki-table">
+  * <table> -> <div class="table-scroll"><table>
   * mw-collapsible divs -> <details>
   * links: /index.php?title=X -> x.html (redirects resolved); red links / unknown targets -> plain text
   * strips MediaWiki comments, section-edit leftovers, span.mw-headline wrappers
@@ -21,7 +21,7 @@ KEEP_TAGS = {"p", "br", "hr", "b", "strong", "i", "em", "u", "s", "sub", "sup", 
              "h1", "h2", "h3", "h4", "h5", "h6", "pre", "code", "blockquote", "center", "img", "details", "summary"}
 PREFIX = {0: "", 4: "", 12: "help-"}
 # MediaWiki's own editing manual is obsolete on a static site; contribute.html is hand-written (see CONTRIBUTING.md).
-SKIP_TITLES = {"The Utopian Encyclopedia:Bots", "The Utopian Encyclopedia:Copyrights", "The Utopian Encyclopedia:Administrators",
+SKIP_TITLES = {"Game Rules", "The Utopian Encyclopedia:Bots", "The Utopian Encyclopedia:Copyrights", "The Utopian Encyclopedia:Administrators",
                "The Utopian Encyclopedia:Bureaucrats"}
 SLUG_OVERRIDES = {"Welcome to the Utopia Wiki": "index", "Help:Contribute": "contribute"}
 def skipped(title, ns): return ns == 12 or title in SKIP_TITLES
@@ -171,8 +171,6 @@ def clean(node, ctx):
         hl = next((k for k in node.kids if isinstance(k, Node) and "mw-headline" in k.attrs.get("class", "").split()), None)
         if hl and hl.attrs.get("id"): out.attrs["id"] = hl.attrs["id"]
     if tag == "table":
-        out_cls.append("wiki-table")
-        if re.search(r"width\s*:\s*100%", style) or a.get("width") == "100%": out_cls.append("wiki-table--wide")
         ctx.stats["tables"] += 1
     if tag in ("td", "th"):
         c = bg_class(style) or bg_class("background:" + a["bgcolor"] if a.get("bgcolor") else "")

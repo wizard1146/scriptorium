@@ -18,7 +18,7 @@ updated: 2026-09-25
 -->
 <p>Text goes here.</p>
 <h2 id="First_Section">First Section</h2>
-<p>Link to another page: <a href="game-rules.html">Game Rules</a>.</p>
+<p>Link to another page: <a href="units.html">Units</a>.</p>
 ```
 
 The file name (without `.html`) is the page's URL. Then add a link to it from a related page or from
