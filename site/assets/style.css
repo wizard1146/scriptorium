@@ -101,19 +101,49 @@ a:visited { color: var(--link-visited); }
 .site-sidebar__close:hover { color: var(--text); }
 
 .site-nav { position: relative; flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; display: flex; flex-direction: column; gap: 1.1rem; padding: 1rem .7rem; font: 400 1rem/1.4 var(--font-heading); }   /* same stack as the headings */   /* scrolls independently; position is remembered across pages (see the inline script in template.html) */
-/* Sidebar scrollbar. Chrome / Edge / Safari: a slim bar whose handle carries the logo (image backgrounds on the thumb are WebKit-only).
-   Firefox: a thin plain scrollbar in the site colours. The standard scrollbar-* properties are kept out of the WebKit branch on purpose:
-   Chromium ignores ::-webkit-scrollbar styling whenever scrollbar-color is set. */
-.site-nav { padding-right: 0; }   /* the scrollbar sits in this space */
+/* Sidebar scrollbar. Chrome / Edge / Safari: the bar and track are invisible; only the logo shows, sitting in the middle of the
+   (transparent) handle, so it travels down the sidebar as you scroll. Drag anywhere on the handle.
+   Firefox can't paint images on scrollbars: it gets a thin scrollbar in the site colours. The standard scrollbar-* properties are kept out
+   of the WebKit branch on purpose: Chromium ignores ::-webkit-scrollbar styling whenever scrollbar-color is set. */
+/* The scrollbar sits on the LEFT: the scroll container is right-to-left (which moves its scrollbar), its children are put back to left-to-right.
+   The scrollbar's gutter takes the place of the left padding. */
+.site-nav { direction: rtl; padding: 1rem .7rem 1rem 0; }
+.site-nav > * { direction: ltr; }
 @supports not selector(::-webkit-scrollbar) {
   .site-nav { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
 }
 @supports selector(::-webkit-scrollbar) {
-  .site-nav::-webkit-scrollbar { width: 18px; }   /* 18 - 2x3px border = 12px handle, exactly the logo's width */
+  .site-nav::-webkit-scrollbar { width: 28px; }
   .site-nav::-webkit-scrollbar-track { background: transparent; }
-  .site-nav::-webkit-scrollbar-thumb { min-height: 48px; border: 3px solid transparent; border-radius: 10px;
-    background: url("logo.svg") center / 12px 12px no-repeat, var(--border); background-clip: padding-box; }   /* the logo, fixed size, centred on the bar */
-  .site-nav::-webkit-scrollbar-thumb:hover { background: url("logo.svg") center / 12px 12px no-repeat, var(--muted); background-clip: padding-box; }
+  /* The handle is drawn as: the logo in the middle and a very faint bracket (20% strength; 80% on hover) at its top and bottom edge (a 2px line with beveled corners and
+     short 3px ticks, in the accent colour). The plain declaration comes first as a fallback for browsers that can't parse color-mix(). */
+  .site-nav::-webkit-scrollbar-thumb { min-height: 48px; border: 0 2px solid transparent; background: url("logo.svg") center / 24px 24px no-repeat; }
+  .site-nav::-webkit-scrollbar-thumb { background:
+      url("logo.svg") center / 24px 24px no-repeat,
+      linear-gradient(color-mix(in srgb, var(--accent) 20%, transparent), color-mix(in srgb, var(--accent) 20%, transparent)) 4px 0 / calc(100% - 8px) 2px no-repeat,
+      linear-gradient(to top left, transparent calc(50% - 1px), color-mix(in srgb, var(--accent) 20%, transparent) calc(50% - 1px), color-mix(in srgb, var(--accent) 20%, transparent) calc(50% + 1px), transparent calc(50% + 1px)) 0 0 / 4px 4px no-repeat,
+      linear-gradient(to top right, transparent calc(50% - 1px), color-mix(in srgb, var(--accent) 20%, transparent) calc(50% - 1px), color-mix(in srgb, var(--accent) 20%, transparent) calc(50% + 1px), transparent calc(50% + 1px)) 100% 0 / 4px 4px no-repeat,
+      linear-gradient(color-mix(in srgb, var(--accent) 20%, transparent), color-mix(in srgb, var(--accent) 20%, transparent)) 0 4px / 2px 3px no-repeat,
+      linear-gradient(color-mix(in srgb, var(--accent) 20%, transparent), color-mix(in srgb, var(--accent) 20%, transparent)) 100% 4px / 2px 3px no-repeat,
+      linear-gradient(color-mix(in srgb, var(--accent) 20%, transparent), color-mix(in srgb, var(--accent) 20%, transparent)) 4px 100% / calc(100% - 8px) 2px no-repeat,
+      linear-gradient(to top right, transparent calc(50% - 1px), color-mix(in srgb, var(--accent) 20%, transparent) calc(50% - 1px), color-mix(in srgb, var(--accent) 20%, transparent) calc(50% + 1px), transparent calc(50% + 1px)) 0 100% / 4px 4px no-repeat,
+      linear-gradient(to top left, transparent calc(50% - 1px), color-mix(in srgb, var(--accent) 20%, transparent) calc(50% - 1px), color-mix(in srgb, var(--accent) 20%, transparent) calc(50% + 1px), transparent calc(50% + 1px)) 100% 100% / 4px 4px no-repeat,
+      linear-gradient(color-mix(in srgb, var(--accent) 20%, transparent), color-mix(in srgb, var(--accent) 20%, transparent)) 0 calc(100% - 4px) / 2px 3px no-repeat,
+      linear-gradient(color-mix(in srgb, var(--accent) 20%, transparent), color-mix(in srgb, var(--accent) 20%, transparent)) 100% calc(100% - 4px) / 2px 3px no-repeat;
+    background-clip: padding-box; }
+  .site-nav::-webkit-scrollbar-thumb:hover { background:
+      url("logo.svg") center / 28px 28px no-repeat,
+      linear-gradient(color-mix(in srgb, var(--accent) 80%, transparent), color-mix(in srgb, var(--accent) 80%, transparent)) 4px 0 / calc(100% - 8px) 2px no-repeat,
+      linear-gradient(to top left, transparent calc(50% - 1px), color-mix(in srgb, var(--accent) 80%, transparent) calc(50% - 1px), color-mix(in srgb, var(--accent) 80%, transparent) calc(50% + 1px), transparent calc(50% + 1px)) 0 0 / 4px 4px no-repeat,
+      linear-gradient(to top right, transparent calc(50% - 1px), color-mix(in srgb, var(--accent) 80%, transparent) calc(50% - 1px), color-mix(in srgb, var(--accent) 80%, transparent) calc(50% + 1px), transparent calc(50% + 1px)) 100% 0 / 4px 4px no-repeat,
+      linear-gradient(color-mix(in srgb, var(--accent) 80%, transparent), color-mix(in srgb, var(--accent) 80%, transparent)) 0 4px / 2px 3px no-repeat,
+      linear-gradient(color-mix(in srgb, var(--accent) 80%, transparent), color-mix(in srgb, var(--accent) 80%, transparent)) 100% 4px / 2px 3px no-repeat,
+      linear-gradient(color-mix(in srgb, var(--accent) 80%, transparent), color-mix(in srgb, var(--accent) 80%, transparent)) 4px 100% / calc(100% - 8px) 2px no-repeat,
+      linear-gradient(to top right, transparent calc(50% - 1px), color-mix(in srgb, var(--accent) 80%, transparent) calc(50% - 1px), color-mix(in srgb, var(--accent) 80%, transparent) calc(50% + 1px), transparent calc(50% + 1px)) 0 100% / 4px 4px no-repeat,
+      linear-gradient(to top left, transparent calc(50% - 1px), color-mix(in srgb, var(--accent) 80%, transparent) calc(50% - 1px), color-mix(in srgb, var(--accent) 80%, transparent) calc(50% + 1px), transparent calc(50% + 1px)) 100% 100% / 4px 4px no-repeat,
+      linear-gradient(color-mix(in srgb, var(--accent) 80%, transparent), color-mix(in srgb, var(--accent) 80%, transparent)) 0 calc(100% - 4px) / 2px 3px no-repeat,
+      linear-gradient(color-mix(in srgb, var(--accent) 80%, transparent), color-mix(in srgb, var(--accent) 80%, transparent)) 100% calc(100% - 4px) / 2px 3px no-repeat;   /* logo grows and the brackets firm up under the pointer */
+    background-clip: padding-box; }
 }
 .nav-group__title { margin: 0 0 .25rem; padding: 0 .7rem; font-size: .78rem; font-weight: 400; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); }   /* same plum as the Play Utopia button */
 .nav-group__list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 1px; }
@@ -143,7 +173,7 @@ a:visited { color: var(--link-visited); }
 
 /* ---- page ---- */
 .page { padding: 1.75rem var(--page-pad) 3rem; min-width: 0; }
-.page__title { margin: 0 calc(-1 * var(--page-pad)) 1rem; padding: .5rem var(--page-pad) .4rem; font: 400 2rem/1.2 var(--font-heading); background: var(--bg); border-bottom: 2px solid var(--accent); }
+.page__title { margin: 0 calc(-1 * var(--page-pad)) 1rem; padding: .5rem var(--page-pad) .4rem; font: 400 2rem/1.2 var(--font-heading); background: var(--bg); border-bottom: 1px solid var(--accent); border-bottom-color: color-mix(in srgb, var(--accent) 67%, transparent); }   /* 1px, at 67% strength (the text stays fully opaque); the solid colour before it is the fallback */
 /* The title scrolls with the page, then pins just under the header. Skipped on short windows (e.g. a phone held sideways),
    where a pinned bar would take too much of the screen. */
 @media (min-height: 32rem) { .page__title:not(.page__title--hidden) { position: sticky; top: var(--header-h); z-index: 10; } }
