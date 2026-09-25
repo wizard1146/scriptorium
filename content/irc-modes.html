@@ -1,0 +1,128 @@
+<!--
+title: IRC Modes
+category: IRC, UtoNet
+updated: 2011-11-29
+credits: Bishop, Puppy101
+-->
+<h2 id="List_of_User_Commands">List of User Commands</h2>
+
+<div class="table-scroll" data-updated="none">
+<table class="wiki-table">
+<table class="wiki-table">
+<tr><td class="cell-dark"><b>TYPE</b></td><td class="cell-dark"><b>SYNTAX</b></td><td class="cell-dark"><b>DESCRIPTION</b></td></tr>
+<tr><td><b>KNOCK</b></td><td><i>/knock #channel &lt;reason&gt;</i></td><td>Knock on a channel to request an invite (+i only channels)</td></tr>
+<tr><td><b>NOTICE</b></td><td><i>/notice &lt;nick&gt;/#&lt;chan&gt; &lt;message&gt;</i></td><td>Sends a notice to the specified target.</td></tr>
+<tr><td><b>INVITE</b></td><td><i>/invite &lt;nick&gt; #chan</i></td><td>Invites a user to #channel. You must be @/&amp;/~ to use this command.</td></tr>
+<tr><td><b>OMSG</b></td><td><i>/omsg &lt;msg&gt;</i></td><td>Sends a message to all the ops (@/&amp;/~) in the channel.</td></tr>
+<tr><td><b>AMSG/AME</b></td><td><i>/amsg or ame &lt;msg&gt;</i></td><td>Sends a message to all the channels you are in
+
+<p><b>Be warned</b> This is one of the easiest ways to annoy people</p></td></tr>
+<tr><td><b>ADMIN</b></td><td><i>/admin</i></td><td>Provides information about the server</td></tr>
+<tr><td><b>CYCLE</b></td><td><i>/cycle</i></td><td>Cycles a channel - same as a /hop but no user is allowed to enter in this period.</td></tr>
+<tr><td><b>AWAY</b></td><td><i>/away &lt;reason&gt;</i></td><td>Sets you Away with message &lt;reason&gt;. If you are already away, it sets you as Back.</td></tr>
+<tr><td><b>ISON</b></td><td><i>/ison &lt;nick&gt;</i></td><td>Determines if &lt;nick&gt; is online.</td></tr>
+<tr><td><b>JOIN</b></td><td><i>/join #&lt;chan&gt;</i></td><td>Makes you join #channel. If #chan = #0,0 - this will make you leave all channels.</td></tr>
+<tr><td><b>LIST</b></td><td><i>/list</i></td><td>Lists all channels on the server that are public.</td></tr>
+<tr><td><b>MOTD</b></td><td><i>/motd</i></td><td>Displays the Message of the Day.</td></tr>
+<tr><td><b>NICK</b></td><td><i>/nick &lt;newnick&gt;</i></td><td>Changes your nickname to newnick</td></tr>
+<tr><td><b>PART</b></td><td><i>/part #chan</i></td><td>Makes you part #channel</td></tr>
+<tr><td><b>QUIT</b></td><td><i>/quit &lt;msg&gt;</i></td><td>Quits IRC with msg</td></tr>
+<tr><td><b>RULES</b></td><td><i>/rules</i></td><td>Displays the Rules of the Server</td></tr>
+<tr><td><b>SETNAME</b></td><td><i>/setname &lt;name&gt;</i></td><td>Changes your Real Name without you having to disconnect.</td></tr>
+<tr><td><b>TOPIC</b></td><td><i>/topic #channel</i>
+
+<p>/topic #channel &lt;newtopic&gt;<i> </i></p></td><td>Brings up the current topic
+
+<p>Changes the topic to newtopic</p></td></tr>
+<tr><td><b>NOTIFY</b></td><td><i>/notify &lt;nick&gt;</i></td><td>Puts &lt;nick&gt; on a notify list, and a message shows up in your status whenever the user is online.</td></tr>
+<tr><td><b>WHOIS</b></td><td><i>/whois &lt;nick&gt;</i></td><td>Returns info of a user who is online, such as real nick, hostname, channels they are in.</td></tr>
+<tr><td><b>WHOWAS</b></td><td><i>/whowas &lt;nick&gt;</i></td><td>Returns the /whois info of a user that is no longer online</td></tr></table>
+<h2 id="List_of_User_Modes">List of User Modes</h2>
+<dl>
+<dd><span><b>Syntax</b></span> <i>/mode &lt;yournickname&gt; +/-&lt;type&gt;</i> </dd></dl>
+<table class="wiki-table">
+<table class="wiki-table">
+<tr><td class="cell-dark"><b>Type</b></td><td class="cell-dark"><b>Decription</b></td></tr>
+<tr><td><b>B</b></td><td>Marks you as a bot
+
+<p>Your /whois will show something similar to this - <i>Asian is a <b>Bot</b> on UtoNet</i></p></td></tr>
+<tr><td><b>R</b></td><td>You will only be able to receive messages from Users that are Registered and identified with NickServ</td></tr>
+<tr><td><b>s &lt;snomask&gt; +s/+k</b></td><td>Sets server notice masks</td></tr>
+<tr><td><b>w</b></td><td>Can listen to Wallop messages</td></tr>
+<tr><td><b>x</b></td><td>Hides your hostname</td></tr></table>
+<h2 id="List_of_Channel_Modes">List of Channel Modes</h2>
+<p>To use any of these modes, you must be at least the level indicated by the letter in the brackets following the description of the mode. The modes can be set by typing:</p>
+<pre><b>/mode #channel +/-modeletter parameters</b>
+</pre>
+<p><b>%</b> requires at least halfop, <b>@</b> requires at least chanop, <b>~</b> requires owner</p>
+<table class="wiki-table">
+<tr><th>Modeletter</th><th>Access Required</th><th>Description</th></tr>
+<tr><td>a &lt;nickname&gt;</td><td>~</td><td>Gives channel admin(+a) to the user</td></tr>
+<tr><td>b &lt;mask&gt;</td><td>%</td><td>Bans users matching the ban mask from the channel</td></tr>
+<tr><td>C</td><td>@</td><td>No CTCPs allowed in the channel</td></tr>
+<tr><td>c</td><td>@</td><td>Block messages containing mIRC color codes</td></tr>
+<tr><td>e &lt;nick/mask&gt;</td><td>@</td><td>Overrides a ban for matching users</td></tr>
+<tr><td>f &lt;antiflood options&gt;</td><td>@</td><td>Channel flood protection</td></tr>
+<tr><td>G</td><td>@</td><td>Filters out Utopia Kingdom Locations with ##:##</td></tr>
+<tr><td>h &lt;nick&gt;</td><td>@</td><td>Gives Half Op (limited op) status to a user</td></tr>
+<tr><td>i</td><td>%</td><td>Makes the channel invite-only (temporary)</td></tr>
+<tr><td>k</td><td>@</td><td>/KNOCK is not allowed.</td></tr>
+<tr><td>k &lt;key&gt;</td><td>%</td><td>Users must specify a key to join in the form <i>/join #channel &lt;key&gt;</i></td></tr>
+<tr><td>L &lt;chan2&gt;</td><td>~</td><td>Links a channel. If the user limit specified by +l is reached, the next user trying to join will be redirected to &lt;chan2&gt;</td></tr>
+<tr><td>l &lt;number&gt;</td><td>@</td><td>Channel may only hold &lt;number&gt; of users at most</td></tr>
+<tr><td>M</td><td>@</td><td>Must be a registered user to talk</td></tr>
+<tr><td>m</td><td>%</td><td>Moderated channel (only +vhoaq may speak)</td></tr>
+<tr><td>N</td><td>@</td><td>No nickname changes in the channel are allowed.</td></tr>
+<tr><td>n</td><td>%</td><td>Users outside the channel cannot send messages into the channel</td></tr>
+<tr><td>o &lt;nick&gt;</td><td>@</td><td>Gives @ status to a user (temporary)</td></tr>
+<tr><td>p</td><td>@</td><td>Makes a channel private (temporary)</td></tr>
+<tr><td>Q</td><td>@</td><td>No kicking of users allowed</td></tr>
+<tr><td>q &lt;nick&gt;</td><td>~</td><td>Gives ~ status to a user (temporary)</td></tr>
+<tr><td>R</td><td>@</td><td>Only registered users may join the channel</td></tr>
+<tr><td>S</td><td>@</td><td>Strips mIRC color codes</td></tr>
+<tr><td>s</td><td>@</td><td>Secret channel</td></tr>
+<tr><td>T</td><td>@</td><td>No notices allowed in the channel</td></tr>
+<tr><td>t</td><td>%</td><td>Only +hoaq may change the topic</td></tr>
+<tr><td>u</td><td>~</td><td>/names and /who #channel only show channel ops</td></tr>
+<tr><td>V</td><td>@</td><td>/INVITE is not allowed</td></tr>
+<tr><td>v &lt;nick&gt;</td><td>%</td><td>Gives + to a user (temporary)</td></tr></table>
+<h3 id="Bans">Bans</h3>
+<p><a href="utonet.html">UtoNet</a> supports the basic bantypes in the form of: <u>nick!user@host</u></p>
+<p>Bans that match against IP addresses are also available (eg: *!*@128.*) and are also always checked.</p>
+<h4 id="Extended_bantypes">Extended bantypes</h4>
+<p>Extended bans look like <i>~&lt;prefix&gt;:&lt;mask,nick,etc&gt;</i>.</p>
+<table class="wiki-table">
+<table class="wiki-table">
+<tr><td class="cell-dark"><b>Prefix</b></td><td class="cell-dark"><b>Ban Type</b></td><td class="cell-dark"><b>Explanation</b></td></tr>
+<tr><td><b>~q</b></td><td>quiet</td><td>People matching these bans can join but are unable to speak, unless they have +v or higher. <i>E.g.: ~q:&lt;nick&gt;/&lt;mask&gt;</i></td></tr>
+<tr><td><b>~n</b></td><td>nickchange</td><td>People matching these bans cannot change nicks, unless they have +v or higher. <i>E.g.: ~n:&lt;mask&gt;/&lt;nick&gt;</i></td></tr>
+<tr><td><b>~c</b></td><td>channel</td><td>If the user is in this channel then she or he is unable to join. <i>E.g.: ~c:#flamers</i></td></tr>
+<tr><td><b>~r</b></td><td>realname</td><td>If the Real Name of a person matches this then (s)he is unable to join. <i>E.g.: ~r:*Bot*</i></td></tr></table>
+<h3 id="Anti_Flood_Options">Anti Flood Options</h3>
+<dl>
+<dd><span><b>Syntax</b></span> <i>/mode #channel +f [10j]:15</i></dd></dl>
+<pre>This means 10 joins per 15 seconds are allowed in the channel. If the limit is hit, 
+the channel will automatically be set +i, the default action for the j floodtype.
+</pre>
+<table class="wiki-table">
+<table class="wiki-table">
+<tr><td class="cell-dark"><b>Type</b></td><td class="cell-dark"><b>Decription</b></td><td class="cell-dark"><b>Default Action</b></td></tr>
+<tr><td><b>c</b></td><td>CTCPs</td><td>Auto +C</td></tr>
+<tr><td><b>j</b></td><td>Joins</td><td>Auto +i</td></tr>
+<tr><td><b>k</b></td><td>Knocks</td><td>Auto +K</td></tr>
+<tr><td><b>m</b></td><td>Messages/Notices</td><td>Auto +m M</td></tr>
+<tr><td><b>n</b></td><td>Nick Changes</td><td>Auto +N</td></tr>
+<tr><td><b>t</b></td><td>text</td><td>kick</td></tr></table>
+<h2 id="Also_Read">Also Read</h2>
+<ol>
+<li><a href="services.html">Services Offered by UtoNet</a></li>
+<li><a href="nickserv.html">NickServ Commands</a></li>
+<li><a href="chanserv.html">ChanServ Commands</a></li>
+<li>MemoServ Commands</li></ol>
+<h2 id="External_Links">External Links</h2>
+<ol>
+<li><b>User Commands</b> <a href="http://www.utonet.org/help.php?hid=6">http://www.utonet.org/help.php?hid=6</a></li>
+<li><b>UtoNet User Modes</b> <a href="http://www.utonet.org/help.php?hid=7">http://www.utonet.org/help.php?hid=7</a></li>
+<li><b>UtoNet Channel Modes</b> <a href="http://www.utonet.org/help.php?hid=8">http://www.utonet.org/help.php?hid=8</a></li>
+<li><b>Ban &amp; Ban Types</b> <a href="http://www.utonet.org/help.php?hid=119">http://www.utonet.org/help.php?hid=119</a></li>
+<li><b>Antiflood Options</b> <a href="http://www.utonet.org/help.php?hid=122">http://www.utonet.org/help.php?hid=122</a></li></ol></table></table></table></table></div>

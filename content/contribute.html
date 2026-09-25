@@ -1,0 +1,40 @@
+<!--
+title: Contribute
+category: Scriptorium
+origin: scriptorium
+updated: 2026-09-25
+-->
+<p>Scriptorium is a community wiki that lives entirely in a GitHub repository. There is no login, database or server:
+every page is a small HTML file, and every improvement is a pull request.</p>
+
+<h2 id="Quick_fix">Fix a typo or update a number</h2>
+<ol>
+<li>Open the page's file in the <a href="https://github.com/wizard1146/scriptorium/tree/main/content">content folder</a>
+(the file name matches the page's address, so <code>magic-formulas.html</code> is <code>content/magic-formulas.html</code>).</li>
+<li>Click the pencil icon, make your change, and choose <b>Propose changes</b>.</li>
+<li>GitHub opens a pull request. The build checks your links automatically, and a maintainer merges it.
+The live site updates within a minute or two.</li>
+</ol>
+
+<div class="callout"><b>Changing a formula or a value?</b> Say which Age it applies to, link your source in the pull request description, and update the <code>updated:</code> date in the comment at the top of the file. That date appears under every table as &ldquo;Numbers last updated&hellip;&rdquo;.</div>
+
+<h2 id="New_page">Add a page</h2>
+<p>Create <code>content/my-page.html</code>. Start it with a comment holding the title and categories, then plain HTML:</p>
+<pre>&lt;!--
+title: My Page
+category: Guides
+updated: 2026-09-25
+--&gt;
+&lt;p&gt;Text goes here. Link to another page like &lt;a href="game-rules.html"&gt;this&lt;/a&gt;.&lt;/p&gt;</pre>
+<p>Then link to it from a related page or from <code>content/_nav.html</code> so people can find it.</p>
+
+<h2 id="Style">Making things look right</h2>
+<p>Don't use inline <code>style=</code>. The site has named classes for tables, colours and boxes, all listed in
+<a href="https://github.com/wizard1146/scriptorium/blob/main/docs/ANATOMY.md">docs/ANATOMY.md</a>.</p>
+
+<h2 id="Rules">Ground rules</h2>
+<ul>
+<li>Content is <a href="https://creativecommons.org/licenses/by-nc/3.0/us/">CC BY-NC 3.0 US</a>. No advertising or commercial links, and nothing you can't license that way.</li>
+<li>Do not publish information about cheating or exploits.</li>
+<li>Be accurate and cite the Age a fact applies to; Utopia changes every Age.</li>
+</ul>

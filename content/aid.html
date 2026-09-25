@@ -1,0 +1,68 @@
+<!--
+title: Aid
+category: 
+updated: 2024-07-16
+credits: Bishop, Puppy101, Willthor, Procariot, Eucariot, Persain, Utopia wolf, Avenger, Icebuckle
+-->
+<p>As you grow in Utopia, you will find that your Kingdom is like family. You share a special bond with them that makes their success just as important to you as your own might be. Provinces are welcome and encouraged to assist either other in times of need. Provinces can also use the Aid System to create their own barter commerce - trading food for runes or gold, and so on.</p>
+<p>However, there are some taxes associated with Trade. Unfortunately, this is simply a reality of the Utopian World -- the Lords use these taxes to supply some of the services they offer and enforce the regulations they set. Your province maintains a Trade Balance that records the history of aid you have sent and received. Each time you send an Aid Shipment to a fellow province in your Kingdom, you will be given a Trade Surplus as described below, and the recipient will receive a Trade Deficit. Each day, a small portion of your trade balance will naturally be forgiven. You can find your current Tax Rate on shipments being received within your Aid Page.</p>
+<p>Starting <a href="age-68.html">Age 68</a>, sending Aid counts as an aggressive action. Certain actions (such as accepting an invitation) requires at least 24 hours since the last aggressive action.</p>
+
+<h3 id="Aid:_The_Trade_Balance">Aid: The Trade Balance</h3>
+
+<p>Your province maintains a Trade Balance that records the history of aid you have sent and received. Each time you send an Aid Shipment to a fellow province in your Kingdom, you will be given a Trade Surplus, and the recipient will receive a Trade Deficit. Your Trade Balance is determined on this basis:</p>
+<p>Resource Trade Value</p>
+
+<ul>
+<li>Gold: 1gc</li>
+<li>Food: 0.05gc</li>
+<li>Soldiers: 100gc</li>
+<li>Runes: 3gc</li>
+<li>Land: 1500gc (pulled from Explore Pool, but 1/3 will be destroyed)</li></ul>
+
+<p>Each Utopian Month, 10% of your Trade Balance will naturally decay, so that aid will be forgotten over time. This does not happen during War.</p>
+
+<h3 id="Aid:_The_Trade_Tax">Aid: The Trade Tax</h3>
+
+<p>Trade recipients are taxed based on their accumulated Trade Deficit - Trade Surpluses are not taxed. The Tax Rate is based on the Province's relative Net Worth and Trade Balance, and will simply confiscate a portion of the traded goods. Tax takes effect once your negative Trade Balance reaches 400% of your Net Worth. If the Province is below the average Net Worth of the Kingdom, then the Tax Rate is calculated using the average instead.</p>
+<p>Aid to needy Provinces is sometimes exempt from taxation. This aid still accumulates in the Trade Balance of both parties.</p>
+
+<h2 id="Aid_.26_Tax_Formulas">Aid &amp; Tax Formulas</h2>
+
+<h3 id="Max_Shipment">Max Shipment</h3>
+
+<div class="formula"><span class="formula__name">Max Aid Shipment</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">Province Net Worth</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">4</span></span></div>
+
+<h3 id="Tax">Tax</h3>
+
+<pre><b>Base Tax Rate =</b> -4 * (Trade Balance / MAX (Net Worth, KD Average Net Worth) + 4)
+
+<b>Tax Rate =</b> <i>DEPEND</i> ( Base Tax Rate ) :
+                    Base Tax Rate &lt; 0    = 0
+               0 &lt;  Base Tax Rate &lt; 80   = Base Tax Rate
+                    Base Tax Rate &gt; 80   = 80
+</pre>
+
+<ul>
+<li>Tax Rate is capped at 80% max.</li>
+<li>If the province is below the Kingdom's average Net Worth, its Tax Rate is calculated on the average Kingdom province Net Worth.</li>
+<li>If the province is below 25% of the Kingdom's median Acres, its Tax Rate is capped at 15%.</li>
+<li>Taxes don't take effect until your negative trade balance reaches 400% of your net worth (equivalent to one maximum aid shipment).</li></ul>
+<hr>
+
+<div class="table-scroll" data-updated="none">
+<table class="wiki-table wiki-table--wide">
+<tr><td>« Previous: <b> <a href="war-room.html">War Room</a> </b></td><td>Next: <b> <a href="ingame.html">Mail &amp; Forum</a></b> »</td></tr></table></div>
+
+<div class="table-scroll" data-updated="none">
+<table class="wiki-table wiki-table--wide">
+<tr><th colspan="2" class="cell-dark"><b>The Utopia Guide</b></th></tr>
+<tr><th class="cell-dark">Introduction</th><td><a href="getting-started-with-utopia.html">Getting Started with Utopia</a>  •  <a href="creating-a-province.html">Creating a province</a>  •  <a href="race.html">Race</a> &amp; <a href="personality.html">Personality</a></td></tr>
+<tr><th class="cell-dark">The Menus</th><td><a href="throne.html">Throne</a>  •  <a href="kingdom.html">Kingdom</a>  •  <a href="the-paper.html">News</a>
+
+<p><a href="explore.html">Explore</a>  •  <a href="growth.html">Growth</a>  •  <a href="science-formulas.html">Science</a>  •  <a href="military.html">Military</a></p>
+<p><a href="mystics.html">Mystics</a>  •  <a href="thievery.html">Thievery</a>  •  <a href="war-room.html">War Room</a> •  <strong>Aid</strong>  •  <a href="dragons.html">Dragon</a>  •  <a href="ritual.html">Ritual</a>  •  <a href="stances.html">Stances</a></p>
+<p><a href="ingame.html">Mail &amp; Forums</a></p>
+<p><a href="politics.html">Politics</a>  •  <a href="relations.html">Relations</a>  •  <a href="https://utopia-game.com/shared/common/ranking_history">Rankings</a>  •  <a href="preferences.html">Preferences</a></p></td></tr>
+<tr><th class="cell-dark">Advanced</th><td><a href="munkbot.html">MunkBot</a>  •  <a href="invitations.html">Invitations</a>  •  <a href="reservations.html">Reservations</a>  •  <a href="utopia.html">Utopia</a>  •  <a href="province.html">Province</a>  •  <a href="world-of-legends.html">World of Legends</a>  •  Formulas</td></tr>
+<tr><th class="cell-dark">Rules</th><td><a href="game-rules.html">Game Rules</a></td></tr></table></div>

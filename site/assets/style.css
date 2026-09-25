@@ -1,0 +1,152 @@
+/* Scriptorium stylesheet. Class names follow BEM-ish "block__element--modifier".
+   Regions: site-header, site-search, site-sidebar, page, page-footer, site-footer.
+   Content vocabulary (used inside content/*.html): see docs/ANATOMY.md */
+
+:root {
+  --bg: #fbf8f1;            /* parchment */
+  --surface: #ffffff;
+  --text: #22201b;
+  --muted: #6b6558;
+  --border: #ddd5c3;
+  --accent: #6b2d5c;        /* plum */
+  --accent-text: #ffffff;
+  --link: #2a5d9f;
+  --link-visited: #6b3fa0;
+  --header-bg: #2b1a27;
+  --header-text: #f3e9d2;
+
+  /* semantic table colours */
+  --yes-bg: #d4edda;  --yes-text: #14532d;
+  --no-bg: #f8d7da;   --no-text: #7f1d1d;
+  --good-bg: #cef6ce;
+  --bad-bg: #f6cece;
+  --head-bg: #b0c4de; --head-text: #1b2a41;
+  --band-bg: #ece7da;
+  --dark-bg: #000; --dark-text: #fff;
+
+  --sidebar-w: 16rem;
+  --content-w: 62rem;
+  font-size: 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #17141a; --surface: #201c25; --text: #e9e4ee; --muted: #a59fb0; --border: #3a3342;
+    --accent: #c78bb6; --accent-text: #17141a; --link: #8fb8f0; --link-visited: #b89bea;
+    --header-bg: #0f0c12; --header-text: #f3e9d2;
+    --yes-bg: #1c3d2a; --yes-text: #b7f0c9; --no-bg: #4a1f26; --no-text: #f6c4ca;
+    --good-bg: #1d3b25; --bad-bg: #472228; --head-bg: #2c3a52; --head-text: #dbe6f7; --band-bg: #2a2532;
+    --dark-bg: #0b090d; --dark-text: #eee;
+  }
+}
+
+* { box-sizing: border-box; }
+html { scroll-padding-top: 4.5rem; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 1rem/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+a { color: var(--link); }
+a:visited { color: var(--link-visited); }
+
+/* ---- site-header ---- */
+.site-header { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 1rem; padding: .6rem 1rem; background: var(--header-bg); color: var(--header-text); }
+.site-header__brand { display: flex; flex-direction: column; text-decoration: none; color: inherit; line-height: 1.15; }
+.site-header__brand:visited { color: inherit; }
+.site-header__brand-name { font: 700 1.35rem Georgia, "Times New Roman", serif; letter-spacing: .02em; }
+.site-header__brand-tagline { font-size: .72rem; opacity: .7; }
+.site-header__menu-button { display: none; background: none; border: 1px solid currentColor; color: inherit; border-radius: .3rem; font-size: 1.2rem; padding: .1rem .5rem; cursor: pointer; }
+
+/* ---- site-search ---- */
+.site-search { position: relative; margin-left: auto; width: min(24rem, 100%); }
+.site-search__input { width: 100%; padding: .45rem .8rem; border-radius: 1.2rem; border: 1px solid transparent; font: inherit; background: #ffffff22; color: inherit; }
+.site-search__input::placeholder { color: inherit; opacity: .6; }
+.site-search__input:focus { outline: 2px solid var(--accent); background: var(--surface); color: var(--text); }
+.site-search__results { position: absolute; right: 0; left: 0; top: calc(100% + .3rem); margin: 0; padding: .3rem; list-style: none; max-height: 70vh; overflow: auto; background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: .5rem; box-shadow: 0 8px 24px #0004; }
+.site-search__results[hidden] { display: none; }
+.search-result__link { display: block; padding: .4rem .6rem; border-radius: .3rem; text-decoration: none; color: inherit; }
+.search-result__link:hover, .search-result__link:focus { background: var(--band-bg); }
+.search-result__title { display: block; font-weight: 600; color: var(--link); }
+.search-result__snippet { display: block; font-size: .8rem; color: var(--muted); }
+.search-result--empty { padding: .5rem .6rem; color: var(--muted); }
+
+/* ---- layout ---- */
+.layout { display: grid; grid-template-columns: var(--sidebar-w) minmax(0, 1fr); max-width: calc(var(--sidebar-w) + var(--content-w)); margin: 0 auto; }
+
+/* ---- site-sidebar ---- */
+.site-sidebar { position: sticky; top: 3.6rem; align-self: start; max-height: calc(100vh - 3.6rem); overflow: auto; padding: 1rem; font-size: .92rem; border-right: 1px solid var(--border); }
+.nav-group { margin: 0 0 1.1rem; }
+.nav-group__title { margin: 0 0 .3rem; font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.nav-group__list { margin: 0; padding: 0; list-style: none; }
+.nav-group__list a { display: block; padding: .12rem .4rem; border-radius: .25rem; text-decoration: none; }
+.nav-group__list a:hover { background: var(--band-bg); }
+
+/* ---- page ---- */
+.page { padding: 1.5rem 2rem 3rem; min-width: 0; }
+.page__title { margin: 0 0 1rem; font: 700 2rem/1.2 Georgia, "Times New Roman", serif; padding-bottom: .4rem; border-bottom: 2px solid var(--accent); }
+.page__body h2 { margin: 2rem 0 .6rem; font: 700 1.5rem Georgia, serif; border-bottom: 1px solid var(--border); padding-bottom: .2rem; }
+.page__body h3 { margin: 1.5rem 0 .4rem; font-size: 1.2rem; }
+.page__body h4 { margin: 1.2rem 0 .3rem; }
+.page__body p, .page__body li { max-width: 75ch; }
+.page__body table p, .page__body table li { max-width: none; }
+.page__body img { max-width: 100%; height: auto; }
+.page__body sub { color: var(--muted); }
+/* pre: wraps instead of scrolling sideways. Add class="pre-scroll" for a block that must keep its exact columns. */
+.page__body pre { white-space: pre-wrap; overflow-wrap: anywhere; padding: .8rem; background: var(--band-bg); border-radius: .4rem; font-size: .9rem; }
+.page__body pre.pre-scroll { white-space: pre; overflow: auto; overflow-wrap: normal; }
+
+/* formula: "Name = term × term × term". The name is on its own line and terms wrap as whole chips, never mid-term. */
+.formula { margin: 1rem 0; padding: .7rem .9rem; background: var(--band-bg); border-left: 4px solid var(--accent); border-radius: 0 .4rem .4rem 0; line-height: 2.1; }
+.formula__name { display: inline; font-weight: 700; }
+.formula__equals { margin: 0 .3rem 0 .2rem; font-weight: 700; color: var(--muted); }
+.formula__equals::after { content: ""; display: block; }        /* line break after "=": terms start on a fresh line */
+.formula__term { display: inline-block; max-width: 100%; padding: 0 .55rem; border: 1px solid var(--border); border-radius: .35rem; background: var(--surface); line-height: 1.6; }
+.formula__step { display: inline-block; max-width: 100%; margin-right: .3rem; }
+.formula__op { margin-right: .3rem; font-weight: 700; color: var(--muted); }
+
+/* ---- page-footer ---- */
+.page__footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: .85rem; color: var(--muted); }
+.category-tag { display: inline-block; padding: .05rem .6rem; margin: 0 .15rem; border: 1px solid var(--border); border-radius: 1rem; text-decoration: none; background: var(--surface); }
+.page__credits summary { cursor: pointer; }
+
+/* ---- site-footer ---- */
+.site-footer { padding: 1.5rem 1rem; text-align: center; font-size: .8rem; color: var(--muted); border-top: 1px solid var(--border); }
+.site-footer p { margin: .2rem 0; }
+
+/* ---- content vocabulary: tables ---- */
+.wiki-table { border-collapse: collapse; margin: 1rem 0; max-width: 100%; font-size: .92rem; background: var(--surface); }
+.wiki-table th, .wiki-table td { padding: .35rem .6rem; border: 1px solid var(--border); vertical-align: top; }
+.wiki-table th { background: var(--head-bg); color: var(--head-text); text-align: center; }
+.table-scroll { overflow-x: auto; margin: 1rem 0; }
+.table-scroll > .wiki-table { margin: 0; }
+.wiki-table--center td { text-align: center; }
+.wiki-table--wide { width: 100%; }
+
+.cell-yes  { background: var(--yes-bg); color: var(--yes-text); text-align: center; font-weight: 600; }
+.cell-no   { background: var(--no-bg);  color: var(--no-text);  text-align: center; font-weight: 600; }
+.cell-good { background: var(--good-bg); }
+.cell-bad  { background: var(--bad-bg); }
+.cell-band { background: var(--band-bg); }
+.cell-head { background: var(--head-bg); color: var(--head-text); font-weight: 700; }
+.cell-dark { background: var(--dark-bg); color: var(--dark-text); font-weight: 700; }
+.cell-center { text-align: center; }
+
+/* data-note: the small "Numbers last updated" line under each data table. Also usable by hand under a formula:
+   <p class="data-note">Numbers last updated 1 Jan 2026.</p> */
+.data-note { margin: -.6rem 0 1.2rem; font-size: .72rem; color: var(--muted); }
+.data-note a { color: inherit; }
+
+/* ---- content vocabulary: boxes ---- */
+.infobox { float: right; clear: right; margin: 0 0 1rem 1.5rem; width: min(22rem, 100%); }
+.callout { margin: 1rem 0; padding: .7rem 1rem; border-left: 4px solid var(--accent); background: var(--band-bg); border-radius: 0 .4rem .4rem 0; }
+.page-list { columns: 16rem; padding-left: 1.2rem; }
+.page__body details { margin: .8rem 0; padding: .4rem .8rem; border: 1px solid var(--border); border-radius: .4rem; background: var(--surface); }
+.page__body details > summary { cursor: pointer; font-weight: 600; }
+
+/* ---- responsive ---- */
+@media (max-width: 52rem) {
+  .layout { display: block; }
+  .site-header__menu-button { display: block; }
+  .site-header__brand-tagline { display: none; }
+  .site-sidebar { position: fixed; z-index: 15; top: 3.4rem; left: 0; bottom: 0; width: min(18rem, 85vw); max-height: none; background: var(--bg); transform: translateX(-100%); transition: transform .2s; }
+  .sidebar-open .site-sidebar { transform: none; box-shadow: 6px 0 24px #0005; }
+  .page { padding: 1rem; }
+  .infobox { float: none; margin: 1rem 0; width: 100%; }
+}

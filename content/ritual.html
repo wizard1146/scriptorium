@@ -1,0 +1,97 @@
+<!--
+title: Ritual
+category: Guide
+updated: 2025-03-28
+credits: Crystopher, Andurilas, Utopia wolf, Avenger, Umajon911, Icebuckle, Sonja says, Fanadin, W1nd
+-->
+<p><b>Kingdom Rituals</b> (KR) are a new mechanic introduced in <a href="age-72.html">Age 72</a> that serves as a kingdom-wide bonus. The <a href="politics.html">Monarch</a> or <a href="politics.html">Steward</a> can begin a ritual.</p>
+
+<h2 id="Kingdom_Ritual_Page">Kingdom Ritual Page</h2>
+
+<p>The Kingdom Ritual page will also display various information such as:</p>
+
+<ul>
+<li>current active KR type and strength</li>
+<li>current mana level and the rune cost to cast on the ritual</li>
+<li>the activation efficiency of the ritual currently being cast</li></ul>
+
+<p>For enemies: an active Kingdom Ritual will be displayed via Spy on Throne, where you will see which KR is active and current strength</p>
+
+<h2 id="Types_of_Kingdom_Rituals">Types of Kingdom Rituals</h2>
+
+<p>There are 7 kinds of Kingdom Rituals:</p>
+
+<div class="table-scroll">
+<table class="wiki-table wiki-table--wide">
+<tr><th colspan="2" class="cell-good">Kingdom Rituals</th></tr>
+<tr><th>Ritual</th><th>Description</th></tr>
+<tr><td>Ascendancy</td><td><ul>
+<li>Double Wizard Production, -50% Wizard Losses on Failed Spells, -40% Book Generation</li></ul></td></tr>
+<tr><td>Barrier</td><td><ul>
+<li>-20% Damage from Enemy Instant Magic &amp; Thievery Operations, -10% Battle (Resource) Losses</li></ul></td></tr>
+<tr><td>Expedient</td><td><ul>
+<li>+10% Building Efficiency, -20% Military Wages, -20% Construction Cost</li></ul></td></tr>
+<tr><td>Haste</td><td><ul>
+<li>-10% Attack Time, -25% Training Time, -25% Construction Time</li></ul></td></tr>
+<tr><td>Havoc</td><td><ul>
+<li>+20% Offensive WPA, +20% Offensive TPA, +10% Spell Damage, +10% Sabotage Damage</li></ul></td></tr>
+<tr><td>Onslaught</td><td><ul>
+<li>+10% Offensive Military Efficiency, +15% Enemy Military Casualties on Attacks</li></ul></td></tr>
+<tr><td>Stalwart</td><td><ul>
+<li>+5% Defensive Military Efficiency, -20% Military Casualties</li></ul></td></tr></table></div>
+
+<h2 id="Retired_Rituals">Retired Rituals</h2>
+
+<div class="table-scroll">
+<table class="wiki-table wiki-table--wide">
+<tr><th colspan="2" class="cell-good">Kingdom Rituals</th></tr>
+<tr><th>Ritual</th><th>Description</th></tr>
+<tr><td>Affluent</td><td><ul>
+<li>+15% Income, +20% Draft Rate</li></ul></td></tr>
+<tr><td>Benediction</td><td><ul>
+<li>+10% Building Efficiency, -20% Military Wages, +40% Birth Rate</li></ul></td></tr>
+<tr><td>Expropriation</td><td><ul>
+<li>+20% Honor Gains on Attacks, +20% Credits gained in Combat and +20% Enemy Military Casualties on Attacks</li></ul></td></tr>
+<tr><td>Godspeed</td><td><ul>
+<li>-10% Attack Time, +10% Combat Gains</li></ul></td></tr></table></div>
+
+<h2 id="Completing_A_Ritual">Completing A Ritual</h2>
+
+<p>To complete the ritual, the Kingdom must successfully cast the ritual spell a minimum of 3 times the number of Provinces in the Kingdom (minimum 15 provinces for this calculation) within 48 hours of the ritual being started. <br></p>
+<p>A Ritual can be overcasted, for increased effects.<br></p>
+
+<div class="formula"><span class="formula__name">Ritual Effectiveness</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">1</span></span><span class="formula__step"><span class="formula__op">+</span><span class="formula__term">(2*SQRT( X - MAX(45,KD_provs*3) )) /100</span></span></div>
+
+<p>where X = number of ritual casts, when X ≥ 3 times the number of Provinces in the Kingdom</p>
+<p>A ritual's strength diminishes by .25% per tick.</p>
+<p>The ritual spell has a difficulty similar to the most difficult self-spell, a very expensive rune cost (Cost Multiplier 6) and costs 2% Mana per cast.<br>
+A successful ritual will last for a minimum of 48 (if destroyed by Abolish Ritual) and a maximum of 120 hours. While only one ritual can be active, another one can be started before the active ritual ends, very similar to Dragons. Once the ritual is completed, the previous ritual will be replaced.</p>
+
+<h2 id="Destroying_A_Ritual">Destroying A Ritual</h2>
+
+<p>Rituals are destroyable via the <a href="mystics.html#Abolish_Ritual">Abolish Ritual</a> spell. This spell reduces the strength of the Ritual by a flat rate of 2%. Abolish Ritual can only be cast on a single province a maximum of 10 times — in order to destroy a Ritual from 100% to 0%, you would need to cast the spell 10 times on 5 different provinces.</p>
+<p>Once a Ritual reaches 0% strength it will be removed, unless it has not reached it's minimum duration of 48 hours, at which point it will remain until the 48th tick and be removed at that time.</p>
+
+<h3 id="Changelog">Changelog</h3>
+
+<ul>
+<li>Age 106: Rituals updated to reflect forum changes on 6 May 2024.</li>
+<li>Age 107: Expedient ritual updated.</li>
+<li>Age 110: Ascendancy ritual added.</li></ul>
+
+<div class="table-scroll" data-updated="none">
+<table class="wiki-table wiki-table--wide">
+<tr><td>« Previous: <b> <a href="dragons.html">Dragons</a> </b></td><td>Next: <b> <a href="stances.html">Stances</a></b> »</td></tr></table></div>
+
+<div class="table-scroll" data-updated="none">
+<table class="wiki-table wiki-table--wide">
+<tr><th colspan="2" class="cell-dark"><b>The Utopia Guide</b></th></tr>
+<tr><th class="cell-dark">Introduction</th><td><a href="getting-started-with-utopia.html">Getting Started with Utopia</a>  •  <a href="creating-a-province.html">Creating a province</a>  •  <a href="race.html">Race</a> &amp; <a href="personality.html">Personality</a></td></tr>
+<tr><th class="cell-dark">The Menus</th><td><a href="throne.html">Throne</a>  •  <a href="kingdom.html">Kingdom</a>  •  <a href="the-paper.html">News</a>
+
+<p><a href="explore.html">Explore</a>  •  <a href="growth.html">Growth</a>  •  <a href="science-formulas.html">Science</a>  •  <a href="military.html">Military</a></p>
+<p><a href="mystics.html">Mystics</a>  •  <a href="thievery.html">Thievery</a>  •  <a href="war-room.html">War Room</a> •  <a href="aid.html">Aid</a>  •  <a href="dragons.html">Dragon</a>  •  <strong>Ritual</strong>  •  <a href="stances.html">Stances</a></p>
+<p><a href="ingame.html">Mail &amp; Forums</a></p>
+<p><a href="politics.html">Politics</a>  •  <a href="relations.html">Relations</a>  •  <a href="https://utopia-game.com/shared/common/ranking_history">Rankings</a>  •  <a href="preferences.html">Preferences</a></p></td></tr>
+<tr><th class="cell-dark">Advanced</th><td><a href="munkbot.html">MunkBot</a>  •  <a href="invitations.html">Invitations</a>  •  <a href="reservations.html">Reservations</a>  •  <a href="utopia.html">Utopia</a>  •  <a href="province.html">Province</a>  •  <a href="world-of-legends.html">World of Legends</a>  •  Formulas</td></tr>
+<tr><th class="cell-dark">Rules</th><td><a href="game-rules.html">Game Rules</a></td></tr></table></div>

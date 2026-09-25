@@ -1,0 +1,96 @@
+<!--
+title: Science Formulas
+category: Main, Formulas
+updated: 2025-08-26
+credits: Bishop, Puppy101, Givenchy, Stupid, Vraid, Pestermenot, Ordray, Procariot, Crystopher, Persain, Spahrep, Leonidas, Andurilas, Utopia wolf, Avenger, Umajon911, Icebuckle, Sonja says, Adret
+-->
+<p>Sciences are the study of knowledge and create our pathway into the future. By studying the laws that govern our being and understanding the effects of these laws, we can strengthen ourselves in all that we do. The mystery of magic and thievery, our military prowess, even our methods of production can all be enhanced through the power of study with an investment in time devoted to those fields. The students of our province will lead us into the future with your careful direction.</p>
+<p>Mastering the Arts &amp; Sciences makes your people stronger, smarter, and more efficient. You can grow in strength without growing in size.</p>
+<p>Details on the benefits of different sciences can be found below.</p>
+
+<h2 id="Science_Categories.2C_Types_and_Effects">Science Categories, Types and Effects</h2>
+
+<p>Check out the Guide for descriptions: <a href="https://utopia-game.com/guide/">https://utopia-game.com/guide/</a>, then go to Science in the navigation menu.</p>
+
+<div class="table-scroll">
+<table class="wiki-table">
+<tr><td><b>Science Category</b></td><td><b>Type</b></td><td><b>Effect</b></td><td><b> Multiplier</b></td></tr>
+<tr><td><b>Economy</b></td><td>Alchemy</td><td>Income</td><td>~0.0724</td></tr>
+<tr><td></td><td>Tools</td><td>Building Effectiveness</td><td>~0.0524</td></tr>
+<tr><td></td><td>Housing</td><td>Population Limits</td><td>~0.0262</td></tr>
+<tr><td></td><td>Production</td><td>Food &amp; Rune Production</td><td>~0.2172</td></tr>
+<tr><td></td><td>Bookkeeping</td><td>Wage Reduction</td><td>~0.068</td></tr>
+<tr><td></td><td>Artisan</td><td>Construction Time Reduction, Construction &amp; Raze Cost Reduction</td><td>~0.0478</td></tr>
+<tr><td><b>Military</b></td><td>Strategy</td><td>Defensive Military Efficiency</td><td>~0.0367</td></tr>
+<tr><td></td><td>Siege</td><td>Battle Gains</td><td>~0.0262</td></tr>
+<tr><td></td><td>Tactics</td><td>Offensive Military Efficiency</td><td>~0.0367</td></tr>
+<tr><td></td><td>Valor</td><td>Reduced Military Train Time &amp; Increased Dragon Slaying Strength</td><td>~0.0582</td></tr>
+<tr><td></td><td>Heroism</td><td>Draft Speed &amp; Draft Costs Reduction</td><td>~0.0418</td></tr>
+<tr><td></td><td>Resilience</td><td>Reduced Military Casualties</td><td>~0.0489</td></tr>
+<tr><td><b>Arcane Arts</b></td><td>Crime</td><td>Thievery Effectiveness</td><td>~0.1557</td></tr>
+<tr><td></td><td>Channeling</td><td>Magic Effectiveness</td><td>~0.1875</td></tr>
+<tr><td></td><td>Shielding</td><td>Reduced Damage from Enemy Thievery and Magic Instant Operations</td><td>~0.0314</td></tr>
+<tr><td></td><td>Sorcery</td><td>Increased Magic Instant Damage</td><td>~0.0314</td></tr>
+<tr><td></td><td>Cunning</td><td>Increased Thievery Operation Damage</td><td>~0.0314</td></tr>
+<tr><td></td><td>Finesse</td><td>Reduced Wizards and Thieves lost on Failed Spells and Operations</td><td>~0.0965</td></tr></table></div>
+
+<h2 id="Science_Formula">Science Formula</h2>
+
+<div class="formula"><span class="formula__name">Science Bonus</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">( # of Books in Type )^(1/2.125)</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Science Multiplier</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="race.html">Race</a> Mod</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="personality.html">Personality</a> Mod</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="mystics.html#Amnesia">Amnesia Effect</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="mystics.html#Scientific_Insights">Scientific Insights</a> Mod</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="growth.html#Libraries">Libraries</a> Mod</span></span></div>
+
+<h2 id="Scientists_and_Books">Scientists and Books</h2>
+
+<ul>
+<li>Each province starts with a set number of Scientists assigned to the three science Categories (<b>Economy, Military, Arcane Arts</b>). <br></li>
+<li>Scientists start out as Recruits, then as they progress they provide incrementally greater benefits with each progression. <br></li>
+<li>Scientist experience is based on how many Books they have produced in that category. <br></li>
+<li>Scientists have no Networth value.</li>
+<li>Scientists can be re-assigned at any time, but revert to Recruit level when doing so. <br></li>
+<li>Every tick each province builds progress towards a new scientist. Universities increase the rate of this progress.</li>
+<li>Scientists produce a set number of books each tick in the Category they are allocated (<b>Economy, Military, Arcane Arts</b>), based on their rank. Schools increase this effect.<br></li>
+<li>Books can be allocated to any science Type within the Category they have been produced.<br></li>
+<li>Allocated books go into effect instantly.</li>
+<li>Inactive provinces do not produce Books.<br></li></ul>
+
+<h3 id="Scientist_Spawn_Rate_Formula">Scientist Spawn Rate Formula</h3>
+
+<div class="formula"><span class="formula__name">Scientists Spawn Rate</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">2</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="race.html">Race</a> Mod</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="exploring-construction-building-formulas.html#Effects_of_Buildings">Universities Effect</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="mystics.html#Revelation">Revelation</a> Mod</span></span></div>
+
+<h3 id="Scientist_Ranks_and_Production">Scientist Ranks and Production</h3>
+
+<div class="table-scroll">
+<table class="wiki-table">
+<tr><td><b>Rank</b></td><td><b>Experience</b></td><td><b>Book Production</b></td></tr>
+<tr><td><b>Recruit</b></td><td>0-1439</td><td>60</td></tr>
+<tr><td><b>Novice</b></td><td>1440-5279</td><td>80</td></tr>
+<tr><td><b>Graduate</b></td><td>5280-12479</td><td>100</td></tr>
+<tr><td><b>Professor</b></td><td>12480+</td><td>120</td></tr></table></div>
+
+<h3 id="Re-assigning_Scientists">Re-assigning Scientists</h3>
+
+<p>Re-assigning scientists drops them back to a recruit. Refer to this forum post for a discussion on this topic: <a href="http://forums.utopia-game.com/showthread.php?639982-A-Question-About-Ticks-amp-Buildings">http://forums.utopia-game.com/showthread.php?639982-A-Question-About-Ticks-amp-Buildings</a></p>
+
+<h2 id="Science_Networth">Science Networth</h2>
+
+<p>Books are worth [0.000006 * Current Land] points.</p>
+
+<h2 id="Obsolete_and_historical_data_-_saved_for_reference">Obsolete and historical data - saved for reference</h2>
+
+<p>Historical information on science systems and formulas can be found here: <b><a href="science-obsolete-and-historical-data.html">Science: Obsolete and historical data</a></b></p>
+
+<div class="table-scroll" data-updated="none">
+<table class="wiki-table wiki-table--wide">
+<tr><td>« Previous: <b> <a href="growth.html">Growth</a> </b></td><td>Next: <b> <a href="military.html">Military</a></b> »</td></tr></table></div>
+
+<div class="table-scroll" data-updated="none">
+<table class="wiki-table wiki-table--wide">
+<tr><th colspan="2" class="cell-dark"><b>The Utopia Guide</b></th></tr>
+<tr><th class="cell-dark">Introduction</th><td><a href="getting-started-with-utopia.html">Getting Started with Utopia</a>  •  <a href="creating-a-province.html">Creating a province</a>  •  <a href="race.html">Race</a> &amp; <a href="personality.html">Personality</a></td></tr>
+<tr><th class="cell-dark">The Menus</th><td><a href="throne.html">Throne</a>  •  <a href="kingdom.html">Kingdom</a>  •  <a href="the-paper.html">News</a>
+
+<p><a href="explore.html">Explore</a>  •  <a href="growth.html">Growth</a>  •  <a href="science-formulas.html">Science</a>  •  <a href="military.html">Military</a></p>
+<p><a href="mystics.html">Mystics</a>  •  <a href="thievery.html">Thievery</a>  •  <a href="war-room.html">War Room</a> •  <a href="aid.html">Aid</a>  •  <a href="dragons.html">Dragon</a>  •  <a href="ritual.html">Ritual</a>  •  <a href="stances.html">Stances</a></p>
+<p><a href="ingame.html">Mail &amp; Forums</a></p>
+<p><a href="politics.html">Politics</a>  •  <a href="relations.html">Relations</a>  •  <a href="https://utopia-game.com/shared/common/ranking_history">Rankings</a>  •  <a href="preferences.html">Preferences</a></p></td></tr>
+<tr><th class="cell-dark">Advanced</th><td><a href="munkbot.html">MunkBot</a>  •  <a href="invitations.html">Invitations</a>  •  <a href="reservations.html">Reservations</a>  •  <a href="utopia.html">Utopia</a>  •  <a href="province.html">Province</a>  •  <a href="world-of-legends.html">World of Legends</a>  •  Formulas</td></tr>
+<tr><th class="cell-dark">Rules</th><td><a href="game-rules.html">Game Rules</a></td></tr></table></div>

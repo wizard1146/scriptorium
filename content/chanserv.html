@@ -1,0 +1,279 @@
+<!--
+title: ChanServ
+category: UtoNet
+updated: 2013-03-11
+credits: Bishop, Puppy101, Ordray, Scav
+-->
+<p>ChanServ allows you to register and control various aspects of channels. ChanServ can often prevent malicious users from "taking over" channels by limiting who is allowed channel operator privileges.</p>
+<p>Note that any channel which is not used for <i>14 days</i> (i.e. which no user on the channel's access list enters for that period of time) will be automatically dropped.</p>
+<p>To use a ChanServ command, type <b>/cs command</b>.</p>
+
+<h2 id="Commands_by_Access_Level">Commands by Access Level</h2>
+
+<h3 id="Founder_.28.7E.29_Level_Commands">Founder (~) Level Commands</h3>
+
+<p><i>Note</i> If your access level is above a SOP (100+) but you are not a founder, you may still have access to some of these commands</p>
+
+<h4 id="IDENTIFY">IDENTIFY</h4>
+
+<dl>
+<dd><span><b>Syntax</b></span> <i>/cs identify #channel &lt;password&gt;</i></dd></dl>
+
+<pre>Authenticates you as the founder of the channel. If you wish for several users to obtain an automatic +oq when they enter the  
+channel, you may share the password you used to create the channel with them (please share smartly and with caution).
+</pre>
+
+<h4 id="DROP">DROP</h4>
+
+<dl>
+<dd><span><b>Syntax</b></span> <i>/cs DROP #channel</i></dd></dl>
+
+<pre>Deregisters a channel. You have to identify to the channel before using this command.
+</pre>
+
+<h4 id="UNSET">UNSET</h4>
+
+<dl>
+<dd><span><b>Syntax</b></span> <i>/cs UNSET #channel {SUCCESSOR | URL | EMAIL | ENTRYMSG}</i></dd></dl>
+
+<pre>Clears the given setting for a channel.
+</pre>
+
+<h4 id="SET">SET</h4>
+
+<p>Allows the channel founder to set various channel options (registered channels).</p>
+
+<div class="table-scroll">
+<table class="wiki-table">
+<table class="wiki-table">
+<tr><td class="cell-dark"><b>SET</b></td><td class="cell-dark"><b>Command</b></td><td class="cell-dark"><b>Description</b></td></tr>
+<tr><td><b>FOUNDER</b></td><td>/cs SET #channel founder &lt;nick&gt;</td><td><i>Sets &lt;nick&gt; as founder for the channel</i></td></tr>
+<tr><td><b>PASSWORD</b></td><td>/cs SET #channel password &lt;newpass&gt;</td><td><i>Changes the existing FOUNDER password to the channel</i></td></tr>
+<tr><td><b>DESC</b></td><td>/cs SET #channel desc &lt;description&gt;</td><td><i>Changes the Channel Description in /cs info #channel</i></td></tr>
+<tr><td><b>TOPICLOCK</b></td><td>/cs SET #channel topiclock on/off</td><td><i>Enables the topic to be changed (or not)</i></td></tr>
+<tr><td><b>MLOCK</b></td><td>/cs SET #channel mlock &lt;mode&gt;</td><td><i>Ensures a channel mode is locked, so if no user is present the mode is retained</i></td></tr>
+<tr><td><b>PRIVATE</b></td><td>/cs SET #channel private on/off</td><td><i>Hides a channel from the /list command</i></td></tr>
+<tr><td><b>RESTRICTED</b></td><td>/cs SET #channel restricted on/off</td><td><i>Makes it so that only identified people on the access list are able to gain entry into the channel</i></td></tr>
+<tr><td><b>SECURE</b></td><td>/cs SET #channel secure on/off</td><td><i>Makes it so that only identified users will be given privileges on the channel as controlled by the access list (opping, etc).</i></td></tr>
+<tr><td><b>SECUREOPS</b></td><td>/cs SET #channel secureops on/off</td><td><i>When secure ops is set, users who are not on the access list will not be allowed chanop status.</i></td></tr>
+<tr><td><b>LEAVEOPS</b></td><td>/cs SET #channel leaveops on/off</td><td><i>When leave ops is set, CS will leave server ops (+o for the first person in the channel) in place even if the user would not normally get auto-opped.</i></td></tr>
+<tr><td><b>OPNOTICE</b></td><td>/cs SET #channel opnotice on/off</td><td><i>When op-notice is set, CS will send a notice to the channel whenever the OP, VOICE, or related commands are used for a user in the channel.</i></td></tr>
+<tr><td><b>ENFORCE</b></td><td>/cs SET #channel enforce on/off</td><td><i>If enforce is on, CS will not allow an AOP user to be de-opped etc.</i></td></tr>
+<tr><td><b>URL</b></td><td>/cs SET #channel url &lt;url&gt;</td><td><i>Sets the URL for a channel.</i></td></tr>
+<tr><td><b>EMAIL</b></td><td>/cs SET #channel email &lt;email&gt;</td><td><i>Sets an email for a channel.</i></td></tr>
+<tr><td><b>ENTRYMSG</b></td><td>/cs SET #channel entrymsg &lt;msg&gt;</td><td><i>Sets the entry message for a channel.</i></td></tr></table>
+<h3 id="SOP_.28.26.29_Level_Commands">SOP (&amp;) Level Commands</h3>
+<h4 id="STATUS">STATUS</h4>
+<dl>
+<dd><span><b>Syntax</b></span> <i>/cs STATUS #channel &lt;nickname&gt;</i> </dd></dl>
+<pre>Returns the current access level of the given nickname on the given channel.
+</pre>
+<h4 id="AKICK_COMMANDS">AKICK COMMANDS</h4>
+<table class="wiki-table">
+<table class="wiki-table">
+<tr><td class="cell-dark"><b>AKICK</b></td><td class="cell-dark"><b>Command</b></td><td class="cell-dark"><b>Description</b></td></tr>
+<tr><td><b>ADD</b></td><td>/cs akick #channel add <u>mask</u> [<u>reason</u>]</td><td><i>The AKICK ADD command adds the given user@host or nick!user@host mask to the autokick list.  If a reason is given with the command, that reason will be used when the user is kicked; if not, the default reason is "You have been banned from the channel".</i></td></tr>
+<tr><td><b>DEL</b></td><td>/cs AKICK #channel del &lt;mask&gt;</td><td><i>The AKICK DEL command removes the given mask from the autokick list.  It does not, however, remove any bans placed by an autokick; those must be removed manually.</i></td></tr>
+<tr><td><b>LIST/VIEW</b></td><td>/cs AKICK #channel list/view &lt;mask/list&gt;</td><td><i> AKICK LIST command displays the autokick list, or optionally only those autokick entries which match the given. AKICK VIEW is similar, but shows more details.</i></td></tr>
+<tr><td><b>ENFORCE</b></td><td>/cs AKICK #channel enforce</td><td><i> ChanServ will enforce the current autokick list by removing those users who match an autokick mask.</i></td></tr>
+<tr><td><b>COUNT</b></td><td>/cs AKICK #channel count</td><td><i>The AKICK COUNT command returns how many entries there are on the autokick list.</i></td></tr></table>
+<h4 id="CLEAR_COMMANDS">CLEAR COMMANDS</h4>
+<table class="wiki-table">
+<table class="wiki-table">
+<tr><td class="cell-dark"><b>CLEAR</b></td><td class="cell-dark"><b>Command</b></td><td class="cell-dark"><b>Description</b></td></tr>
+<tr><td><b>MODES</b></td><td>/cs CLEAR #channel modes</td><td><i>Clears all modes on the channel except those set in the channel's mlock.</i></td></tr>
+<tr><td><b>BANS</b></td><td>/cs CLEAR #channel bans</td><td><i>Clears all bans on a channel.</i></td></tr>
+<tr><td><b>EXCEPTIONS</b></td><td>/cs CLEAR #channel exceptions</td><td><i>Clears all exceptions on a channel.</i></td></tr>
+<tr><td><b>INVITES</b></td><td>/cs CLEAR #channel invites</td><td><i>Clears all invite masks on a channel.</i></td></tr>
+<tr><td><b>OPS/HALFOPS/VOICES</b></td><td>/cs CLEAR #channel ops/halfops/voices</td><td><i>Removes mode +o/+h/+v from all users.</i></td></tr>
+<tr><td><b>USERS</b></td><td>/cs CLEAR #channel users</td><td><i>Kicks all users from the channel.</i></td></tr></table>
+<h3 id="AOP_.28.40.29_Level_Commands">AOP (@) Level Commands</h3>
+<h4 id="TOPIC">TOPIC</h4>
+<dl>
+<dd><span><b>Syntax</b></span> <i>/cs TOPIC #channel &lt;topic&gt;</i> </dd></dl>
+<pre>Causes ChanServ to set the channel topic to the one specified.  
+This command is most useful in conjunction with SET TOPICLOCK. 
+</pre>
+<h4 id="UNBAN">UNBAN</h4>
+<dl>
+<dd><span><b>Syntax</b></span> <i>/cs UNBAN #channel</i> </dd></dl>
+<pre>Tells ChanServ to remove all bans preventing you from entering the given channel.
+</pre>
+<h4 id="INVITE">INVITE</h4>
+<dl>
+<dd><span><b>Syntax</b></span> <i>/cs INVITE #channel</i> </dd></dl>
+<pre>Tells ChanServ to invite you into the given channel. If you get 
+a message saying that the channel is not in use, it means that 
+the channel is empty, and you can join it freely without needing 
+to use this command.
+</pre>
+<h4 id="KICK">KICK</h4>
+<dl>
+<dd><span><b>Syntax</b></span> <i>/cs KICK &lt;channel&gt; &lt;user&gt; [Reason]</i> </dd></dl>
+<pre>Tells ChanServ to kick the given nickname from the given 
+channel.  The message included in the kick will show who used 
+the KICK command, as well as the reason given with the command, 
+if any. Note that protected (+a) users cannot be kicked with 
+this command, even by the channel founder.
+</pre>
+<h3 id="HOPs.28.25.29.2C_VOPs.28.2B.29_.26_Everyone_Else">HOPs(%), VOPs(+) &amp; Everyone Else</h3>
+<h4 id="INFO">INFO</h4>
+<dl>
+<dd><span><b>Syntax</b></span> <i>/cs INFO channel [ALL]</i></dd></dl>
+<pre>Lists information about the named registered channel,
+including its founder, time of registration, last time
+used, description, and mode lock, if any.  If you are
+identified as the founder of the channel you're getting
+information for and ALL is specified, the entry message
+and successor will also be displayed.
+</pre>
+<h2 id="Changing_a_Channel.27s_Access_List">Changing a Channel's Access List</h2>
+<h3 id="Customized_Access">Customized Access</h3>
+<p>The access list specifies which users are allowed Chan Op status or access to ChanServ commands on the channel. Different user levels allow for access to different subsets of privileges; <b>/msg ChanServ HELP ACCESS LEVELS</b> for more specific information. Any nickname not on the access list has a user level of 0.</p>
+<p>The ACCESS ADD command adds the given nickname to the access list with the given user level; if the nick is already present on the list, its access level is changed to the level specified in the command. <i>The level specified must be less than that of the user giving the command</i>.</p>
+<pre>   <b>Syntax:</b>
+   ACCESS #channel ADD nickname level
+   ACCESS #channel DEL {nickname | entry-num | list}
+   ACCESS #channel LIST [mask | list]
+   ACCESS #channel COUNT
+</pre>
+<h3 id="Defaults">Defaults</h3>
+<table class="wiki-table">
+<table class="wiki-table">
+<tr><td class="cell-dark"><b>ACCESS TYPE</b></td><td class="cell-dark"><b>Command</b></td><td class="cell-dark"><b>Description</b></td><td class="cell-dark"><b>Privileges</b></td></tr>
+<tr><td><b>SOP</b></td><td><p><b>SOP #channel ADD/DEL nickname</b></p>
+<p><b>SOP #channel LIST [mask | list]</b></p>
+<p><br>
+<b>SOP #channel COUNT</b></p></td><td><p>Adds/Deletes a nickname from the SOPlist</p>
+<p>Displays the SOPlist for a channel. If a wildcard mask is given, only those entries matching the mask are displayed.  If a list of entry numbers is given, only those entries are shown.</p>
+<p>Displays the number of SOPs on the access list for a channel.</p></td><td><p><i>Users with SOP status are automatically </i>
++oa when they join the channel if identified. 
+A SOP can modify the AOP, HOP and VOP 
+lists. Only a channel's founder can modify the SOP list.</p></td></tr>
+<tr><td><b>AOP</b></td><td><p><b>AOP #channel ADD/DEL nickname</b></p>
+<p><b>AOP #channel LIST [mask | list]</b></p>
+<p><br>
+<b>AOP #channel COUNT</b></p></td><td><p>Adds/Deletes a nickname from the AOP list</p>
+<p>Displays the AOP list for a channel. If a wildcard mask is given, only those entries matching the mask are displayed.  If a list of entry numbers is given, only those entries are shown.</p>
+<p>Displays the number of AOPs on the access list for a channel.</p></td><td><p><i>Users with AOP status are automatically </i>
+given a +o when they join the channel if 
+identified. AOP may be conferred by SOPS 
+and owners. AOPs may add to the HOP and 
+VOP list.</p></td></tr>
+<tr><td><b>HOP</b></td><td><p><b>HOP #channel ADD/DEL nickname</b></p>
+<p><b>HOP #channel LIST [mask | list]</b></p>
+<p><br>
+<b>HOP #channel COUNT</b></p></td><td><p>Adds/Deletes a nickname from the HOP list</p>
+<p>Displays the HOP list for a channel. If a wildcard mask is given, only those entries matching the mask are displayed.  If a list of entry numbers is given, only those entries are shown.</p>
+<p>Displays the number of HOPs on the access list for a channel.</p></td><td><p><i>Users with HOP status are automatically </i>
+given a +h when they join the channel 
+if identified. HOP may be conferred by 
+AOPs, SOPs and owners. AOPs may add to the 
+HOP and VOP list. <span>
+HOPs are unable to edit the access list</span>.</p></td></tr>
+<tr><td><b>VOP</b></td><td><p><b>VOP #channel ADD/DEL nickname</b></p>
+<p><b>VOP #channel LIST [mask | list]</b></p>
+<p><br>
+<b>VOP #channel COUNT</b></p></td><td><p>Adds/Deletes a nickname from the VOP list</p>
+<p>Displays the VOP list for a channel. If a wildcard mask is given, only those entries matching the mask are displayed.  If a list of entry numbers is given, only those entries are shown.</p>
+<p>Displays the number of VOPs on the access list for a channel.</p></td><td><p><i>Users with VOP status are automatically </i>
+given a +v when they join the channel if 
+identified. HOP may be conferred by 
+AOPs, SOPs and owners.</p></td></tr></table>
+<h2 id="CHANGING_A_CHANNEL_OP_LIST_.28TEMPORARY.29">CHANGING A CHANNEL OP LIST (TEMPORARY)</h2>
+<p><i>Used to confer or take away ops from a user in the channel. However, this does not affect the access list.</i></p>
+<table class="wiki-table">
+<table class="wiki-table">
+<tr><td class="cell-dark"><b>COMMAND</b></td><td class="cell-dark"><b>SYNTAX</b></td><td class="cell-dark"><b>DESCRIPTION</b></td></tr>
+<tr><td><b>PROTECT</b></td><td>/cs protect #channel &lt;nick&gt;</td><td><i>Gives channel protection to a selected nickname.</i></td></tr>
+<tr><td><b>DEPROTECT</b></td><td>/cs deprotect #channel &lt;nick&gt;</td><td><i>Removes channel protection from a selected nickname.</i></td></tr>
+<tr><td><b>OP</b></td><td>/cs op #channel &lt;nick&lt;</td><td><i>Ops a selected nickname on a channel.</i></td></tr>
+<tr><td><b>DEOP</b></td><td>/cs deop #channel &lt;nick&gt;</td><td><i>De Ops a selected nickname on a channel.</i></td></tr>
+<tr><td><b>HALFOP</b></td><td>/cs halfop #channel &lt;nick&gt;</td><td><i>Gives a halfop to a nickname on the channel.</i></td></tr>
+<tr><td><b>DEHALFOP</b></td><td>/cs dehalfop #channel &lt;nick&gt;</td><td><i>Removes halfop status from a nickname on the channel.</i></td></tr>
+<tr><td><b>VOICE</b></td><td>/cs voice #channel &lt;nick&gt;</td><td><i>Voices a selected nickname on a channel.</i></td></tr>
+<tr><td><b>DEVOICE</b></td><td>/cs devoice #channel &lt;nick&gt;</td><td><i>Devoices a selected nickname on a channel using ChanServ.</i></td></tr></table>
+<h2 id="LEVELS.2FPERMISSIONS">LEVELS/PERMISSIONS</h2>
+<p>Lets you define the access level required for most of ChanServ's functions. You would say this is akin to editing Permissions on a forum.</p>
+<dl>
+<dd><span><b>Syntax</b></span> 
+
+<dl>
+<dd><i>/cs levels #channel set &lt;type&gt; &lt;level&gt;</i></dd>
+<dd><i>/cs levels #channel disable type</i></dd>
+<dd><i>/cs levels #channel list</i></dd>
+<dd><i>/cs levels #channel reset</i></dd></dl></dd></dl>
+<pre>Basically, the Levels command allow you to define how much access is required by a user before 
+they can use a certain ChanServ command. Unless you know what you are doing it is suggested you
+do not play around with these commands, and leave them as the default.
+</pre>
+<pre><b>LEVELS SET</b> allows the access level for a function or group of functions to be changed. 
+<b>LEVELS DISABLE</b> disables an automatic feature or disallows access to a function by anyone other than the channel founder. 
+<b>LEVELS LIST</b> shows the current levels for each function or group of functions. 
+<b>LEVELS RESET</b> resets the levels to the default levels of a newly-created channel (see <a href="chanserv.html#Default_Channel_Access_Levels">Default Channel Access Levels</a>).
+</pre>
+<table class="wiki-table">
+<table class="wiki-table">
+<tr><td class="cell-dark"><b>TYPE</b></td><td class="cell-dark"><b>DEFAULT LEVEL</b></td><td class="cell-dark"><b>DESCRIPTION</b></td></tr>
+<tr><td><b>AUTOPROTECT</b></td><td>100</td><td><i>Auto +a status on joining</i></td></tr>
+<tr><td><b>AUTO OP</b></td><td>50</td><td><i>Auto +o status on joining</i></td></tr>
+<tr><td><b>AUTO HALFOP</b></td><td>40</td><td><i>Auto +h status on joining</i></td></tr>
+<tr><td><b>AUTO VOICE</b></td><td>30</td><td><i>Auto +v status on joining</i></td></tr>
+<tr><td><b>INVITE</b></td><td>50</td><td><i>Allowed to use <b>/cs invite</b>. If this is a kingdom private channel and you wish to give some ex members %, you may have to switch this access level so that people with access level of <b>40</b> are able to invite themselves.</i></td></tr>
+<tr><td><b>AKICK</b></td><td>100</td><td><i>Allowed to edit the Autokick list</i></td></tr>
+<tr><td><b>SET</b></td><td>-</td><td><i>Founder only</i></td></tr>
+<tr><td><b>CLEAR</b></td><td>100</td><td><i>Allowed to use CLEAR commands</i></td></tr>
+<tr><td><b>UNBAN</b></td><td>50</td><td><i>Allowed to use UNBAN command</i></td></tr>
+<tr><td><b>ACC-LIST</b></td><td>1</td><td><i>Allowed to view the access list</i></td></tr>
+<tr><td><b>ACC-CHANGE</b></td><td>30</td><td><i>Auto +v status on joining</i></td></tr>
+<tr><td><b>MEMO</b></td><td>100</td><td><i>Allowed to read memos</i></td></tr>
+<tr><td><b>OP-DEOP</b></td><td>50</td><td><i>Allowed to use OP/DEOP</i></td></tr>
+<tr><td><b>VOICE</b></td><td>30</td><td><i>Allowed to use VOICE/DEVOICE</i></td></tr>
+<tr><td><b>HALFOP</b></td><td>40</td><td><i>Allowed to use HALFOP/DEHALFOP</i></td></tr>
+<tr><td><b>PROTECT</b></td><td>100</td><td><i>Allowed to use PROTECT/DEPROTECT</i></td></tr>
+<tr><td><b>KICK</b></td><td>50</td><td><i>Allowed to use KICK</i></td></tr>
+<tr><td><b>TOPIC</b></td><td>50</td><td><i>Allowed to use TOPIC</i></td></tr>
+<tr><td><b>STATUS</b></td><td>100</td><td><i>Allowed to use STATUS</i></td></tr></table>
+<h2 id="Registering_A_Channel">Registering A Channel</h2>
+<p>In order to register a channel, use the following command.</p>
+<dl>
+<dd><b>/msg chanserv register #channel password description</b></dd></dl>
+<p>Replace #channel with the channel you are trying to register. Replace password with a password that will only be used for channel administration (not one that is required for users to know to join the channel). Replace description with a description of your channel, this will be publicly visible.</p>
+<h3 id="Securing_a_Kingdom_Channel">Securing a Kingdom Channel</h3>
+<p>When creating a private channel for a kingdom, it is important that only authorized members are able to get in. These modes may be used in combination to help secure a private kingdom channel.</p>
+<pre><b>/cs set #channel mlock +s</b>
+</pre>
+<dl>
+<dd>This makes a channel secret and not show up when users are <i>/whois</i> 'd. It will also not show up on the channels list. Therefore, only people that know of the channel’s existence will be able to join the channel. This is a basic step in ensuring that your channel is secure – however once someone knows what your channel is called there is nothing to stop them from joining anyway.
+
+<dl>
+<dd>This is a CRUCIAL step. If netsplits happen, channels which have not had the secret mode modelocked to the channel will show up in /list as well as their topics, which is a severe security breach if you have wave info etc. on the channel topic.</dd></dl></dd></dl>
+<pre><b>/cs set #channel mlock +k &lt;key&gt;</b>
+</pre>
+<dl>
+<dd>This applies a key/password to the channel. Note that this is NOT the same as the password you used to create the channel. In order to join the channel, people then need to type /join #channel &lt;key&gt;. However, there are several key breakers in irc and if this lock is applied by itself it does not ensure security as your channel is still not-secreted and anyone with the key will be able to join.</dd></dl>
+<pre><b>/cs set #channel mlock +i</b>
+</pre>
+<dl>
+<dd>Using mode +i makes your channel invite-only - that is, only someone who has been invited to the channel first may join the channel. The advantage with mode +i is that if you need someone in your channel once, they can come in for just that occasion, and they will not be able to return.
+
+<dl>
+<dd>If you have access to the channel and/or are a kingdom member, just use <i>/cs invite #channel</i> for an invite from ChanServ, and add it to your autojoin list - <i>/ns ajoin add #channel</i> and this will bypass the need to use the ChanServ invite everytime you connect onto IRC.</dd></dl></dd></dl>
+<pre><b>/cs set #channel Restricted on</b>
+</pre>
+<p>ChanServ has an option, called "restricted", which will prevent anyone not on the ChanServ access list from remaining in the channel. Beware, however, as people can still join, however they will then be immediately kicked and banned. This will allow them to see your topic, any channel modes, how many users are in your channel, and who is in your channel. This option is best used in combination with other options. To apply restricted mode, you must use the "set" command, which is usually restricted to the founder (owner) of the channel.</p>
+<dl>
+<dd>For ease of use, the best combination is mode +s and the use of the Restricted Method.</dd>
+<dd>For the highest security, the best combination is mode +s, mode +i, and the use of the Restricted Method.</dd></dl>
+<h2 id="Also_Read">Also Read</h2>
+<ol>
+<li><a href="services.html">Services Offered by UtoNet</a></li>
+<li><a href="nickserv.html">NickServ Commands</a></li>
+<li>MemoServ Commands</li>
+<li><a href="irc-modes.html#List_of_User_Commands">User Commands</a></li>
+<li><a href="irc-modes.html#List_of_User_Modes">User Modes</a></li>
+<li><a href="irc-modes.html#List_of_Channel_Modes">Channel Modes</a></li></ol>
+<h2 id="External_Links">External Links</h2>
+<ol>
+<li><b>ChanServ Commands</b> <a href="http://www.utonet.org/help.php?hid=2">http://www.utonet.org/help.php?hid=2</a></li>
+<li><b>Setting Up a Kingdom Channel</b> <a href="http://www.utonet.org/articles.php?a=10">http://www.utonet.org/articles.php?a=10</a></li></ol></table></table></table></table></table></table></div>

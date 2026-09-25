@@ -1,0 +1,92 @@
+<!--
+title: Units
+category: Guide, Formulas
+updated: 2025-08-17
+credits: Bishop, Clampy, Puppy101, Tzar, Testacc, Johnscott, Givenchy, Stupid, Vraid, Paranoidkitten, Procariot, Eucariot, Crystopher, Spahrep, Andurilas, Utopia wolf, Avenger, Umajon911, Kandy, Sonja says, Fanadin, Adret
+-->
+<div class="table-scroll">
+<table class="wiki-table wiki-table--wide">
+<tr><th colspan="7">Here are the unit types that are available in <a href="utopia.html">Utopia</a> (racial/personality bonuses are not included)</th></tr>
+<tr><th>Units</th><th>Description</th><th>Offense</th><th>Defense</th><th>Cost</th><th>Networth</th></tr>
+<tr><td><b>Peasants</b></td><td><div>Peasants are responsible for working and <a href="economy.html#Money">generating income</a> for your province.</div></td><td></td><td></td><td></td><td>0.25</td></tr>
+<tr><td><b>Soldiers</b></td><td><div>The basic unit for every province. They are drafted from Peasants and can be trained into Specialists, Elites or Thieves. You are not required to pay <a href="economy.html#Military_Expenses_.2F_Wages">Wages</a> for Soldiers. </div></td><td>3†</td><td>0†</td><td>Varies</td><td>0.25 networth per point of power</td></tr>
+<tr><td><b>Wizards</b></td><td><div>Wizards are required to cast spells. They do not count towards your military size. Check out the <a href="mystics.html">Mystics Guide</a> as well as the <a href="magic-formulas.html">Mystic Formulas</a>. </div></td><td></td><td></td><td></td><td>7</td></tr>
+<tr><td><b>Thieves</b></td><td><div>The part of your military which will conduct <a href="thievery.html">Thievery ops</a>. Be sure to check out <a href="thievery-formulas.html">Thievery Formulas</a> as well </div></td><td></td><td></td><td>500gc</td><td>5</td></tr>
+<tr><td><b>Horses</b></td><td><div>Sending horses with your attacks adds raw offensive point per horse. You may include up to one horse per military unit sent in combat.</div></td><td>2†<br></td><td></td><td></td><td>0.3 per point of power</td></tr>
+<tr><td><b>Prisoners</b></td><td><div>Prisoners are taken from the total number of enemies that would've been killed after an attack, usually at a 2/3 prisoner to total kills ratio - IF there is room in your dungeons for them. Prisoners have no upkeep, every 2 prisoners fills 1 job, and every prisoner produces 0.75gc per hour. About one third of the prisoners sent are lost in the fight. They are then again immediately available to your general. You can use at most 1 Prisoner for every 5† normal troops you send. </div></td><td>8†<br></td><td></td><td></td><td>0.2 per point of power</td></tr>
+<tr><td><b>Mercenaries</b></td><td><div>You can use at most 1 Mercenary for every 5† normal troops you send. </div></td><td>8†<br></td><td></td><td>300gc</td><td></td></tr>
+<tr><td><b><a href="military.html#Military_Units">Defensive Specialist</a></b></td><td><div>These troops defend your land only, and are unable to attack. </div></td><td></td><td>10†<br></td><td>350gc</td><td>0.5 networth per point of power<br></td></tr>
+<tr><td><b><a href="military.html#Military_Units">Offensive Specialist</a></b></td><td><div>These troops are used to attack, and are unable to defend. </div></td><td>10†<br></td><td></td><td>350gc</td><td>0.4 networth per point of power<br></td></tr>
+<tr><td><b><a href="military.html#Military_Units">Elites</a></b></td><td><div>Elites have offensive as well as defensive strength. Their offensive and defensive values vary from race to race. For Elite values please see the respective <a href="race.html">Race</a> page. </div></td><td>Varies</td><td>Varies</td><td>Varies</td><td>Varies</td></tr></table></div>
+
+<p>† <a href="races-and-personalities.html">Race and Personality</a> modifiers can increase or decrease this number.</p>
+
+<h2 id="Formulas">Formulas</h2>
+
+<h3 id="Soldiers_Drafted_Per_Tick">Soldiers Drafted Per Tick</h3>
+
+<div class="formula"><span class="formula__name">Soldiers Drafted per Tick</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">Peasants</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Draft Speed</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Race Bonus</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Personality Bonus</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="mystics.html#Patriotism">Patriotism</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Affluent Ritual</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="mystics.html#Sloth">Sloth</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="dragons.html">Dragon</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="science-formulas.html#Science_Categories.2C_Types_and_Effects">Heroism Science Effect</a></span></span></div>
+
+<div class="table-scroll">
+<table class="wiki-table">
+<tr><td><b>Modifier Type</b></td><td><b>Active</b></td><td><b>Otherwise</b></td></tr>
+<tr><td><b><a href="mystics.html#Patriotism">Patriotism</a></b></td><td>1.3</td><td>1</td></tr>
+<tr><td><b><a href="mystics.html#Sloth">Sloth</a></b></td><td>0.5</td><td>1</td></tr>
+<tr><td><b>Ruby <a href="dragons.html">Dragon</a></b></td><td>0.75</td><td>1</td></tr>
+<tr><td><b>Expedient Ritual</b></td><td>1.2</td><td>1</td></tr></table></div>
+
+<h3 id="Draft_Cost_Formula">Draft Cost Formula</h3>
+
+<div class="formula"><span class="formula__name">Cost of Soldier Drafting</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">Current Draft Level Factor</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Draft Rate</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Race Bonus</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Personality Bonus</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="growth.html#Armouries">Armouries Mod</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="science-formulas.html#Science_Categories.2C_Types_and_Effects">Heroism Science Effect</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="mystics.html#Sloth">Sloth Effect</a></span></span></div>
+
+<p><b>Note</b></p>
+
+<ul>
+<li>Current Draft Level Factor scales base soldier draft cost upwards once 50% of max population is reached</li>
+<li>Draft Level Factor is MAX(1.0154*((Solds+Ospecs+Dspecs+Elites)/maxpop)^2+1.1759*((Solds+Ospecs+Dspecs+Elites)/maxpop)+0.3633,1)* base rate for level</li></ul>
+
+<h3 id="Draft_Rate_Formula">Draft Rate Formula</h3>
+
+<div class="formula"><span class="formula__name">Draft Rate</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">Base Draft Rate</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Patriotism Bonus</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="science-formulas.html#Science_Categories.2C_Types_and_Effects">Heroism Science Effect</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Sloth</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Ritual</span></span></div>
+
+<ul>
+<li><a href="mystics.html">Drought</a> reduces draft rate by 15%</li></ul>
+
+<div class="table-scroll">
+<table class="wiki-table">
+<tr><td><b>Base Draft Rate</b></td><td><b>Draft Speed</b></td><td><b>Cost per soldier</b></td></tr>
+<tr><td><b>Reservist</b></td><td>0.5%</td><td>30gc</td></tr>
+<tr><td><b>Normal</b></td><td>1.0%</td><td>50gc</td></tr>
+<tr><td><b>Aggressive</b></td><td>1.5%</td><td>75gc</td></tr>
+<tr><td><b>Emergency</b></td><td>2.0%</td><td>110gc</td></tr></table></div>
+
+<h3 id="Training_Formulas">Training Formulas</h3>
+
+<div class="formula"><span class="formula__name">Training Cost</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">Unit Cost</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Race Bonus</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="growth.html#Armouries">Armouries Bonus</a></span></span></div>
+
+<div class="formula"><span class="formula__name">Full training time</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">24</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Race Bonus</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Personality Bonus</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">MAX (<a href="mystics.html#Inspire_Army">Inspire Army</a>,<a href="mystics.html#Hero.27s_Inspiration">Hero's Inspiration</a>)</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="science-formulas.html#Science_Categories.2C_Types_and_Effects">Valor Science Effect</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="ritual.html">Haste Ritual</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="growth.html#Training_Grounds">Training Grounds Bonus</a></span></span></div>
+
+<h3 id="Maintenance_cost">Maintenance cost</h3>
+
+<p><a href="economy.html#Military_Expenses_.2F_Wages"><b>Click here for the Formula</b></a></p>
+
+<div class="table-scroll" data-updated="none">
+<table class="wiki-table wiki-table--wide">
+<tr><th colspan="2" class="cell-dark"><b>The Utopia Guide</b></th></tr>
+<tr><th class="cell-dark">Introduction</th><td><a href="getting-started-with-utopia.html">Getting Started with Utopia</a>  •  <a href="creating-a-province.html">Creating a province</a>  •  <a href="race.html">Race</a> &amp; <a href="personality.html">Personality</a></td></tr>
+<tr><th class="cell-dark">The Menus</th><td><a href="throne.html">Throne</a>  •  <a href="kingdom.html">Kingdom</a>  •  <a href="the-paper.html">News</a>
+
+<p><a href="explore.html">Explore</a>  •  <a href="growth.html">Growth</a>  •  <a href="science-formulas.html">Science</a>  •  <a href="military.html">Military</a></p>
+<p><a href="mystics.html">Mystics</a>  •  <a href="thievery.html">Thievery</a>  •  <a href="war-room.html">War Room</a> •  <a href="aid.html">Aid</a>  •  <a href="dragons.html">Dragon</a>  •  <a href="ritual.html">Ritual</a>  •  <a href="stances.html">Stances</a></p>
+<p><a href="ingame.html">Mail &amp; Forums</a></p>
+<p><a href="politics.html">Politics</a>  •  <a href="relations.html">Relations</a>  •  <a href="https://utopia-game.com/shared/common/ranking_history">Rankings</a>  •  <a href="preferences.html">Preferences</a></p></td></tr>
+<tr><th class="cell-dark">Advanced</th><td><a href="munkbot.html">MunkBot</a>  •  <a href="invitations.html">Invitations</a>  •  <a href="reservations.html">Reservations</a>  •  <a href="utopia.html">Utopia</a>  •  <a href="province.html">Province</a>  •  <a href="world-of-legends.html">World of Legends</a>  •  Formulas</td></tr>
+<tr><th class="cell-dark">Rules</th><td><a href="game-rules.html">Game Rules</a></td></tr></table></div>
+
+<div class="table-scroll" data-updated="none">
+<table class="wiki-table wiki-table--wide">
+<tr><th colspan="2" class="cell-head"><b>Races &amp; Personalities</b></th></tr>
+<tr><th class="cell-head">Races</th><td><a href="race.html#Avians">Avians</a>  •  <a href="race.html#Dark_Elves">Dark Elves</a>  •  <a href="race.html#Dryads">Dryads</a>  •  <a href="race.html#Dwarves">Dwarves</a>  •  <a href="race.html#Elves">Elves</a>  •  <a href="race.html#Faeries">Faeries</a>  •  <a href="race.html#Halflings">Halflings</a>  •  <a href="race.html#Humans">Humans</a>  •  <a href="race.html#Orcs">Orcs</a>  •  <a href="race.html#Undead">Undead</a></td></tr>
+<tr><th class="cell-head">Extinct Races</th><td><a href="race.html#Bocans">Bocans</a>  •  <a href="race.html#Gnomes">Gnomes</a></td></tr>
+<tr><th class="cell-dark">Personalities</th><td><a href="personality.html#The_Artisan">The Artisan</a>  •  <a href="personality.html#The_Cleric">The Cleric</a>  •  <a href="personality.html#The_General">The General</a>  •  <a href="personality.html#The_Heretic">The Heretic</a>  •  <a href="personality.html#The_Mystic">The Mystic</a>  •  <a href="personality.html#The_Rogue">The Rogue</a>  •  <a href="personality.html#The_Tactician">The Tactician</a>  •  <a href="personality.html#The_Warrior">The Warrior</a></td></tr>
+<tr><th class="cell-dark">Extinct Personalities</th><td><a href="personality.html#The_Freak">The Freak</a>  •  <a href="personality.html#The_Paladin">The Paladin</a>  •  <a href="personality.html#The_Raider">The Raider</a>  •  <a href="personality.html#The_Undead">The Undead</a>  •  <a href="personality.html#The_Necromancer">The Necromancer</a>  •  <a href="personality.html#The_Merchant">The Merchant</a>  •  <a href="personality.html#The_Sage">The Sage</a>  •  <a href="personality.html#The_Shepherd">The Shepherd</a>  •  <a href="personality.html#The_War_Hero">The War Hero</a></td></tr></table></div>

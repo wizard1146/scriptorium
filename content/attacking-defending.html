@@ -1,0 +1,221 @@
+<!--
+title: Attacking & Defending
+category: Formulas
+updated: 2025-03-16
+credits: Bishop, Clampy, Puppy101, Guyanthalas, Givenchy, Stupid, Andrei, Bowman, ThZ, Angelus, Trepach, Vraid, Pestermenot, Ordray, Procariot, Eucariot, Bijo, Crystopher, Spahrep, Zyx, Francis, Leonidas, Utopia wolf, Avenger, BigShotFancyMan, Umajon911, Sonja says, Fanadin, W1nd
+-->
+<h2 id="Military_Efficiency">Military Efficiency</h2>
+
+<h3 id="Base_Military_Efficiency">Base Military Efficiency</h3>
+
+<div class="formula"><span class="formula__name">Base Military Efficiency</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">( 33 + 67 * ( Effective Wage Rate / 100 ) <sup>0.25</sup> )</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="dragons.html#Ruby">Ruby Dragon</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="multi-attack-protection-map.html">Multi-Attack Protection Bonus</a></span></span></div>
+
+<ul>
+<li>Rounded to one decimal point, it should return the most accurate values. Effective Wage Rate lies between 20% (77.8% Efficiency) to 200% (112.7% Efficiency).</li>
+<li>While wages can be changed instantly, the effective wage rate used for base military efficiency changes slowly per tick. It takes approximately 96hrs to go from 20% wages to max at 200% wages.</li>
+<li><b>Effective Wage Rate Formula</b> = (Final Wage Rate - Previous Wage Rate)* 0.05 - Previous Wage Rate</li></ul>
+
+<ul>
+<li><b>96 Hour Wage Rate Chart</b>: <a href="https://upload.wikimedia.org/wikipedia/commons/c/cb/ME_Chart.png">ME Chart</a></li></ul>
+
+<div class="formula"><span class="formula__name">Change in Effective Wage Rate</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">0.05</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">(Wage Rate Paid - Effective Wage Rate)</span></span></div>
+
+<ul>
+<li>If wages were not fully paid in the previous tick, Wage Rate Paid will be set at minimum regardless of the amount of wages actually paid.</li></ul>
+
+<h3 id="Offensive_Military_Efficiency">Offensive Military Efficiency</h3>
+
+<div class="formula"><span class="formula__name">OME</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">(Base Military Efficiency + <a href="exploring-construction-building-formulas.html#Effects_of_Buildings">Training Grounds Bonus</a> + <a href="honor.html">Honor</a> Bonus)</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="science-formulas.html">Science Bonus</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Race Bonus</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="personality.html">Personality Bonus</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="mystics.html#Fanaticism">Fanaticism</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="mystics.html#Bloodlust">Bloodlust</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="ritual.html">Ritual</a></span></span></div>
+
+<h3 id="Defensive_Military_Efficiency">Defensive Military Efficiency</h3>
+
+<div class="formula"><span class="formula__name">DME</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">(Base Military Efficiency + <a href="exploring-construction-building-formulas.html#Effects_of_Buildings">Forts Bonus</a> + <a href="honor.html">Honor</a> Bonus)</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="science-formulas.html">Science Bonus</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Race Bonus</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="personality.html">Personality Bonus</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="mystics.html#Minor_Protection">Minor Protection</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="mystics.html#Greater_Protection">Greater Protection</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="mystics.html#Fanaticism">Fanaticism</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="the-plague.html">Plague</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="ritual.html">Ritual</a></span></span></div>
+
+<h2 id="Attacking">Attacking</h2>
+
+<h3 id="Raw_Offense">Raw Offense</h3>
+
+<div class="formula"><span class="formula__name">Raw Off</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">(Soldiers * (Soldier Off value + Aggression))</span></span><span class="formula__step"><span class="formula__op">+</span><span class="formula__term">(Offensive Specs * Off Spec Attack value)</span></span><span class="formula__step"><span class="formula__op">+</span><span class="formula__term">(Elites * Elite Attack value)</span></span><span class="formula__step"><span class="formula__op">+</span><span class="formula__term">(Horses * War Horse Attack value)</span></span><span class="formula__step"><span class="formula__op">+</span><span class="formula__term">[(Mercs * Attack Value + Prisoners * Attack Value)]</span></span></div>
+
+<h3 id="Modified_Offense">Modified Offense</h3>
+
+<div class="formula"><span class="formula__name">Mod Off</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">Raw Offense</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">(<a href="attacking-defending.html#Offensive_Military_Efficiency">OME</a> + General Bonus)</span></span></div>
+
+<div class="table-scroll" data-updated="none">
+<table class="wiki-table">
+<tr><td><b>Condition</b></td><td><b>Modifier</b></td></tr>
+<tr><td><b>OME</b></td><td><i>check your Military Advisor</i></td></tr>
+<tr><td><b>General Bonus</b></td><td>+5% per additional general over 1</td></tr></table></div>
+
+<h3 id="Attack_Times">Attack Times</h3>
+
+<div class="formula"><span class="formula__name">Attack Time</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">Base Attack Time</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="race.html">Race</a> Bonus</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="personality.html">Personality</a> Bonus</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="growth.html#Barracks">Barracks</a> Bonus</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="mystics.html#Quick_Feet">Quick Feet</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Attack Type</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="relations.html#War">War</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">NW Mod</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="ritual.html">Ritual Bonus</a></span></span></div>
+
+<ul>
+<li>Note: War Attack Speed phases in to -15%, after 12 hours of War have passed.</li>
+<li>There is a net worth value adjustment for attack times. This adjustment compares your net worth to the net worth of the province you are planning to attack. If these are close to each other the base attack times as given below are used. If the net worth differs, then the base attack time is multiplied, so your attack time is longer. This does not affect intra-KD attacks or in War.</li></ul>
+
+<h4 id="Base_Attack_Time">Base Attack Time</h4>
+
+<p>The base attack time is 14 hours. This is the value all calculations are based upon.</p>
+
+<div class="table-scroll" data-updated="none">
+<table class="wiki-table">
+<tr><td class="cell-dark"><b>Location</b></td><td class="cell-dark"><b><i>Intra KD</i></b></td><td class="cell-dark"><b><i>Different KD</i></b></td></tr>
+<tr><td><b>Attack Time</b></td><td>7</td><td>14</td></tr></table></div>
+
+<h4 id="Minimum_Offense_to_Win">Minimum Offense to Win</h4>
+
+<p>To guarantee a win, you must send Mod Offense that is at least 1 greater than the defender's Mod Defense.</p>
+<p>On Conquest attacks, the minimum Offense to win is 51% of the opponents Defense.</p>
+
+<h2 id="Attack_Gains">Attack Gains</h2>
+
+<p>For Attacks that target and capture Resources (Traditional March, Conquest, Plunder, Learn), the Gains are calculated as follows:</p>
+
+<div class="formula"><span class="formula__name"><b>Gains</b></span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">Target Resource</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Attack Type</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="attacking-defending.html#Province_Networth_Factor">RPNW</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="attacking-defending.html#Kingdom_Networth_Factor">RKNW</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="multi-attack-protection-map.html">Multi-Attack Protection</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Race Modifier</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Personality Modifier</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Castles Protection</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Relations Modifier</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Stance Modifier</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Siege Science</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Emerald Dragon</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Attack Time Adjustment Factor</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="ritual.html">Ritual Bonus</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="mystics.html#Anonymity">Anonymity</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="mystics.html#Anonymity">Mist</a></span></span></div>
+
+<ul>
+<li>Resources are defined as: Land, Gold Coins, Food, Runes, Science Books</li>
+<li>Land attacks (except Ambush) also reward Military Credits (target's Defense Points *.008 * relative NW * Military Credits mod) and Building Credits (Acres captured * 0.4 * relative NW * Building Credits mod).</li>
+<li>Raze ignores all modifiers except Relations, <a href="multi-attack-protection-map.html">Multi-Attack Protection</a> and the Attack Time Adjustment Factor.</li>
+<li>Massacre ignores most Resource Gains modifiers, except RPNW, RKNW, Relations, <a href="multi-attack-protection-map.html">Multi-Attack Protection</a> and the Attack Time Adjustment Factor; Massacre is affected by Massacre Damage mod.</li>
+<li>Ambush ignores all modifiers except increased/decreased Ambush Battle Losses mod.</li></ul>
+
+<h3 id="Province_Networth_Factor">Province Networth Factor</h3>
+
+<pre> <b>Relative Province Networth </b>(rpnw) = Targets Networth / Self Networth
+ 
+ <b>Province Networth Factor =</b> <i>DEPEND</i> ( rpnw ) :
+                                     rpnw &lt; 0.567   = 0
+                             0.567 &lt; rpnw &lt; 0.9     = 3 * rpnw - 1.7
+                             0.9   &lt; rpnw &lt; 1.1     = 1
+                             1.1   &lt; rpnw &lt; 1.6     = -2 * rpnw + 3.2
+                                     rpnw &gt; 1.6     = 0
+</pre>
+
+<h3 id="Kingdom_Networth_Factor">Kingdom Networth Factor</h3>
+
+<pre> <b>Relative Kingdom Networth </b>(rknw) = Target Kingdom Average Prov. Networth / Self Kingdom Average Prov. Networth
+ 
+ <b>Kingdom Networth Factor =</b> <i>DEPEND</i> ( rknw ) :
+                                    rknw &lt; 0.5      = 0.8
+                              0.5 &lt; rknw &lt; 0.9      = rknw / 2 + 0.55
+                                    rknw &gt; 0.9      = 1
+</pre>
+
+<p><b>NOTE</b>: RKNW is based on the Average Province size of the Kingdom.</p>
+
+<h3 id="Attack_Time_Adjustment_Factor">Attack Time Adjustment Factor</h3>
+
+<p>Adding or subtracting hours modifies the Gains (based on your Attack Time), as follows:</p>
+
+<div class="table-scroll">
+<table class="wiki-table">
+<tr><td class="cell-dark"><b>Hours</b></td><td class="cell-dark"><b>Gains Modifier %</b></td></tr>
+<tr><td><b>-2</b></td><td>(-2 / base attack time) * 160%</td></tr>
+<tr><td><b>-1</b></td><td>(-1 / base attack time) * 150%</td></tr>
+<tr><td><b>+1</b></td><td>(1 / base attack time) * 80%</td></tr>
+<tr><td><b>+2</b></td><td>(2 / base attack time) * 70%</td></tr>
+<tr><td><b>+3</b></td><td>(3 / base attack time) * 60%</td></tr>
+<tr><td><b>+4</b></td><td>(4 / base attack time) * 50%</td></tr></table></div>
+
+<h3 id="Attack_Type">Attack Type</h3>
+
+<h4 id="Traditional_March">Traditional March</h4>
+
+<p>Base gains are 12% and are capped at 20% of your Acres or your opponent's Acres, whichever is smaller.</p>
+
+<h4 id="Ambush">Ambush</h4>
+
+<ul>
+<li>Will return 50% of the Acres lost in the attack.</li>
+<li>Unaffected by Gains modifiers.</li>
+<li>Inflicts 15% increased Military Casualties.</li></ul>
+
+<h4 id="Plunder">Plunder</h4>
+
+<ul>
+<li>Base gains are 50% gold, 60% food and 60% runes.</li>
+<li>Max gains is 1.75x base (67.5% gold, 81% runes/food).</li>
+<li>Military Casualties on Plunder defense are reduced by 50%.</li></ul>
+
+<h4 id="Learn">Learn</h4>
+
+<ul>
+<li>Steals ~2% of target's allocated Books, plus ~2% of the target's unallocated Books.</li>
+<li>During War, Learn temporarily removes ~35% of total allocated Science Books, these return over 48 Ticks.</li>
+<li>Military Casualties on Learn defense are reduced by 50%.</li></ul>
+
+<h4 id="Raze">Raze</h4>
+
+<ul>
+<li>Destroys a portion (~5%) of the target's Land.</li>
+<li>In War, this attack only destroys ~30% Buildings.</li></ul>
+
+<h4 id="Conquest">Conquest</h4>
+
+<ul>
+<li>Base gains are 6.8% land for a full hit, Gains are decreased in proportion to the relative Offense sent vs. target's Defense.</li>
+<li>Available only within 5% Net Worth range outside Hostile/War, unless attacker has access to Enhanced Conquest.</li></ul>
+
+<h4 id="Massacre">Massacre</h4>
+
+<p>Base gains are 9.5% peasants, 7.5% Thieves and 5% Wizards. Efficiency increased roughly 3x during War.</p>
+
+<h2 id="Defending">Defending</h2>
+
+<div class="formula"><span class="formula__name">Raw Defense</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">(Defense Specs * Def Spec Points)</span></span><span class="formula__step"><span class="formula__op">+</span><span class="formula__term">(Elites at Home * Elite's Defense)</span></span><span class="formula__step"><span class="formula__op">+</span><span class="formula__term">(Soldiers *  Sold Def Points * <a href="mystics.html#Aggression">Aggression</a>)</span></span><span class="formula__step"><span class="formula__op">+</span><span class="formula__term"><a href="mystics.html#Town_Watch">Townwatch</a></span></span></div>
+
+<pre><b>Mod Defense =</b> <i>MAX</i> ( Raw Defense * Defensive Military Efficiency , Land )
+</pre>
+
+<div class="table-scroll" data-updated="none">
+<table class="wiki-table">
+<tr><td><b>Modifier Type</b></td><td><b>Active</b></td><td><b>Otherwise</b></td></tr>
+<tr><td><b>Def Spec Points</b></td><td><i>Variable</i></td><td>10</td></tr>
+<tr><td><b>Elite Defense</b></td><td><i>Variable</i></td></tr>
+<tr><td><b><a href="mystics.html#Town_Watch">Town Watch</a></b></td><td>Peasants / 5</td><td>0</td></tr></table></div>
+
+<h3 id="Minimum_Defense">Minimum Defense</h3>
+
+<ul>
+<li>All land is protected by a minimum of 1 defense per Acre.<br></li>
+<li>Opponent needs one offense to break your defense<br></li>
+<li>This <b>does not apply</b> to Intra-Kingdom attacks.</li></ul>
+
+<h2 id="Military_Casualties">Military Casualties</h2>
+
+<p>Base Military Casualties are 6.5%-8.5% on Offense, 5%-6.5% on Defense.</p>
+
+<div class="table-scroll">
+<table class="wiki-table">
+<tr><td><b>Modifier</b></td><td><b>Type</b></td><td><b>Effect</b></td></tr>
+<tr><td><b>Building: Hospitals</b></td><td>All Military Casualties</td><td>Varies</td></tr>
+<tr><td><b>Science: Resilience</b></td><td>All Military Casualties</td><td>Varies</td></tr>
+<tr><td><b>Multi-Attack Protection</b></td><td>All Military Casualties</td><td>Varies</td></tr>
+<tr><td><b>Attack: Learn</b></td><td>Defensive Military Casualties</td><td>-50%</td></tr>
+<tr><td><b>Attack: Plunder</b></td><td>Defensive Military Casualties</td><td>-50%</td></tr>
+<tr><td><b>Attack: Failed</b></td><td>Defensive Military Casualties</td><td>-35%</td></tr>
+<tr><td><b>Race: Orc</b></td><td>All Military Casualties</td><td>+15%</td></tr>
+<tr><td><b>Ritual: Stalwart</b></td><td>All Military Casualties</td><td>-20%</td></tr>
+<tr><td><b>Ritual: Onslaught</b></td><td>Offensive Military Casualties inflicted</td><td>+15%</td></tr>
+<tr><td><b>Spell: Pitfalls</b></td><td>Defensive Military Casualties</td><td>+20%</td></tr>
+<tr><td><b>Spell: Bloodlust</b></td><td>Offensive Military Casualties inflicted, Self Military Casualties</td><td>+15%</td></tr>
+<tr><td><b>Spell: Salvation</b></td><td>All Military Casualties</td><td>-15%</td></tr>
+<tr><td><b>Spell: Wrath</b></td><td>Enemy Military Casualties</td><td>+20%</td></tr>
+<tr><td><b>Operation: Bribe Generals</b></td><td>All Military Casualties</td><td>+20%</td></tr>
+<tr><td><b>Emerald Dragon</b></td><td>All Military Casualties</td><td>+20%</td></tr></table></div>
+
+<div class="table-scroll" data-updated="none">
+<table class="wiki-table wiki-table--wide">
+<tr><th colspan="2" class="cell-dark"><b>The Utopia Guide</b></th></tr>
+<tr><th class="cell-dark">Introduction</th><td><a href="getting-started-with-utopia.html">Getting Started with Utopia</a>  •  <a href="creating-a-province.html">Creating a province</a>  •  <a href="race.html">Race</a> &amp; <a href="personality.html">Personality</a></td></tr>
+<tr><th class="cell-dark">The Menus</th><td><a href="throne.html">Throne</a>  •  <a href="kingdom.html">Kingdom</a>  •  <a href="the-paper.html">News</a>
+
+<p><a href="explore.html">Explore</a>  •  <a href="growth.html">Growth</a>  •  <a href="science-formulas.html">Science</a>  •  <a href="military.html">Military</a></p>
+<p><a href="mystics.html">Mystics</a>  •  <a href="thievery.html">Thievery</a>  •  <a href="war-room.html">War Room</a> •  <a href="aid.html">Aid</a>  •  <a href="dragons.html">Dragon</a>  •  <a href="ritual.html">Ritual</a>  •  <a href="stances.html">Stances</a></p>
+<p><a href="ingame.html">Mail &amp; Forums</a></p>
+<p><a href="politics.html">Politics</a>  •  <a href="relations.html">Relations</a>  •  <a href="https://utopia-game.com/shared/common/ranking_history">Rankings</a>  •  <a href="preferences.html">Preferences</a></p></td></tr>
+<tr><th class="cell-dark">Advanced</th><td><a href="munkbot.html">MunkBot</a>  •  <a href="invitations.html">Invitations</a>  •  <a href="reservations.html">Reservations</a>  •  <a href="utopia.html">Utopia</a>  •  <a href="province.html">Province</a>  •  <a href="world-of-legends.html">World of Legends</a>  •  Formulas</td></tr>
+<tr><th class="cell-dark">Rules</th><td><a href="game-rules.html">Game Rules</a></td></tr></table></div>

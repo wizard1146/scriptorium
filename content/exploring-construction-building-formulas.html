@@ -1,0 +1,101 @@
+<!--
+title: Exploring, Construction & Building Formulas
+category: Formulas
+updated: 2024-03-04
+credits: Bishop, Clampy, Puppy101, Celien, Isaac, Givenchy, Stupid, Angevin, Bowman, ThZ, BT, Hetchienna18, Trepach, Vraid, Pestermenot, Ordray, Scav, Procariot, Eucariot, Crystopher, Spahrep, Dorus, Zyx, Leonidas, Utopia wolf, Panthira, Avenger, Icebuckle, Sonja says, Fanadin
+-->
+<p>flag:delete</p>
+<p>Deprecated. Already added content to the <a href="explore.html">Explore</a> and <a href="growth.html">Growth</a> pages.</p>
+
+<h2 id="Construction">Construction</h2>
+
+<h3 id="Construction_Time">Construction Time</h3>
+
+<div class="formula"><span class="formula__name">Construction Time</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">16</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Racial Mod</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Personality Mod</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Builders Boon</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Double Speed</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Expedient Ritual Mod</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Artisan Science Mod</span></span></div>
+
+<div class="table-scroll">
+<table class="wiki-table">
+<tr><td><b>Modifier Type</b></td><td><b>Active</b></td><td><b>Otherwise</b></td></tr>
+<tr><td><b><a href="mystics.html#Builders_Boon">Builders Boon</a></b></td><td>0.75</td><td>1</td></tr>
+<tr><td><b>Double Speed</b></td><td>0.5</td><td>1</td></tr>
+<tr><td><b>Double Speed in Protection</b></td><td>0.75</td><td>1</td></tr>
+<tr><td><b>War</b></td><td>0.75</td><td>1</td></tr>
+<tr><td><b><a href="ritual.html">Expedient Ritual</a></b></td><td>0.8 (if at 100% efficiency)</td><td>1</td></tr></table></div>
+
+<h3 id="Construction_Costs">Construction Costs</h3>
+
+<div class="formula"><span class="formula__name">Construction Costs</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">0.05*(land+10000)</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Race Mod</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Mills Mod</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Double Speed</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Expedient Ritual Mod</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Artisan Science Mod</span></span></div>
+
+<div class="table-scroll">
+<table class="wiki-table">
+<tr><td><b>Modifier Type</b></td><td><b>Active</b></td><td><b>Otherwise</b></td></tr>
+<tr><td><b>Double Speed</b></td><td>2</td><td>1</td></tr>
+<tr><td><b>Race: Dwarf</b></td><td>0.5</td><td>1</td></tr>
+<tr><td><b><a href="ritual.html">Expedient Ritual</a></b></td><td>0.75 (if at 100% efficiency)</td><td>1</td></tr></table></div>
+
+<h3 id="Raze_Costs">Raze Costs</h3>
+
+<pre><b>Raze Costs =</b> (300+(0.05*land) * Artisan Science Mod
+</pre>
+
+<h2 id="Buildings">Buildings</h2>
+
+<h3 id="Building_Efficiency">Building Efficiency</h3>
+
+<pre><b>Available Workers         = </b> Peasants + <i>ROUNDDOWN</i> ( Prisoners / 2 )
+
+<b>Optimal Workers           = </b> <i>ROUNDDOWN</i> ( Total Jobs * 0.67 )
+
+<b>% Jobs Performed          = </b> <i>MIN</i> ( Available Workers / Optimal Workers <i>,</i> 1 )
+
+<b>Building Efficiency       = </b> (0.5 * (1 + % Jobs Performed)) * Race * Personality * Tools Science * Dragon * Blizzard
+</pre>
+
+<ul>
+<li>The "Current Available Workers" value, provided by the Internal Affairs Adviser page, already takes prisoners into account.</li>
+<li>Building Efficiency affects all <a href="growth.html#Classes_of_Buildings">Flat Rate</a> and <a href="growth.html#Classes_of_Buildings">Percentage-Based</a> buildings.</li>
+<li>Building Efficiency has <b>NO</b> effect on Capacity component of Capacity Buildings as well as <a href="growth.html#Universities">Universities</a>.</li></ul>
+
+<ul>
+<li>Changes in Building Efficiency take effect gradually.</li></ul>
+
+<div class="table-scroll">
+<table class="wiki-table">
+<tr><td><b>Modifier Type</b></td><td><b>Active</b></td><td><b>Otherwise</b></td></tr>
+<tr><td><b>Race: Dwarf</b></td><td>1.25</td><td>1</td></tr>
+<tr><td><b>Dragon: <a href="dragons.html#Topaz">Topaz</a></b></td><td>0.75</td><td>1</td></tr>
+<tr><td><b>Spell: <a href="mystics.html#Blizzard">Blizzard</a></b></td><td>0.9</td><td>1</td></tr></table></div>
+
+<h3 id="Building_Effects">Building Effects</h3>
+
+<pre><b><a href="growth.html#Classes_of_Buildings">Percentage Based Buildings</a> =</b> Base Effect * BE * MIN(50%, % of building * (1 + Race)) * (100% - MIN(50%, % of building * (1 + Race)))
+<b><a href="growth.html#Classes_of_Buildings">Flat Rate Buildings</a> =</b> Base Effect * (Number of Buildings * (1 + Race)) * BE 
+</pre>
+
+<ul>
+<li>In general, the Max Effect of a %-Based Building is 25 x Base Effect (exceptions apply, refer to table)</li>
+<li>If your BE is less than 100%, the effect you would have with 50% of that building is the maximum.</li>
+<li>If you have less than 100% BE, additional buildings past 50% will have no effect.</li></ul>
+
+<h2 id="Related_Links:">Related Links:</h2>
+
+<div class="table-scroll" data-updated="none">
+<table class="wiki-table wiki-table--wide">
+<tr><th colspan="2" class="cell-dark"><b>The Utopia Guide</b></th></tr>
+<tr><th class="cell-dark">Introduction</th><td><a href="getting-started-with-utopia.html">Getting Started with Utopia</a>  •  <a href="creating-a-province.html">Creating a province</a>  •  <a href="race.html">Race</a> &amp; <a href="personality.html">Personality</a></td></tr>
+<tr><th class="cell-dark">The Menus</th><td><a href="throne.html">Throne</a>  •  <a href="kingdom.html">Kingdom</a>  •  <a href="the-paper.html">News</a>
+
+<p><a href="explore.html">Explore</a>  •  <a href="growth.html">Growth</a>  •  <a href="science-formulas.html">Science</a>  •  <a href="military.html">Military</a></p>
+<p><a href="mystics.html">Mystics</a>  •  <a href="thievery.html">Thievery</a>  •  <a href="war-room.html">War Room</a> •  <a href="aid.html">Aid</a>  •  <a href="dragons.html">Dragon</a>  •  <a href="ritual.html">Ritual</a>  •  <a href="stances.html">Stances</a></p>
+<p><a href="ingame.html">Mail &amp; Forums</a></p>
+<p><a href="politics.html">Politics</a>  •  <a href="relations.html">Relations</a>  •  <a href="https://utopia-game.com/shared/common/ranking_history">Rankings</a>  •  <a href="preferences.html">Preferences</a></p></td></tr>
+<tr><th class="cell-dark">Advanced</th><td><a href="munkbot.html">MunkBot</a>  •  <a href="invitations.html">Invitations</a>  •  <a href="reservations.html">Reservations</a>  •  <a href="utopia.html">Utopia</a>  •  <a href="province.html">Province</a>  •  <a href="world-of-legends.html">World of Legends</a>  •  Formulas</td></tr>
+<tr><th class="cell-dark">Rules</th><td><a href="game-rules.html">Game Rules</a></td></tr></table></div>
+
+<div class="table-scroll" data-updated="none">
+<table class="wiki-table wiki-table--wide">
+<tr><th colspan="2" class="cell-dark"><b>Buildings</b></th></tr>
+<tr><th class="cell-dark">Civil Buildings</th><td><a href="growth.html#Barren_Lands">Barren Lands</a>  •  <a href="growth.html#Homes">Homes</a>  •  <a href="growth.html#Farms">Farms</a>  •  <a href="growth.html#Mills">Mills</a>  •  <a href="growth.html#Banks">Banks</a></td></tr>
+<tr><th class="cell-dark">Military Buildings</th><td><a href="growth.html#Training_Grounds">Training Grounds</a>  •  <a href="growth.html#Armouries">Armouries</a>  •  <a href="growth.html#Barracks">Barracks</a>  •  <a href="growth.html#Forts">Forts</a>  •  <a href="growth.html#Castles">Castles</a>  •  <a href="growth.html#Hospitals">Hospitals</a>  •  <a href="growth.html#Stables">Stables</a>  •  <a href="growth.html#Dungeons">Dungeons</a></td></tr>
+<tr><th>Thievery and Mystic Buildings</th><td><a href="growth.html#Guilds">Guilds</a>  •  <a href="growth.html#Towers">Towers</a>  •  <a href="growth.html#Thieves.27_Dens">Thieves' Dens</a>  •  <a href="growth.html#Watchtowers">Watchtowers</a></td></tr>
+<tr><th>Science Buildings</th><td><a href="growth.html#Universities">Universities</a>  •  <a href="growth.html#Libraries">Libraries</a></td></tr></table></div>

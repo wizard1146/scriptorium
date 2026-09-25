@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{title}} · Scriptorium</title>
+  <meta name="description" content="{{description}}">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<!-- REGION: site-header -->
+<header class="site-header">
+  <button class="site-header__menu-button" type="button" aria-label="Toggle menu" aria-expanded="false">☰</button>
+  <a class="site-header__brand" href="index.html">
+    <span class="site-header__brand-name">Scriptorium</span>
+    <span class="site-header__brand-tagline">The Utopia wiki, kept in the open</span>
+  </a>
+  <!-- REGION: site-search -->
+  <form class="site-search" role="search" onsubmit="return false">
+    <input class="site-search__input" type="search" placeholder="Search the wiki…" aria-label="Search" autocomplete="off">
+    <ol class="site-search__results" hidden></ol>
+  </form>
+</header>
+
+<div class="layout">
+
+  <!-- REGION: site-sidebar -->
+  <nav class="site-sidebar" aria-label="Main">
+{{nav}}
+  </nav>
+
+  <!-- REGION: page -->
+  <main class="page">
+    <h1 class="page__title">{{title}}</h1>
+    <article class="page__body">
+{{body}}
+    </article>
+    <!-- REGION: page-footer -->
+    <footer class="page__footer">
+{{categories}}
+{{credits}}
+    </footer>
+  </main>
+
+</div>
+
+<!-- REGION: site-footer -->
+<footer class="site-footer">
+  <p class="site-footer__licence">Content is licensed <a href="https://creativecommons.org/licenses/by-nc/3.0/us/">CC BY-NC 3.0 US</a> and was originally written by the Utopia community on the <a href="https://wiki.utopia-game.com/">Utopian Encyclopedia</a>. Code is MIT.</p>
+  <p class="site-footer__disclaimer">Unofficial fan project. Utopia is a game by MUGA Gaming, LLC. This site is not affiliated with or endorsed by them.</p>
+  <p class="site-footer__links"><a href="https://github.com/wizard1146/scriptorium">Edit on GitHub</a> · <a href="all-pages.html">All pages</a> · <a href="about.html">About</a></p>
+</footer>
+
+<script src="assets/search.js" defer></script>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

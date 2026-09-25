@@ -1,0 +1,157 @@
+<!--
+title: Science: Obsolete and historical data
+category: 
+updated: 2018-10-07
+credits: Avenger
+-->
+<h3 id="Age_77">Age 77</h3>
+
+<div class="formula"><span class="formula__name">Science Bonus</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">[ <i>MIN</i>( Science Multiplier * Skill points , Cap )</span></span><span class="formula__step"><span class="formula__op">+</span><span class="formula__term"><i>MAX</i>( 0, Science Multiplier * Skill points - Cap )</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Diminishing Return Factor ]</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="race.html">Race</a> Mod</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="personality.html">Personality</a> Mod</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="mystics.html#Scientific_Insights">Scientific Insights</a> Mod</span></span></div>
+
+<div class="formula"><span class="formula__name">Skill points</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">Number of Novices</span></span><span class="formula__step"><span class="formula__op">+</span><span class="formula__term">1.5</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Number of Graduates</span></span><span class="formula__step"><span class="formula__op">+</span><span class="formula__term">2</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Number of Professors</span></span></div>
+
+<div class="table-scroll">
+<table class="wiki-table">
+<tr><td><b>Modifier Type</b></td><td><b> Multiplier</b></td><td><b>Science Category</b></td></tr>
+<tr><td>Personality: <a href="personality.html#The_Heretic">Heretic</a></td><td>1.3</td><td>Crime</td></tr>
+<tr><td>Personality: <a href="personality.html#The_Heretic">Heretic</a></td><td>1.3</td><td>Channeling</td></tr>
+<tr><td>Personality: <a href="personality.html#The_Rogue">Rogue</a></td><td>1.5</td><td>Crime</td></tr>
+<tr><td>Personality: <a href="personality.html#The_Mystic">Mystic</a></td><td>1.75</td><td>Channeling</td></tr>
+<tr><td>Personality: <a href="personality.html#The_Sage">Sage</a></td><td>1.3</td><td>All</td></tr>
+<tr><td>Spell: <a href="mystics.html#Scientific_Insights">Scientific Insights</a></td><td>1.1</td><td>All</td></tr></table></div>
+
+<p><br>
+<b>*NOTE* Starting Age 73: Science no longer has a hard maximum for all categories. Science will scale in a linear fashion up to stated maximums (Cap) as normal. Once this point is reached, additional scientists will yield diminishing returns.</b></p>
+
+<div class="table-scroll">
+<table class="wiki-table">
+<tr><td><b>Science Category</b></td><td><b>Effect</b></td><td><b> Multiplier</b></td><td><b>Cap</b></td><td><b>Scientist Cap</b></td></tr>
+<tr><td><b>Alchemy</b></td><td>Income</td><td>0.500%</td><td>30%</td><td>30</td></tr>
+<tr><td><b>Tools</b></td><td>Building Effectiveness</td><td>0.333%</td><td>20%</td><td>30</td></tr>
+<tr><td><b>Housing</b></td><td>Population Limits</td><td>0.250%</td><td>15%</td><td>30</td></tr>
+<tr><td><b>Production</b></td><td>Food &amp; Rune Production</td><td>2.000%</td><td>120%</td><td>30</td></tr>
+<tr><td><b>Military</b></td><td>Military Efficiency</td><td>0.250%</td><td>15%</td><td>30</td></tr>
+<tr><td><b>Crime</b></td><td>Thievery Effectiveness</td><td>1.667%</td><td>100%</td><td>30</td></tr>
+<tr><td><b>Channeling</b></td><td>Magic Effectiveness</td><td>2.084%</td><td>125%</td><td>30</td></tr></table></div>
+
+<ul>
+<li>As of Age 77, Universities protect a province from <a href="mystics.html#Amnesia">Amnesia</a>.</li>
+<li>Starting Age 77, the number of scientists required for (soft) cap will be the same number for all categories: 30.</li>
+<li>Abduct attack has been removed in Age 77.</li></ul>
+
+<p><br>
+<b>Scientist Spawn Rate</b></p>
+<p>Each province starts with a set number of scientists assigned to the various science categories. Scientists start out as Recruits that provide no bonus, then as they progress ther provide incrementally greater benefits with each progression.</p>
+
+<ul>
+<li>Recruit -&gt; Novice = 3 Utopian days (3 hours)</li>
+<li>Novice -&gt; Graduate = 72 Utopian days (3 days)</li>
+<li>Graduate -&gt; Professor = 96 Utopian days (4 days)</li></ul>
+
+<p>Scientists can be re-assigned at any time, but revert to Recruit level when doing so. <br>
+Every tick each province builds progress towards a new random scientist. Laboratories increase the rate of this progress.</p>
+
+<div class="formula"><span class="formula__name">Scientists Spawn Rate</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">9.5</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="race.html">Race</a> Mod</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="exploring-construction-building-formulas.html#Effects_of_Buildings">Laboratories Effect</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="mystics.html#Revelation">Revelation</a> Mod</span></span></div>
+
+<div class="table-scroll" data-updated="none">
+<table class="wiki-table">
+<tr><td><b>Modifier Type</b></td><td><b> Multiplier</b></td></tr>
+<tr><td>Race: <a href="race.html#Human">Human</a></td><td>1.25</td></tr>
+<tr><td>Spell: <a href="mystics.html#Revelation">Revelation</a></td><td>1.3</td></tr></table></div>
+
+<p><b>Scientist Networth</b></p>
+
+<div class="formula"><span class="formula__name">Networth Per Scientist</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">~1.7gc</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">tick of experience</span></span></div>
+
+<ul>
+<li>Professors experience caps at 72 hours</li>
+<li>A maxed-out professor will provide ~413gc Networth</li></ul>
+
+<h3 id="Age_69_-_Age_76">Age 69 - Age 76</h3>
+
+<p><b>Abduct Attacks</b><br></p>
+
+<ul>
+<li>Through combat, you can abduct scientists from another province. Universities protect a province from abduction. <b>Note: Abduct attack has been removed in Age 77.</b></li></ul>
+
+<p><b>Changelog</b></p>
+
+<ul>
+<li>Age 69: The new science system is introduced.</li>
+<li>Age 70: Professors experience capped at 72 hours (a maxed-out professor will provide ~624gc Networth). Tools cap increased from 15% to 20%, housing and military cap from 10% to 15%, food from 100% to 200%, channeling from 100% to 125%. Additional scientist rank added: Recruit.</li>
+<li>Age 71: Approximately +50% scientists will be required to reach maximum effects (see table below). Production Science maximum will be 120% (down from 200%) and it will increase both Food and Rune production.</li>
+<li>Age 72: Scientists are generated on a flat ratio (7.5) similar to wizards instead of via RNG.</li>
+<li>Age 73: Science will no longer have a hard maximum for all categories. Science will scale in a linear fashion up to the previously stated maximums as normal. Once this point is reached additional scientists will yield diminishing returns.</li>
+<li>Age 74: Scientist experience will now show on the Science page and in the Spy on Sciences.</li>
+<li>Age 76: The number of scientists required for soft cap will be the same number for all categories: 35.</li></ul>
+
+<p><b>Old scientist multipliers and caps, during Age 76:</b></p>
+
+<div class="table-scroll">
+<table class="wiki-table">
+<tr><td><b>Science Category</b></td><td><b>Effect</b></td><td><b> Multiplier</b></td><td><b>Soft Cap</b></td></tr>
+<tr><td><b>Alchemy</b></td><td>Income</td><td>0.428</td><td>30%</td></tr>
+<tr><td><b>Tools</b></td><td>Building Effectiveness</td><td>0.287</td><td>20%</td></tr>
+<tr><td><b>Housing</b></td><td>Population Limits</td><td>0.215</td><td>15%</td></tr>
+<tr><td><b>Production</b></td><td>Food &amp; Rune Production</td><td>1.714</td><td>120%</td></tr>
+<tr><td><b>Military</b></td><td>Military Efficiency</td><td>0.215</td><td>15%</td></tr>
+<tr><td><b>Crime</b></td><td>Thievery Effectiveness</td><td>1.428</td><td>100%</td></tr>
+<tr><td><b>Channeling</b></td><td>Magic Effectiveness</td><td>1.785</td><td>125%</td></tr></table></div>
+
+<p><b>Old scientist multipliers and caps, Age 71 - Age 75:</b></p>
+
+<div class="table-scroll">
+<table class="wiki-table">
+<tr><td><b>Science Category</b></td><td><b>Effect</b></td><td><b> Multiplier</b></td><td><b>Cap</b></td><td><b>Scientist Cap</b></td></tr>
+<tr><td><b>Alchemy</b></td><td>Income</td><td>0.5</td><td>30%</td><td>30</td></tr>
+<tr><td><b>Tools</b></td><td>Building Effectiveness</td><td>0.33</td><td>20%</td><td>31</td></tr>
+<tr><td><b>Housing</b></td><td>Population Limits</td><td>0.2</td><td>15%</td><td>38</td></tr>
+<tr><td><b>Production</b></td><td>Food &amp; Rune Production</td><td>2</td><td>120%</td><td>30</td></tr>
+<tr><td><b>Military</b></td><td>Military Efficiency</td><td>0.2</td><td>15%</td><td>38</td></tr>
+<tr><td><b>Crime</b></td><td>Thievery Effectiveness</td><td>1.65</td><td>100%</td><td>31</td></tr>
+<tr><td><b>Channeling</b></td><td>Magic Effectiveness</td><td>2</td><td>125%</td><td>32</td></tr></table></div>
+
+<h3 id="Age_.3F.3F_to_Age_68">Age ?? to Age 68</h3>
+
+<p><b>NOTE: These formulas apply to the old books system of science. In Age 69, books were replaced by scientists.</b>
+<b>From Ages ?? to 68 Science formulas worked as follows:</b></p>
+<p><b>Science Effects</b></p>
+
+<pre><b>Books per Acre =</b> Books / MAX(Acres,300)
+</pre>
+
+<div class="formula"><span class="formula__name">Science Bonus</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term"><a href="race.html">Race</a> Mod</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="personality.html">Personality</a> Mod</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Science Multiplier</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><i>SQRT</i>( Books per Acre )</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="exploring-construction-building-formulas.html#Building_Effects">Library Effect</a></span></span></div>
+
+<div class="table-scroll">
+<table class="wiki-table">
+<tr><td><b>Science Category</b></td><td><b>Multiplier</b></td></tr>
+<tr><td><b>Alchemy</b></td><td>1.4</td></tr>
+<tr><td><b>Tools</b></td><td>1</td></tr>
+<tr><td><b>Housing</b></td><td>0.65</td></tr>
+<tr><td><b>Food</b></td><td>8</td></tr>
+<tr><td><b>Military</b></td><td>0.52</td></tr>
+<tr><td><b>Thievery</b></td><td>6</td></tr>
+<tr><td><b>Channeling</b></td><td>6</td></tr></table></div>
+
+<p><b>Science Costs</b></p>
+
+<div class="formula"><span class="formula__name">Science Cost</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">Raw Cost (<i>Table Below</i>)</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="race.html">Race</a> Mod</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="exploring-construction-building-formulas.html#Effects_of_Buildings">Schools Effect</a></span></span></div>
+
+<div class="table-scroll">
+<table class="wiki-table">
+<tr><td><b>Science Rate</b></td><td><b>BPA</b></td><td><b>GC / Book</b></td><td><b>GC / Acre</b></td></tr>
+<tr><td><b>No Research</b></td><td>0</td><td>0</td><td>0</td><td></td></tr>
+<tr><td><b>Minimal</b></td><td>0.3</td><td>6</td><td>1.8</td></tr>
+<tr><td><b>Limited</b></td><td>0.4</td><td>7</td><td>2.8</td></tr>
+<tr><td><b>Sustained</b></td><td>0.5</td><td>9</td><td>4.5</td></tr>
+<tr><td><b>Active</b></td><td>0.7</td><td>13</td><td>9.1</td></tr>
+<tr><td><b>Focused</b></td><td>0.9</td><td>17</td><td>15.3</td></tr>
+<tr><td><b>Accelerated</b></td><td>1.2</td><td>22</td><td>26.4</td></tr>
+<tr><td><b>Intensive</b></td><td>1.5</td><td>27</td><td>40.5</td></tr>
+<tr><td><b>Rushed</b></td><td>2.0</td><td>36</td><td>72.0</td></tr>
+<tr><td><b>Extreme</b></td><td>3.0</td><td>50</td><td>150.0</td></tr></table></div>
+
+<div class="table-scroll" data-updated="none">
+<table class="wiki-table">
+<tr><th colspan="2" class="cell-dark"><b>Obsolete and historical data</b></th></tr>
+<tr><th></th><td><strong>Science</strong>  •  <a href="stances.html">Stances</a></td></tr></table></div>

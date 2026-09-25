@@ -1,0 +1,38 @@
+<!--
+title: Custom Themes
+category: 
+updated: 2014-07-11
+credits: Spahrep
+-->
+<p>Basics:</p>
+<p>After you have followed the instructions on how to create your own theme, it’s time to get to work on making it your own.  If you no little to nothing about CSS its highly suggested you go over to <a href="http://www.w3schools.com/css/">http://www.w3schools.com/css/</a> as this tutorial will assume you know the basics which are well taught there.</p>
+<p>When you fork the master repository you will get a number of files, but the one you are most interested in is theme.css followed by uniform.utopia.css (which is called by theme.css).</p>
+<p>The next thing you want to do is ensure you have a browser or browser plugin that allows you to quickly find the CSS associated with a given part of the page you are looking at. My preference is ‘firebug’ which works in Firefox and can be found here: <a href="https://getfirebug.com/">https://getfirebug.com/</a></p>
+<p>When turned to inspect mode, simply click on the page and you can see what CSS class is associated with what you clicked on, and you can change it on the fly:</p>
+<p>In the below image I used firebug’s inspect tool, and clicked on the date (red circle) . I was then able to see the style path for that element (green circle), and where it was located in the page’s html (blue circle).  In this particular image, because CSS cascades from the top down, making any change to any style in its style path would lead to a change in this element.</p>
+<p><br>
+You can make changes to theme.css on the github site, simply click the edit button, and then when you are done click the green ‘commit change’ button to save.</p>
+<p><br>
+If we were to go into theme.css and do a search on the inner most style “current-date” we find the following exists:
+#game-navigation .current-date {
+    padding: 11px 0px;
+    font-family: KnightsQuestRegular;
+    font-size: 16px;
+...
+}</p>
+<p>This style applies to any ‘current-date’ classed elements that are encased in a #game-navigation element. By looking at our style path, we can see that our .current-date classed div in indeed wrapped by a #game-navigation div, so this is where we want to edit.</p>
+<p>For example we could change the font family line to:
+font-family: "Times New Roman",Georgia,Serif;
+And we would set the font to Times New Roman for this box 
+#game-navigation .current-date {
+    padding: 11px 0px;
+    font-family: KnightsQuestRegular;
+    font-size: 16px;
+
+...
+}</p>
+<p>If there were other elements classed with .current-date that were not inside a #game-navigation element, we could simply create a new style after the previous style as follows:</p>
+<p>.current-date{
+        font-family: "Times New Roman",Georgia,Serif;
+}</p>
+<p>Remember that the most recently applied style in the cascade is the one that is used, with the lowest style defined being the most recent.</p>

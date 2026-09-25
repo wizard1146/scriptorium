@@ -1,0 +1,120 @@
+<!--
+title: Economy
+category: Formulas
+updated: 2024-05-14
+credits: Bishop, Clampy, Puppy101, Givenchy, Stupid, DaK, Pestermenot, Ordray, Scav, Procariot, Spahrep, Dorus, Francis, Avenger, Umajon911, Icebuckle, Sonja says
+-->
+<h2 id="Money">Money</h2>
+
+<p><b>Gold Coin</b> (1gc or $1) is Utopian Currency, the base of Utopian Economics.</p>
+<p>Banks and population produce money, wizards could cast it from <a href="mystics.html#Tree_of_Gold">Tree of Gold</a>.</p>
+<p>Spend money on Exploration, Building, Training, Wages, Dragons or aid your teammates.</p>
+
+<h4 id="Raw_Income">Raw Income</h4>
+
+<div class="formula"><span class="formula__name">Raw Income</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">(3 * Employed Peasants)</span></span><span class="formula__step"><span class="formula__op">+</span><span class="formula__term">(1 * Unemployed Peasants)</span></span><span class="formula__step"><span class="formula__op">+</span><span class="formula__term">(0.75 * Prisoners)</span></span><span class="formula__step"><span class="formula__op">+</span><span class="formula__term">Racial Gold Generation</span></span><span class="formula__step"><span class="formula__op">+</span><span class="formula__term">(Banks * 25 * BE)</span></span><span class="formula__step"><span class="formula__op">+</span><span class="formula__term">Miner's Mystique Gold Generation</span></span></div>
+
+<h4 id="Modified_Total_Income">Modified Total Income</h4>
+
+<pre><b>Modified Income =</b> Raw Income * <a href="the-plague.html">Plague</a> * <a href="thievery.html#Incite_Riots">Riots</a> * Bank % Bonus * Income Sci * <a href="honor.html#Effects">Honor Income Mod</a> 
+                  * <a href="race.html#Humans">Race</a> Mod * <a href="personality.html#The_Merchant">Personality</a> Mod * <a href="dragons.html">Dragon</a> * <a href="ritual.html">Ritual</a>
+</pre>
+
+<h4 id="Military_Expenses_.2F_Wages">Military Expenses / Wages</h4>
+
+<div class="formula"><span class="formula__name">Military Expenses</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">(((Def specs + Off specs ) * 0.5) + Elites * 0.75)</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Wage Rate</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Armouries Bonus</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="race.html">Race Mod</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="personality.html">Personality Mod</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">max(<a href="mystics.html#Inspire_Army">Inspire Army</a> , <a href="mystics.html#Hero.27s_Inspiration">Hero's Inspiration</a>)</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="mystics.html#Greed">Greed</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="ritual.html">Ritual</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="dragons.html">Dragon</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="science-formulas.html#Science_Categories.2C_Types_and_Effects">Bookkeeping Science Effect</a></span></span></div>
+
+<p><b>Note</b></p>
+
+<ul>
+<li>Wages are not paid to basic soldiers</li>
+<li>Greed affects provinces as a wage penalty, not an income penalty</li></ul>
+
+<h2 id="Population">Population</h2>
+
+<h4 id="Total_Population">Total Population</h4>
+
+<pre><b>Raw Living Space =</b> ((Built Land + Land in progress) * 25) + (Barren Land * 15) + (Homes * Homes Capacity)  
+
+<b>Mod Living Space =</b> Raw Living Space * Race Bonus * Population Science * Honor Population Bonus
+</pre>
+
+<p><b>Note</b></p>
+
+<ul>
+<li>Honor Bonuses are calculated as 1 + (Personality Mod * Honor Bonus)</li></ul>
+
+<h4 id="Current_Population">Current Population</h4>
+
+<pre><b>Current Population =</b> Peasants + Soldiers + Off Specs + Off Specs in Training + Def Specs + Def Specs in Training 
+                     + Elites + Elites in Training + Thieves + Thieves in Training + Wizards
+</pre>
+
+<p><b>Note</b></p>
+
+<ul>
+<li>Prisoners do not add to the population</li></ul>
+
+<h3 id="Peasants">Peasants</h3>
+
+<h4 id="Hourly_Change">Hourly Change</h4>
+
+<div class="formula"><span class="formula__name">Peasants Hourly Change</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">(Current Peasants * ((Birth Rate + Love &amp; Peace) * Race Bonus * Hospitals Bonus * <a href="relations.html#Ending_A_War">EOWCF</a> * Chastity - Storms))</span></span><span class="formula__step"><span class="formula__op">+</span><span class="formula__term">(<a href="growth.html#Homes">Homes bonus</a> * Chastity)</span></span><span class="formula__step"><span class="formula__op">−</span><span class="formula__term">Drafted Soldiers</span></span><span class="formula__step"><span class="formula__op">−</span><span class="formula__term">Wizards Trained</span></span></div>
+
+<div class="table-scroll">
+<table class="wiki-table">
+<tr><td><b>Modifier Type</b></td><td><b>Active</b></td><td><b>Otherwise</b></td></tr>
+<tr><td><b>Love &amp; Peace</b></td><td>0.85%</td><td>0</td></tr>
+<tr><td><b>Storms</b></td><td>1.5%</td><td>0</td></tr>
+<tr><td><b>Chastity</b></td><td>0.5</td><td>1</td></tr></table></div>
+
+<p><b>Note</b></p>
+
+<ul>
+<li>Base birth rate is 2.05% and ranges from 1.9457% up to 2.1525% (± 5% of 2.05%)</li>
+<li>Base birth rate is increased to ~3% during Protection</li>
+<li>There must be enough population space for peasants to increase</li>
+<li>When a province is overpopulated, the number of peasants will decrease by 10% per tick</li></ul>
+
+<h3 id="Employment">Employment</h3>
+
+<h4 id="Available_Jobs">Available Jobs</h4>
+
+<div class="formula"><span class="formula__name">Available Jobs</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">(Completed Buildings - Homes)</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">25</span></span></div>
+
+<h4 id="Unfilled_Jobs">Unfilled Jobs</h4>
+
+<pre><b>Unfilled Jobs =</b> <i>MAX</i> ( <a href="economy.html#Available_Jobs">Available Jobs</a> - Peasants - <i>ROUNDDOWN</i>( Prisoners / 2 ) , 0 )
+</pre>
+
+<h4 id="Employed_Peasants">Employed Peasants</h4>
+
+<pre><b>Employed Peasants =</b> <i>MIN</i> ( Peasants , <a href="economy.html#Available_Jobs">Available Jobs</a> - (<i>ROUNDDOWN</i> ( Prisoners* / 2 )) )
+</pre>
+
+<p><b>Note</b></p>
+
+<ul>
+<li>Prisoners are included in the Employed Peasants calculation for Building Efficiency. Prisoners are not considered actual peasants, as they do not generate the same amount of gold as employed or unemployed peasants (they only generate 0.75 gold regardless of employment)</li></ul>
+
+<h4 id="Unemployed_Peasants">Unemployed Peasants</h4>
+
+<pre><b>Unemployed Peasants =</b> MIN(Peasants - <a href="economy.html#Employed_Peasants">Employed Peasants</a>)
+</pre>
+
+<h4 id="Employment_Rate">Employment Rate</h4>
+
+<div class="formula"><span class="formula__name">Employment Rate</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">(<a href="economy.html#Employed_Peasants">Employed Peasants</a> / Peasants)</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">100</span></span></div>
+
+<div class="table-scroll" data-updated="none">
+<table class="wiki-table wiki-table--wide">
+<tr><th colspan="2" class="cell-dark"><b>The Utopia Guide</b></th></tr>
+<tr><th class="cell-dark">Introduction</th><td><a href="getting-started-with-utopia.html">Getting Started with Utopia</a>  •  <a href="creating-a-province.html">Creating a province</a>  •  <a href="race.html">Race</a> &amp; <a href="personality.html">Personality</a></td></tr>
+<tr><th class="cell-dark">The Menus</th><td><a href="throne.html">Throne</a>  •  <a href="kingdom.html">Kingdom</a>  •  <a href="the-paper.html">News</a>
+
+<p><a href="explore.html">Explore</a>  •  <a href="growth.html">Growth</a>  •  <a href="science-formulas.html">Science</a>  •  <a href="military.html">Military</a></p>
+<p><a href="mystics.html">Mystics</a>  •  <a href="thievery.html">Thievery</a>  •  <a href="war-room.html">War Room</a> •  <a href="aid.html">Aid</a>  •  <a href="dragons.html">Dragon</a>  •  <a href="ritual.html">Ritual</a>  •  <a href="stances.html">Stances</a></p>
+<p><a href="ingame.html">Mail &amp; Forums</a></p>
+<p><a href="politics.html">Politics</a>  •  <a href="relations.html">Relations</a>  •  <a href="https://utopia-game.com/shared/common/ranking_history">Rankings</a>  •  <a href="preferences.html">Preferences</a></p></td></tr>
+<tr><th class="cell-dark">Advanced</th><td><a href="munkbot.html">MunkBot</a>  •  <a href="invitations.html">Invitations</a>  •  <a href="reservations.html">Reservations</a>  •  <a href="utopia.html">Utopia</a>  •  <a href="province.html">Province</a>  •  <a href="world-of-legends.html">World of Legends</a>  •  Formulas</td></tr>
+<tr><th class="cell-dark">Rules</th><td><a href="game-rules.html">Game Rules</a></td></tr></table></div>

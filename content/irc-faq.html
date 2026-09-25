@@ -1,0 +1,63 @@
+<!--
+title: IRC FAQ
+category: IRC, UtoNet
+updated: 2017-05-28
+credits: Bishop, Puppy101, Utopia wolf
+-->
+<h2 id="How_Do_I_create_Text_Effects.3F">How Do I create Text Effects?</h2>
+
+<p><i>Bold text</i> is done in many IRC clients by pressing <i>Ctrl+B</i> simultanously.</p>
+<p><b>Underlined text</b> can be shown by pressing <i>Ctrl+U</i> in the same manner.</p>
+<p>Colored text often uses the <i>Ctrl+K</i> shortcut, followed by 1 or 2 numbers, where the first number stands for the text-color and the optional second number for the background-color. If you choose to use a background color you must seprate the text color from the background color with a comma. All of these codes should be trailed by the same key-combination to mark the end of a colored/underlined/bold section.</p>
+
+<h2 id="What_Do_the_symbols_.28.7E.2C_.26.2C_.40.2C_.25_and_.2B.29_mean.3F">What Do the symbols (~, &amp;, @, % and +) mean?</h2>
+
+<pre>  ~ = Channel Owner
+  &amp; = Channel Admin
+  @ = Channel Operator (Op)
+  % = Half Operator (Halfop)
+  + = Voice
+</pre>
+
+<p><i>Channel Owner (~/+q)</i> The channel owner is the founder of the channel. There may be more than one user who is mode +q, but there can only be one permanent founder. A user who is +q is also able to protect/deprotect (+/-a) users and set any channel mode.</p>
+<p><i>Channel Admin (&amp;/+a)</i> The channel admin is protected from being kicked by anyone. The channel admin can also set op/deop (+/-o) users and set almost all channel modes.</p>
+<p><i>Channel Operator (@/+o)</i> The channel operator has many channel powers. An Operator can op/deop (+/-o) other users and set many channel modes. It is also the first level that can set/remove ban exceptions (+/-e).</p>
+<p><i>Half Operator (%/+h)</i> Half operators have limited channel powers. They can kick another user, as long as that user does not have halfop (+h) or higher on the channel. They can set bans, and change a few other modes.</p>
+<p><i>Voice (+/+v)</i> Voiced users have no channel powers that ordinary users do not have, except for one thing: if the channel is moderated (+m), Voiced users (and higher) can speak.</p>
+
+<h2 id="How_Do_I_join_Channels_with_User_Passwords.2Fkeys.3F">How Do I join Channels with User Passwords/keys?</h2>
+
+<p>Normally you'd join a channel using:</p>
+
+<pre> /join #Channel
+</pre>
+
+<p>In case of a keyed channel, you'd type the following:</p>
+
+<pre> /join #Channel key
+</pre>
+
+<h2 id="How_Do_I_Register_my_Nick.3F">How Do I Register my Nick?</h2>
+
+<p>In order to secure your nickname so others cannot use it, UtoNet provides a service called <a href="nickserv.html">NickServ</a>. To to register with <a href="nickserv.html">NickServ</a>, use the following command.</p>
+
+<pre>/ns register password email
+</pre>
+
+<p>Replace password with a password to your liking and also make sure you replace email with a valid email address. This email address is required and will be validated before you can use your nickname. Note that your email address is not publicly visible.</p>
+<p>You are advised to configure your nickname settings via the /NS SET commands - read the <a href="nickserv.html">NickServ Guide</a>.</p>
+<p>Ced65a  &lt;a href="<a href="http://doyqkkjisomx.com/">http://doyqkkjisomx.com/</a>"&gt;doyqkkjisomx&lt;/a&gt;</p>
+
+<h2 id="Session_Limits">Session Limits</h2>
+
+<p>To prevent abuse, UtoNet allows a maximum of three (3) connections from a host. If you run bot(s) and experience a ping timeout, you may exceed three (3) connections. Also, it is possible that you're connecting from behind a firewall or a NAT network from where other people also connect to UtoNet from seemingly the same host. In these cases, exceptions from the session limit rule can sometimes be made. All requests should be sent via email to the UtoNet staff at opers@utonet.org.</p>
+<p>Exceeding the session limit (i.e four (4) or more connections from a single host) results in a 15 minute server ban.</p>
+
+<pre> <i>EXAMPLE</i>
+ « 18.41.03 » -OperServ- The session limit for your host ###.###.##.## has been exceeded.
+ « 18.41.03 » -OperServ- Please visit <a href="http://www.utonet.org/articles.php?a=25">http://www.utonet.org/articles.php?a=25</a> for more information about session limits.
+ « 18.41.03 » * You were killed by OperServ (zoidberg!services!OperServ (Session limit exceeded))
+ « 18.41.03 » Closing Link: YourNick[###.###.##.###] zoidberg.us.utonet.org (Killed (OperServ (Session limit exceeded)))
+ -
+ « 18.41.03 » * Disconnected
+</pre>

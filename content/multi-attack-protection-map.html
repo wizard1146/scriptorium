@@ -1,0 +1,69 @@
+<!--
+title: Multi-Attack Protection (MAP)
+category: Mini Guides
+updated: 2024-10-09
+credits: Bishop, Clampy, Puppy101, BaalsMistress, Avenger, Umajon911
+-->
+<div class="table-scroll" data-updated="none">
+<table class="wiki-table wiki-table--wide">
+<tr><td class="cell-center"><b>This is part of the Utopia WIKI Mini Guide Series.</b></td></tr></table></div>
+
+<div class="table-scroll" data-updated="none">
+<table class="wiki-table wiki-table--wide">
+<tr><td><table class="wiki-table wiki-table--wide">
+<tr><td class="cell-center"><p><span><b>THIS PAGE</b> describes a game mechanism - Multi-Attack Protection (MAP) in utopia. It also aims to discuss the implications of this game mechanism &amp; how others have utilized it. To discuss further implications or ask questions with regards to Multi-Attack Protection (MAP), be sure to check out the discussions page.
+</span></p></td></tr></table></td></tr></table></div>
+
+<p>Multi-Attack Protection (<b>MAP</b>) (formerly known as Gangbang Protection <b>GBP</b>) is a game mechanism introduced which aims to increase the protection conferred to Provinces which have been recently hit.<br>
+Current MAP Status/Level can bee seen under Affairs of the State.<br>
+Failed Attacks also increase the MAP of the defender, based on relative Offense sent/Defense, linearly scaling from 0 to half the amount of MAP generated on a successful Traditional March.</p>
+
+<h2 id="Effects_of_MAP">Effects of MAP</h2>
+
+<ul>
+<li>The more MAP on your Province, the less an Attack will gain from you - all other variables being equal.</li>
+<li>Increases Military Efficiency.</li>
+<li>Reduced Military Casualties equal to Gains reduction</li>
+<li>MAP rounds off to the nearest percentage (eg. it can be 20% or 21% but not 20.5%)</li>
+<li>MAP is almost negligible in War.</li></ul>
+
+<div class="table-scroll">
+<table class="wiki-table">
+<tr><td class="cell-dark"><b>MAP Status (Level)</b></td><td class="cell-dark"><b>MAP rating</b></td><td class="cell-dark"><b>Gains Out of War</b></td><td class="cell-dark"><b>Gains in War</b></td><td class="cell-dark"><b>Increase in ME</b></td><td class="cell-dark"><b>MAP Decay</b></td></tr>
+<tr><td><b>Not Hit</b></td><td><div>0%</div></td><td><div>100%</div></td><td><div>100%</div></td><td><div>N/A</div></td><td><div>0</div></td></tr>
+<tr><td><b>Couple</b></td><td><div>1-20%</div></td><td><div>80-99%</div></td><td><div>80-99%</div></td><td><div>+0.13-2.67%</div></td><td><div>1</div></td></tr>
+<tr><td><b>Moderately Hit</b></td><td><div>21-40%</div></td><td><div>60-79%</div></td><td><div>80%</div></td><td><div>+2.80-5.33%</div></td><td><div>1</div></td></tr>
+<tr><td><b>Heavily Hit</b></td><td><div>41-60%</div></td><td><div>40-59%</div></td><td><div>80%</div></td><td><div>+5.47-8.00%</div></td><td><div>2</div></td></tr>
+<tr><td><b>Extremely Heavily Hit</b></td><td><div>61-90%</div></td><td><div>10-39%</div></td><td><div>80%</div></td><td><div>+8.13-12.00%</div></td><td><div>3 or 4 if above 79%</div></td></tr></table></div>
+
+<h2 id="Attacking_MAP_Change">Attacking MAP Change</h2>
+
+<h3 id="Land_Attacks">Land Attacks</h3>
+
+<pre> A land attack (Traditional March, Raze or Conquest) increases the MAP rating by 2.75 * Percent of Targets land taken. 
+</pre>
+
+<p>For example if a target is attacked for 120 of its 1000 acres (12%) its MAP/GBP rating will increase by(12% * 2.75 = 33%) 33 points, taking it from 0% to 33% if previously un hit - enough to put it into the 'moderately hit' section.</p>
+
+<h3 id="Non-Land_Attacks">Non-Land Attacks</h3>
+
+<pre> Non-Land Attacks (Plunder  or Massacre) increase the MAP/GBP rating by 0.06 * Current Gains OOW
+ Learn increases the MAP/GBP rating by 0.12 * Current Gains OOW
+</pre>
+
+<p>For example if a target with a MAP rating of 20% (and thus Gains OOW of 80%) which is hit for a Plunder, it will boost its GBP by (0.06 * 80% = 4.8% rounded off) 5% to 25%.</p>
+
+<h2 id="MAP_Decay">MAP Decay</h2>
+
+<ul>
+<li>MAP rating naturally decreases every Tick by an amount dependent on the current MAP rating as shown in the above table. For example if the MAP rating is currently 59% (heavily hit), on the next hour change it will decrease by 2% to 57%.</li></ul>
+
+<ul>
+<li>MAP also decays whenever the province with MAP makes an attack.</li></ul>
+
+<h2 id="Military_Effectiveness">Military Effectiveness</h2>
+
+<pre> MAP gives a bonus to Military Effectiveness equal to the MAP rating / 7.5 
+</pre>
+
+<p>For example if the MAP rating of a province is 59% (heavily hit) their ME is boosted by (59 / 7.5 = 7.9%) 7.9% - ie. 1.079 times it's current rating.</p>

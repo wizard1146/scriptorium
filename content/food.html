@@ -1,0 +1,53 @@
+<!--
+title: Food
+category: Formulas, Resources
+updated: 2024-05-14
+credits: Clampy, Puppy101, Givenchy, Stupid, Pestermenot, Procariot, Hint, Crystopher, Dorus, Morsha, DavidC, Avenger, Umajon911, Sonja says, Fanadin
+-->
+<p><b>Food</b> is a resource, and it is needed to keep population of a <a href="province.html">Province</a> alive. It's measured in <b>bushels</b>.</p>
+
+<h2 id="Food_Consumed">Food Consumed</h2>
+
+<div class="formula"><span class="formula__name">Bushels Eaten</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">Total Population</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">0.25</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="race.html">Race Mod</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="mystics.html#Gluttony">Gluttony Mod</a></span></span></div>
+
+<div class="table-scroll">
+<table class="wiki-table">
+<tr><td><b>Modifier Type</b></td><td><b>Active</b></td><td><b>Otherwise</b></td></tr>
+<tr><td>Race: <a href="race.html#Undead">Undead</a></td><td>0</td><td>1</td></tr>
+<tr><td>Race: <a href="race.html#Dwarves">Dwarf</a></td><td>1.5</td><td>1</td></tr>
+<tr><td>Spell: <a href="mystics.html#Gluttony">Gluttony</a></td><td>1.25</td><td>1</td></tr></table></div>
+
+<ul>
+<li>If a province has zero food, it will enter into a state of starvation. While a province is starving, its population (peasants, military units and thieves) will die off at a rate proportional to the food deficit (this also includes armies away from home). Wizards are not affected. This rate is capped at 5% and will continue until the province has a value for food greater than 0.</li></ul>
+
+<h2 id="Food_Produced">Food Produced</h2>
+
+<pre><b>Base Food Production     =</b> ((<a href="growth.html">Farms</a> * 60) * Building Efficiency) + (Barren Land * 2) + (Race Mod * Acres) + (Personality Mod * Acres)
+ 
+<b>Modified Food Production =</b> Base Food Production * <a href="science-formulas.html">Production Science Mod</a> * <a href="mystics.html#Fertile_Lands">Fertile Lands Mod</a> * <a href="mystics.html#Droughts">Drought Mod</a> * <a href="honor.html">Honor Mod</a>
+</pre>
+
+<div class="table-scroll" data-updated="none">
+<table class="wiki-table">
+<tr><td><b>Condition</b></td><td><b>Modifier</b></td></tr>
+<tr><td><a href="mystics.html#Fertile_Lands">Fertile Lands</a></td><td>1.25</td></tr>
+<tr><td><a href="mystics.html#Droughts">Drought</a></td><td>0.75</td></tr></table></div>
+
+<h2 id="Food_Decayed">Food Decayed</h2>
+
+<div class="formula"><span class="formula__name">Food Remaining</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">Food Stock</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">0.99</span></span><span class="formula__step"><span class="formula__op">+</span><span class="formula__term">Modified Food Production</span></span><span class="formula__step"><span class="formula__op">−</span><span class="formula__term">Bushels Eaten</span></span></div>
+
+<p>0.99 or about 1% of the total food stock decays in normal conditions. The exact amount depends on the modifiers in the formula as provided above and it is calculated on the total food stored in the province. So if a province has 300,000 bushels of food in stock under normal conditions, then the expected decay is slightly less or more than 3000 bushels per tick / Utopia day. There may be scenarios where the total food decayed, is higher than what remains after food needed by the population is consumed from the food grown. This may lead to depletion of the stock in the province especially after a war when the people are much lesser compared to the maximum population limit and the stored food may be much higher or when a new player has built a lot of farms / received aid as food. This will normalize once the population reaches back to expected levels and the province only needs to ensure that the food grown is more than the food needed by the population at all times so as to avoid starvation.</p>
+
+<div class="table-scroll" data-updated="none">
+<table class="wiki-table wiki-table--wide">
+<tr><th colspan="2" class="cell-dark"><b>The Utopia Guide</b></th></tr>
+<tr><th class="cell-dark">Introduction</th><td><a href="getting-started-with-utopia.html">Getting Started with Utopia</a>  •  <a href="creating-a-province.html">Creating a province</a>  •  <a href="race.html">Race</a> &amp; <a href="personality.html">Personality</a></td></tr>
+<tr><th class="cell-dark">The Menus</th><td><a href="throne.html">Throne</a>  •  <a href="kingdom.html">Kingdom</a>  •  <a href="the-paper.html">News</a>
+
+<p><a href="explore.html">Explore</a>  •  <a href="growth.html">Growth</a>  •  <a href="science-formulas.html">Science</a>  •  <a href="military.html">Military</a></p>
+<p><a href="mystics.html">Mystics</a>  •  <a href="thievery.html">Thievery</a>  •  <a href="war-room.html">War Room</a> •  <a href="aid.html">Aid</a>  •  <a href="dragons.html">Dragon</a>  •  <a href="ritual.html">Ritual</a>  •  <a href="stances.html">Stances</a></p>
+<p><a href="ingame.html">Mail &amp; Forums</a></p>
+<p><a href="politics.html">Politics</a>  •  <a href="relations.html">Relations</a>  •  <a href="https://utopia-game.com/shared/common/ranking_history">Rankings</a>  •  <a href="preferences.html">Preferences</a></p></td></tr>
+<tr><th class="cell-dark">Advanced</th><td><a href="munkbot.html">MunkBot</a>  •  <a href="invitations.html">Invitations</a>  •  <a href="reservations.html">Reservations</a>  •  <a href="utopia.html">Utopia</a>  •  <a href="province.html">Province</a>  •  <a href="world-of-legends.html">World of Legends</a>  •  Formulas</td></tr>
+<tr><th class="cell-dark">Rules</th><td><a href="game-rules.html">Game Rules</a></td></tr></table></div>
