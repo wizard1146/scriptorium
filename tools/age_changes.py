@@ -120,7 +120,7 @@ updated: {updated}
 
 <h2 id="Bonuses_Penalties_and_Abilities">Bonuses, penalties and abilities</h2>
 
-{table(head2, rows2, "table--mono table--fixed table--cards")}
+{table(head2, rows2, "table--mono table--fixed table--cards table--hover")}
 '''
 (ROOT / "content/current-changes.html").write_text(page)
 print("wrote content/current-changes.html:", ", ".join(RACES))
