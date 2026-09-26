@@ -254,8 +254,11 @@ a:visited { color: var(--link-visited); }
 .page__body table.table--mono { font-family: var(--font-mono); font-size: .84rem; }   /* optional: monospace table, e.g. Current Changes */
 .page__body table.table--mono th, .page__body table.table--mono td:first-child { font: 400 .98rem/1.3 var(--font-heading); letter-spacing: .02em; }   /* header cells and the first (Race) column use the page-title font */
 .page__body table.table--mono td:first-child b { font-weight: inherit; }   /* IM Fell has no bold: keep the race names at regular weight instead of a faked bold */
+.page__body table.table--mono td:not(.cell-num) { font: 400 .98rem/1.35 var(--font-heading); letter-spacing: .01em; }   /* every text cell (not the figure cells) in the page-title font */
+.page__body table.table--mono b.ability { font-weight: 400; color: var(--accent); letter-spacing: .03em; }   /* an ability's name: accent colour instead of bold (IM Fell has no bold) */
+.page__body table.table--mono .num { font-family: var(--font-mono); font-size: .88em; letter-spacing: 0; }   /* a figure set in the monospace font inside text set in another font */
 .page__body table.table--mono th[rowspan] { vertical-align: middle; }   /* a header cell that spans both header rows (Race) sits in the middle of its box */
-.page__body table.table--mono th[colspan] { padding-top: .65rem; padding-bottom: .65rem; }   /* group headers (Soldier, Offense Specialist, ...) get extra height */
+.page__body table.table--mono tr:first-child > th { padding-top: .95rem; padding-bottom: .6rem; }   /* the top header row (group headers on the units table, the column headings on the other) gets extra height, mostly above the text */
 
 .cell-yes  { background: var(--yes-bg); color: var(--yes-text); text-align: center; font-weight: 600; }
 .cell-no   { background: var(--no-bg);  color: var(--no-text);  text-align: center; font-weight: 600; }
@@ -290,6 +293,7 @@ a:visited { color: var(--link-visited); }
 .page__body table.table--units .cell-num { padding-left: .25rem; padding-right: .75rem; }   /* tighter than the default so 4-digit costs still fit the narrow columns */
 /* table--hover: a soft highlight on the row under the pointer (data cells only, so header rows are left alone) */
 .page__body table.table--hover tr:hover > td { background-color: var(--row-hover); }
+.page__body table.table--hover.table--sticky-first tr:nth-child(n+3):hover > :first-child { background-color: var(--row-hover); }   /* the frozen Race cell has its own solid background, so it needs its own hover rule */
 .page__body table.table--hover td { transition: background-color .12s; }
 @media (prefers-reduced-motion: reduce) { .page__body table.table--hover td { transition: none; } }
 
@@ -302,7 +306,7 @@ a:visited { color: var(--link-visited); }
   .page__body table.table--cards tr { margin: 0 0 1rem; border: 1px solid var(--border); border-radius: .5rem; overflow: hidden; background: var(--surface); }
   .page__body table.table--cards td { padding: .6rem .9rem; border: 0; border-top: 1px solid var(--border); }
   .page__body table.table--cards td:first-child { border-top: 0; padding: .55rem .9rem; font-size: 1.05rem; background: var(--head-bg); color: var(--head-text); }
-  .page__body table.table--cards td[data-label]::before { content: attr(data-label); display: block; margin-bottom: .25rem; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+  .page__body table.table--cards td[data-label]::before { content: attr(data-label); display: block; font-family: var(--font-mono); margin-bottom: .25rem; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
   .page__body table.table--cards .list-plain, .page__body table.table--cards ul { margin-top: 0; margin-bottom: 0; }
 }
 

@@ -62,9 +62,14 @@ for r in RACES:
         "sol": unit(b, "Soldier"), "off": unit(b, "Offensive Specialist"), "def": unit(b, "Defensive Specialist"), "elite": unit(b, "Elite Unit"),
     }
 
+FIGURE = re.compile(r"(?<![\w.])([+\-\u2212]?\d+(?:\.\d+)?%?)")
+def numbers_mono(text):
+    """Escape a line and wrap each figure (with its sign and %) in <span class="num">, which CSS sets in the monospace font."""
+    return FIGURE.sub(r'<span class="num">\1</span>', html.escape(text, quote=False))
+
 def ul(items):
-    """Bonuses / penalties: no bullets, with a small gap between items so a wrapped line doesn't blur into the next one."""
-    return '<ul class="list-plain list-spaced">' + "".join(f"<li>{html.escape(i)}</li>" for i in items) + "</ul>" if items else ""
+    """Bonuses / penalties: no bullets, a small gap between items so a wrapped line doesn't blur into the next; figures in mono."""
+    return '<ul class="list-plain list-spaced">' + "".join(f"<li>{numbers_mono(i)}</li>" for i in items) + "</ul>" if items else ""
 
 def fmt_column(values):
     """Give every value in a column the same number of decimals (the most any of them has), so digits line up: 7 and 7.5 -> 7.0 and 7.5."""
@@ -88,7 +93,7 @@ for r in RACES:
     spells = '<ul class="list-plain">' + "".join(f"<li>{spell_link(s)}</li>" for s in d["spells"]) + "</ul>"
     # data-label is the caption shown above each section when the table turns into cards on narrow screens
     rows2.append(f'<tr><td><b>{r}</b></td><td class="cell-good" data-label="Bonuses">{ul(d["bonuses"])}</td><td class="cell-bad" data-label="Penalties">{ul(d["penalties"])}</td>'
-                 f'<td data-label="Unique Ability"><b>{html.escape(d["ua"][0])}</b><br>{html.escape(d["ua"][1])}</td><td data-label="Spellbook">{spells}</td></tr>')
+                 f'<td data-label="Unique Ability"><b class="ability">{html.escape(d["ua"][0])}</b><br>{numbers_mono(d["ua"][1])}</td><td data-label="Spellbook">{spells}</td></tr>')
 
 def table(head_rows, rows, cls="table--mono", colgroup=""):
     return f'<div class="table-scroll">\n<table class="{cls}">\n{colgroup}' + "\n".join(head_rows) + "\n" + "\n".join(rows) + "\n</table>\n</div>"
@@ -107,8 +112,7 @@ title: Current Changes: Age {age}
 origin: scriptorium
 updated: {updated}
 -->
-<p>Race stats for the current Age, <b>Age {age}</b>, taken from <b>AGE {age} FINAL CHANGES.pdf</b>, posted in the game's
-<a href="https://utopia-game.com/discord">Discord</a>. That file is the source of truth for everything else that changed this Age.</p>
+<p>Race stats for Age {age}. Source: <b>AGE {age} FINAL CHANGES.pdf</b> in the game's <a href="https://utopia-game.com/discord">Discord</a>.</p>
 
 <h2 id="Units_and_Costs">Units and costs</h2>
 

@@ -63,6 +63,8 @@ Every part of the site has one stable name. Use these names in issues, PRs and c
 | `table--borderless` | No cell borders, inside or out |
 | `table--sticky-first` | The first column stays in view while the table scrolls sideways (for two-row headers whose first header cell spans both rows) |
 | `table--cards` | Below 64rem each row turns into a card; each cell's `data-label="…"` becomes its caption. For text-heavy tables |
+| `ability` | Put on the `<b>` of a name in a `table--mono` text cell: accent colour, regular weight |
+| `num` | Wrap a figure (`<span class="num">+30%</span>`) to set it in the monospace font inside text in another font (inside a `table--mono`) |
 | `list-spaced` | Add to a `list-plain` list: a small gap between items, useful when items wrap onto several lines |
 | `list-plain` | A list with no bullets or indent (e.g. a stacked spell list) |
 
