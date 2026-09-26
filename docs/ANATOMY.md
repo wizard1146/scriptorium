@@ -65,6 +65,7 @@ Every part of the site has one stable name. Use these names in issues, PRs and c
 | `table--cards` | Below 64rem each row turns into a card; each cell's `data-label="…"` becomes its caption. For text-heavy tables |
 | `ability` | Put on the `<b>` of a name in a `table--mono` text cell: accent colour, regular weight |
 | `num` | Wrap a figure (`<span class="num">+30%</span>`) to set it in the monospace font inside text in another font (inside a `table--mono`) |
+| `entry-link` | On a `<p>`: a small link line tucked under a summary paragraph ("Full entry and history: …") |
 | `list-spaced` | Add to a `list-plain` list: a small gap between items, useful when items wrap onto several lines |
 | `list-plain` | A list with no bullets or indent (e.g. a stacked spell list) |
 
@@ -113,6 +114,21 @@ Add `status: needs-update` or `status: retired` to a page's header comment (opti
 
 `site/assets/logo.svg` is the mark (plum tile, parchment "S" built from two arcs). `favicon.svg`, `favicon-32.png`, `favicon.ico`
 and `apple-touch-icon.png` are derived from it. The mark is pure geometry, so edit the SVG and re-export the PNGs.
+
+## Values (`{{name}}`)
+
+Numbers that change from Age to Age (the starting number of scientists, the default draft rate, the current Age) live in one file,
+[`content/_values.json`](../content/_values.json). In any content file, or in `_nav.html`, write `{{name}}` and the build replaces it with the value:
+
+```
+Your draft rate is set to {{default_draft_rate}} by default.        ->  Your draft rate is set to 70% by default.
+```
+
+- To change a number for a new Age, edit it once in `_values.json`; every page that uses it updates.
+- Names are letters, digits and underscores, starting with a letter. Keys starting with `_` are notes and are ignored.
+- A name that isn't in the file fails `python3 build.py --check` (so a typo can't ship), and unused values are listed as a note.
+- Values work in page titles and the sidebar too, and they're in place before the search index is built.
+- `tools/age_changes.py` sets `age` for you when it generates the Current Changes page.
 
 ## Screen sizes
 

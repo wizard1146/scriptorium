@@ -44,9 +44,10 @@ def unit(block, name):
 UA_NAMES = {"Avian": "Dive Bomb", "Dark Elf": "Mystic Enthusiasts", "Dryad": "Overgrowth", "Dwarf": "Architect's Revenge", "Elf": "Arcane Mastery",
             "Faery": "Leyline Interference", "Halfling": "Silent Assault", "Human": "Civil Administration", "Orc": "Blood Spoils", "Undead": "Death March"}
 mystics = (ROOT / "content/mystics.html").read_text()
-ids = {re.sub(r"\s+", " ", i.replace("_", " ").replace(".27", "'")).lower(): i for i in re.findall(r'id="([^"]+)"', mystics)}
+_plain = lambda x: re.sub(r"['’‘]", "", re.sub(r"\s+", " ", x)).strip().lower()
+ids = {_plain(i.replace("_", " ").replace(".27", "'")): i for i in re.findall(r'id="([^"]+)"', mystics)}
 def spell_link(name):
-    key = name.replace("’", "'").strip().lower()
+    key = _plain(name)
     return f'<a href="mystics.html#{ids[key]}">{html.escape(name.strip())}</a>' if key in ids else html.escape(name.strip())
 
 data = {}
@@ -65,6 +66,8 @@ for r in RACES:
 FIGURE = re.compile(r"(?<![\w.])([+\-\u2212]?\d+(?:\.\d+)?%?)")
 def numbers_mono(text):
     """Escape a line and wrap each figure (with its sign and %) in <span class="num">, which CSS sets in the monospace font."""
+    text = re.sub(r"(\d)\s+%", r"\1%", text)              # "+25 %"  -> "+25%"   (typo in the PDF)
+    text = re.sub(r",(?=[A-Za-z])", ", ", text)              # "Greed,Incite" -> "Greed, Incite"
     return FIGURE.sub(r'<span class="num">\1</span>', html.escape(text, quote=False))
 
 def ul(items):
@@ -78,6 +81,47 @@ def fmt_column(values):
 
 # NW precision is normalised per unit column (Soldier NW: 0.75 everywhere; Off. Specialist NW: 1 decimal everywhere; ...)
 nw = {k: dict(zip(RACES, fmt_column([data[r][k][3] for r in RACES]))) for k in ("sol", "off", "def", "elite")}
+
+# ---- personalities: parsed from the PDF's "Personalities" section, one block per "The <Name>" line ----
+def parse_personalities():
+    start = next(i for i, l in enumerate(lines) if l.strip() == "Personalities")
+    block_lines = [l.strip() for l in lines[start + 1:]]
+    heads = [i for i, l in enumerate(block_lines) if re.fullmatch(r"The [A-Z][A-Za-z ]+", l)]
+    people = {}
+    for n, i in enumerate(heads):
+        name = block_lines[i][4:]
+        chunk = [l for l in block_lines[i + 1:(heads[n + 1] if n + 1 < len(heads) else len(block_lines))] if l]
+        items = []                                        # [kind, text-or-lines]
+        for l in chunk:
+            prev = items[-1] if items else None
+            if l.startswith("Access to"): items.append(["spells", l[len("Access to"):].strip()])
+            elif l.startswith("Starts with"): items.append(["start", l[len("Starts with"):].strip()])
+            elif l.startswith("Unique Passive"): items.append(["ua", [l[len("Unique Passive"):].lstrip(" :–-").strip()]])
+            elif prev and prev[0] == "ua": prev[1].append(l)                                   # everything after Unique Passive belongs to it
+            elif prev and prev[0] == "spells" and prev[1].endswith(","): prev[1] += " " + l   # wrapped spell list
+            elif prev and prev[0] == "start" and re.fullmatch(r"[A-Z][a-z]+", l): prev[1] += " " + l   # "...+200 Building" / "Credits"
+            elif prev and prev[0] == "bonus" and l[0].islower(): prev[1] += " " + l           # wrapped bonus line
+            else: items.append(["bonus", l])
+        p = {"bonuses": [t for k, t in items if k == "bonus"], "start": [t for k, t in items if k == "start"], "spells": [], "ua": ("", "")}
+        for k, t in items:
+            if k == "spells": p["spells"] += [re.sub(r"^and\s+", "", x.strip()) for x in t.split(",") if x.strip()]
+            if k == "ua":
+                first = t[0]
+                m = re.match(r"(.*?)(?::\s+|\.\s+| - |\s*:$|$)(.*)", first)
+                name_, rest = m.group(1).strip(), m.group(2).strip()
+                rest_lines = ([rest] if rest else []) + t[1:]
+                text = ""
+                prev_piece = ""
+                for piece in rest_lines:                  # a line starting with a figure is a new list line ("15% of gold") only inside a list, not mid-sentence
+                    in_list = re.match(r"\d", piece) and (prev_piece.endswith((":", ".")) or re.match(r"\d", prev_piece))
+                    text += ("<br>" if text and in_list else " " if text else "") + numbers_mono(piece)
+                    prev_piece = piece
+                p["ua"] = (name_, text.strip())
+        people[name] = p
+    return people
+
+PERSONALITIES = parse_personalities()
+PLAYERS = list(PERSONALITIES)
 
 # ---- table 1: per unit Att | Def | NW (NW muted, all numbers right-aligned); Elite adds a muted Cost ----
 NUM, MUTED = "cell-num", "cell-num cell-muted"
@@ -107,20 +151,54 @@ head1 = [head(['<th rowspan="2">Race</th>', '<th colspan="3">Soldier</th>', '<th
 # second table: fixed layout, so Bonuses / Penalties / Unique Ability get equal widths; Race and Spellbook are set narrow
 head2 = [head(['<th class="col-sm">Race</th>', "<th>Bonuses</th>", "<th>Penalties</th>", "<th>Unique Ability</th>", '<th class="col-md">Spellbook</th>'])]
 
+# ---- table 3: personalities (same layout as the race table: fixed even columns, cards on narrow screens) ----
+rows3 = []
+for name, p in PERSONALITIES.items():
+    spells = ('<ul class="list-plain">' + "".join(f"<li>{spell_link(s)}</li>" for s in p["spells"]) + "</ul>") if p["spells"] else '<span class="cell-muted">None</span>'
+    rows3.append(f'<tr><td><b>{name}</b></td><td class="cell-good" data-label="Bonuses">{ul(p["bonuses"])}</td>'
+                 f'<td data-label="Starting Bonuses">{ul(p["start"])}</td>'
+                 f'<td data-label="Unique Ability"><b class="ability">{html.escape(p["ua"][0])}</b><br>{p["ua"][1]}</td><td data-label="Spellbook">{spells}</td></tr>')
+head3 = [head(['<th class="col-sm">Personality</th>', "<th>Bonuses</th>", "<th>Starting Bonuses</th>", "<th>Unique Ability</th>", '<th class="col-md">Spellbook</th>'])]
+
 page = f'''<!--
 title: Current Changes: Age {age}
 origin: scriptorium
 updated: {updated}
 -->
-<p>Race stats for Age {age}. Source: <b>AGE {age} FINAL CHANGES.pdf</b> in the game's <a href="https://utopia-game.com/discord">Discord</a>.</p>
+<p>Race and personality stats for Age {age}. Source: <b>AGE {age} FINAL CHANGES.pdf</b> in the game's <a href="https://utopia-game.com/discord">Discord</a>.</p>
 
 <h2 id="Units_and_Costs">Units and costs</h2>
 
 {table(head1, rows1, "table--mono table--sticky-first table--borderless table--units table--hover", UNITS_COLS)}
 
-<h2 id="Bonuses_Penalties_and_Abilities">Bonuses, penalties and abilities</h2>
+<h2 id="Race_Bonuses_Penalties_and_Abilities">Race bonuses, penalties and abilities</h2>
 
 {table(head2, rows2, "table--mono table--fixed table--cards table--hover")}
+
+<h2 id="Personalities">Personalities</h2>
+
+{table(head3, rows3, "table--mono table--fixed table--cards table--hover")}
 '''
 (ROOT / "content/current-changes.html").write_text(page)
-print("wrote content/current-changes.html:", ", ".join(RACES))
+print("wrote content/current-changes.html:", ", ".join(RACES), "|", len(PERSONALITIES), "personalities:", ", ".join(PERSONALITIES))
+# coverage check: every personality line in the PDF must appear on the page (letters and digits only, so punctuation and wrapping don't matter)
+_norm = lambda t: re.sub(r"[^a-z0-9%]+", "", html.unescape(re.sub(r"<[^>]+>", " ", t)).lower())
+_page = _norm(page)
+_missing = []
+for l in (x.strip() for x in lines[next(i for i, l in enumerate(lines) if l.strip() == "Personalities") + 1:]):
+    if not l or re.fullmatch(r"The [A-Z][A-Za-z ]+", l): continue
+    if l.startswith("Access to"):                                      # spells are listed one per line on the page: check each
+        _missing += [x for x in re.split(r",|\band\b", l[len("Access to"):]) if x.strip() and _norm(x) not in _page]
+    elif _norm(re.sub(r"^(Starts with|Unique Passive)", "", l)) not in _page:
+        _missing.append(l)
+if _missing: print("WARNING: personality lines from the PDF that are NOT on the page:", *_missing, sep="\n  ")
+else: print("coverage: every personality line in the PDF is on the page")
+
+# the sidebar label ("Current Changes: Age {{age}}") reads the current Age from content/_values.json
+import json
+vf = ROOT / "content" / "_values.json"
+vals = json.loads(vf.read_text(encoding="utf-8"))
+if vals.get("age") != int(age):
+    vals["age"] = int(age)
+    vf.write_text(json.dumps(vals, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    print("updated content/_values.json: age =", age)

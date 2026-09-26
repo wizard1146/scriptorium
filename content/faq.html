@@ -2,13 +2,13 @@
 title: FAQ
 category: Guide, Mini Guides
 updated: 2024-03-03
-credits: Fagashlil, Bishop, Puppy101, Tzar, Procariot, Utopia wolf, Panthira, Avenger, Umajon911, Sonja says
+credits: Fagashlil, Bishop, Puppy101, Tzar, Procariot, Utopia wolf, Panthira, Avenger, Umajon911, Sonja says, Topsy, Tom
 -->
 
 <h3 id="Getting_Started_Questions">Getting Started Questions</h3>
 
 <details class="faq-item">
-<summary>What race and personality should I select??</summary>
+<summary>What race and personality should I select?</summary>
 <div class="faq-item__answer">
 <p>It all depends on what style of play you plan on doing, and the needs of your kingdom. You can look at the current races and personalities here, <a href="race.html">Race</a> and <a href="personality.html">Personality</a>.</p>
 </div>
@@ -17,42 +17,28 @@ credits: Fagashlil, Bishop, Puppy101, Tzar, Procariot, Utopia wolf, Panthira, Av
 <details class="faq-item">
 <summary>What should I do when I first join? What buildings to build for protection?</summary>
 <div class="faq-item__answer">
-<p>You should introduce yourself to the kingdom. Most of the times, your kingdom will post a Discord link where most of the chat goes on. Some kingdoms just use the in-game chat, some others use the forums. If you do not feel comfortable using discord, just send your Monarch or Steward a message in game and introduce yourself. You can identify the Monarch(M) or Stewards(S) by looking on the KD page. In regards of buildings, since protection is only 24 hours, we recommend you consult the leadership within your kingdom first.</p>
-</div>
-</details>
-
-<details class="faq-item">
-<summary>I'm a ******/******, what buildings should my "build" consist of?</summary>
-<div class="faq-item__answer">
-<p>This answer shouldn't be specific to a build, but discussion of what to look for in builds, and how one should be focused on the dynamic situation more than some constant "build"</p>
-</div>
-</details>
-
-<details class="faq-item">
-<summary>What does x building do? When should I have x building?(this will be the direct link to the page with all the comments for each building)</summary>
-<div class="faq-item__answer">
-<p><a href="growth.html">Building Uses</a></p>
+<p>You should introduce yourself to the kingdom. Most of the times, your kingdom will post a Discord link where most of the chat goes on. Some kingdoms just use the in-game chat, some others use the forums. If you do not feel comfortable using discord, just send your Monarch or Steward a message in game and introduce yourself. You can identify the Monarch (M) or Stewards (S) by looking on the KD page. In regards of buildings, since protection is only 24 hours, we recommend you consult the leadership within your kingdom first.</p>
 </div>
 </details>
 
 <details class="faq-item">
 <summary>What should I do with starting science?</summary>
 <div class="faq-item__answer">
-<p>Each province starts with 5 scientists at the beginning of the age. Your role should determine where to set your scientists, Economy, Military, or Arcane Arts.</p>
+<p>Each province starts with {{starting_scientists}} scientists at the beginning of the age. Your role should determine where to set your scientists, Economy, Military, or Arcane Arts.</p>
 </div>
 </details>
 
 <details class="faq-item">
 <summary>What should I set my draft rate to?</summary>
 <div class="faq-item__answer">
-<p>Your draft rate is set to 70% by default. A new province will take a while to draft to 70%. You can change your draft rate as you deem fit but remember, the lower the draft rate, the higher your peasant count will be and your Building Efficiency will increase. The higher you are drafted, the lower your peasant count will be, negatively affecting your Building Efficiency, but making your province stronger with a stronger military.</p>
+<p>Your draft rate is set to {{default_draft_rate}} by default. A new province will take a while to draft to {{default_draft_rate}}. You can change your draft rate as you deem fit but remember, the lower the draft rate, the higher your peasant count will be and your Building Efficiency will increase. The higher you are drafted, the lower your peasant count will be, negatively affecting your Building Efficiency, but making your province stronger with a stronger military.</p>
 </div>
 </details>
 
 <details class="faq-item">
-<summary>What is military wages? What should I put them to?</summary>
+<summary>What does the Military Wages % setting do, and what should I set it to?</summary>
 <div class="faq-item__answer">
-<p>Military wages modify the amount each spec/elite costs per tick. Over time, raising or lowering wages will raise or lower military efficiency. It takes 4 days of higher wages for the military efficiency to go from 77.86%(20% wages) to 112.14%(200% wages).</p>
+<p>Military wages modify the amount each spec/elite costs per tick. Over time, raising or lowering wages will raise or lower military efficiency. It takes 4 days of higher wages for the military efficiency to go from 77.86% (20% wages) to 112.14% (200% wages).</p>
 </div>
 </details>
 
@@ -75,7 +61,7 @@ credits: Fagashlil, Bishop, Puppy101, Tzar, Procariot, Utopia wolf, Panthira, Av
 <details class="faq-item">
 <summary>I keep getting hit out of war by massive kd's, how do I prevent this?</summary>
 <div class="faq-item__answer">
-<p>One way that large kingdoms(whores) generate land is by hitting random provinces that are in nw range. In order to know how not to be targeted it is important to know what they are looking for in a good target.</p>
+<p>One way that large kingdoms (whores) generate land is by hitting random provinces that are in nw range. In order to know how not to be targeted it is important to know what they are looking for in a good target.</p>
 </div>
 </details>
 
@@ -89,12 +75,11 @@ credits: Fagashlil, Bishop, Puppy101, Tzar, Procariot, Utopia wolf, Panthira, Av
 <details class="faq-item">
 <summary>How do magic and thief ops work? What determines their success-rate? What determines their damage?</summary>
 <div class="faq-item__answer">
-<p>The success of a magic op is a function of the relative mod wpa between a target province and the caster province * the difficulty of the spell * the relative nw between caster and target. A common rule of thumb is that having *2 your targets mod wpa will grant decent success on most non-mystic specific ops and that having *4-5 your targets mod wpa will grand decent success on most mystic specific ops. NW differential between caster and target also gives a certain amount of auto-fail. Many WPA mods(such as the saphire dragon mod) double as an auto-fail mod. FB is partially immune to the affects of nw. Duration on offensive spells is a function of modified guild % with 20% guilds(after mods) giving max durations.</p>
+<p>The success of a magic op is a function of the relative mod wpa between a target province and the caster province * the difficulty of the spell * the relative nw between caster and target. A common rule of thumb is that having *2 your targets mod wpa will grant decent success on most non-mystic specific ops and that having *4-5 your targets mod wpa will grand decent success on most mystic specific ops. NW differential between caster and target also gives a certain amount of auto-fail. Many WPA mods (such as the saphire dragon mod) double as an auto-fail mod. FB is partially immune to the affects of nw. Duration on offensive spells is a function of modified guild % with 20% guilds (after mods) giving max durations.</p>
+<dl>
+<dd>The success of a thief op is a function of the relative mod tpa between both parties, the difficulty of the op, and anything that might give auto-fail (WT or CS). The damage done by an op is a function of the amount of raw theives sent (up to a cap on all ops but prop), relative nw, and any gains modifiers. </dd></dl>
 </div>
 </details>
-
-<dl>
-<dd>The success of a thief op is a function of the relative mod tpa between both parties, the difficulty of the op, and anything that might give auto-fail(WT or CS). The damage done by an op is a function of the amount of raw theives sent(up to a cap on all ops but prop), relative nw, and any gains modifiers. </dd></dl>
 
 <details class="faq-item">
 <summary>How do I calculate my attack so that I don't bounce?</summary>
@@ -107,11 +92,10 @@ credits: Fagashlil, Bishop, Puppy101, Tzar, Procariot, Utopia wolf, Panthira, Av
 <summary>When/Why should I ambush?</summary>
 <div class="faq-item__answer">
 <p>When to Ambush:  Before your enemy's army returns back home with your land - other wise you cannot ambush them.</p>
-</div>
-</details>
-
 <dl>
 <dd>Reasons to Ambush:  Once you take your enemy's SoM, if you can attack your enemy, return home, and then still ambush them, this gives you 2 attacks for every 1 attack your enemy has made on you which means you will likely have a net gain in land over.  During war you might need to ambush armies to keep your enemies from getting too much of your land or to keep them from trying to recover from a chain.  Ambush is also useful if you are trying to harm your enemy's offensive specialist number or number of elites - by ambushing you could cause a decrease in your enemy's offensive power.  A major reason to ambush would also be if you do not have enough offense to attack your enemy's At Home army - ambush could let you get some of your land back without having to use as much offense on a regular attack.  Ambushes are also quicker than traditional attacks so your army will not be out as long.   </dd></dl>
+</div>
+</details>
 
 <details class="faq-item">
 <summary>Someone said that offense is better than defense in Utopia. Is this the case?</summary>
@@ -144,14 +128,14 @@ credits: Fagashlil, Bishop, Puppy101, Tzar, Procariot, Utopia wolf, Panthira, Av
 </details>
 
 <details class="faq-item">
-<summary>How do you make an unbreakable(UB)? What is the purpose of an unbreakable? What should I look for in a province that I want to make unbreakable?</summary>
+<summary>How do you make an unbreakable (UB)? What is the purpose of an unbreakable? What should I look for in a province that I want to make unbreakable?</summary>
 <div class="faq-item__answer">
 <p>You make an unbreakable during war by taking out the enemies top attacker and creating a province that is able to not be attacked. With mechanics and operations though, it is more difficult now than in the past creating unbreakables but is still very possible. Once a UB is made, they usually train offense so they can bottom feed on chained provinces and continue to grow during war, feeding their kingdom with resources.</p>
 </div>
 </details>
 
 <details class="faq-item">
-<summary>How do I prevent the other KD from making an unbreakable(UB)? When should I act on the other kd's attempt to make an UB?</summary>
+<summary>How do I prevent the other KD from making an unbreakable (UB)? When should I act on the other kd's attempt to make an UB?</summary>
 <div class="faq-item__answer">
 <p>Usually to prevent an unbreakable, they are targeted within the opening wave. A UB will usually turn into a TM vs TM battle and who has the better WPA and TPA. If you notice that a KD is making UB's, it is usually beneficial to coordinate taking their resources, and having your TM's do propaganda and nightmare waves to open them up to attackers.</p>
 </div>
@@ -279,10 +263,3 @@ credits: Fagashlil, Bishop, Puppy101, Tzar, Procariot, Utopia wolf, Panthira, Av
 <p><a href="http://forums.utopia-game.com/showth...ealest-Returns">http://forums.utopia-game.com/showth...ealest-Returns</a></p>
 <p><a href="http://forums.utopia-game.com/showth...e-advantageous">http://forums.utopia-game.com/showth...e-advantageous</a></p>
 <p><a href="http://forums.utopia-game.com/showthread.php?622799-Quick-Tips">http://forums.utopia-game.com/showthread.php?622799-Quick-Tips</a></p>
-
-<h3 id="Contributing_Editors">Contributing Editors</h3>
-
-<ul>
-<li>Topsy</li>
-<li>Tom</li></ul>
-

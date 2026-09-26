@@ -1,0 +1,6 @@
+{
+  "_about": "Game numbers that change from Age to Age. In any content file (or _nav.html) write {{name}} and the build replaces it with the value below. Change a number here once and every page that uses it updates. Names are letters, digits and underscores, starting with a letter.",
+  "age": 116,
+  "starting_scientists": 5,
+  "default_draft_rate": "70%"
+}

@@ -28,9 +28,31 @@ ROOT = pathlib.Path(__file__).resolve().parent
 CONTENT, SITE, DIST = ROOT / "content", ROOT / "site", ROOT / "dist"
 META = re.compile(r"\A\s*<!--(.*?)-->\s*", re.S)
 
+# ---- values: game numbers kept in content/_values.json and dropped into pages as {{name}} ----
+VALUES, USED, UNKNOWN = {}, set(), []
+TOKEN = re.compile(r"(?<!\{)\{\{\s*([A-Za-z][A-Za-z0-9_]*)\s*\}\}(?!\})")   # {{name}}; leaves MediaWiki-style {{{1f}}} alone
+
+
+def load_values():
+    f = CONTENT / "_values.json"
+    data = json.loads(f.read_text(encoding="utf-8")) if f.exists() else {}
+    return {k: v for k, v in data.items() if not k.startswith("_")}      # keys starting with "_" are notes
+
+
+def fill_values(text, where):
+    """Replace every {{name}} with its value from _values.json. Unknown names are recorded (and fail --check) and left as they are."""
+    def rep(m):
+        k = m.group(1)
+        if k in VALUES:
+            USED.add(k)
+            return html.escape(str(VALUES[k]), quote=False)
+        UNKNOWN.append((where, k))
+        return m.group(0)
+    return TOKEN.sub(rep, text)
+
 
 def parse_page(path):
-    raw = path.read_text(encoding="utf-8")
+    raw = fill_values(path.read_text(encoding="utf-8"), path.stem)      # values first, so titles, search and descriptions all see the numbers
     m = META.match(raw)
     meta = {}
     if m:
@@ -211,7 +233,8 @@ def main():
     DIST.mkdir()
     shutil.copytree(SITE / "assets", DIST / "assets")
     template = (SITE / "template.html").read_text(encoding="utf-8")
-    nav = (CONTENT / "_nav.html").read_text(encoding="utf-8") if (CONTENT / "_nav.html").exists() else ""
+    VALUES.clear(); VALUES.update(load_values()); USED.clear(); UNKNOWN.clear()
+    nav = fill_values((CONTENT / "_nav.html").read_text(encoding="utf-8"), "_nav") if (CONTENT / "_nav.html").exists() else ""
 
     pages = [parse_page(p) for p in sorted(CONTENT.glob("*.html")) if not p.name.startswith("_")]
     by_slug = {p["slug"]: p for p in pages}
@@ -256,6 +279,11 @@ def main():
         if p["status"] and p["status"] not in STATUSES:
             print(f"WARNING: {p['slug']}: unknown status '{p['status']}' (use: {', '.join(STATUSES)})", file=sys.stderr)
     if "index" not in by_slug: print("WARNING: no content/index.html (home page)", file=sys.stderr)
+    unused = sorted(set(VALUES) - USED)
+    if unused: print(f"note: unused values in _values.json: {', '.join(unused)}", file=sys.stderr)
+    if UNKNOWN:
+        print(f"{len(UNKNOWN)} {{{{name}}}} value(s) not defined in content/_values.json:", file=sys.stderr)
+        for where, k in UNKNOWN[:20]: print(f"  {where}: {{{{{k}}}}}", file=sys.stderr)
 
     index = [{"t": p["title"], "u": p["url"], "x": plain(p["body"]), **({"s": STATUSES[p["status"]]["label"]} if p["status"] in STATUSES else {})} for p in pages]
     (DIST / "search-index.json").write_text(json.dumps(index, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
@@ -266,6 +294,7 @@ def main():
         print(f"{len(broken)} broken internal links:", file=sys.stderr)
         for slug, href in broken[:40]: print(f"  {slug}: {href}", file=sys.stderr)
         if check: sys.exit(1)
+    if UNKNOWN and check: sys.exit(1)       # a {{name}} with no value is a mistake worth failing the build for
 
 
 if __name__ == "__main__":

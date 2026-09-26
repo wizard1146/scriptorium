@@ -27,6 +27,8 @@ The file name (without `.html`) is the page's URL. Then add a link to it from a 
 ## Rules of the road
 - **Content is CC BY-NC 3.0.** Don't paste in anything you can't license that way, and no ads or commercial links.
 - **No JavaScript, no inline `style=` in content.** Use the classes in [docs/ANATOMY.md](docs/ANATOMY.md).
+- **Game numbers that change each Age** (starting scientists, default draft rate, the current Age) live in `content/_values.json`.
+  Write `{{name}}` in the text instead of the number, and update the number once in that file when the Age changes.
 - **Numbers change every Age.** When a formula or value changes, say which Age it applies to, and **bump `updated:` in the page's header comment**. That date is shown under every table as "Numbers last updated …" (see [docs/ANATOMY.md](docs/ANATOMY.md)).
 - Do not publish information about cheating or exploits. (The original wiki had the same rule.)
 
