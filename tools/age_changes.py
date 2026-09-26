@@ -155,10 +155,10 @@ head2 = [head(['<th class="col-sm">Race</th>', "<th>Bonuses</th>", "<th>Penaltie
 rows3 = []
 for name, p in PERSONALITIES.items():
     spells = ('<ul class="list-plain">' + "".join(f"<li>{spell_link(s)}</li>" for s in p["spells"]) + "</ul>") if p["spells"] else '<span class="cell-muted">None</span>'
-    rows3.append(f'<tr><td><b>{name}</b></td><td class="cell-good" data-label="Bonuses">{ul(p["bonuses"])}</td>'
-                 f'<td data-label="Starting Bonuses">{ul(p["start"])}</td>'
+    start = f'<div class="start-bonus">{ul(p["start"])}</div>' if p["start"] else ""
+    rows3.append(f'<tr><td><b>{name}</b></td><td data-label="Bonuses">{ul(p["bonuses"])}{start}</td>'
                  f'<td data-label="Unique Ability"><b class="ability">{html.escape(p["ua"][0])}</b><br>{p["ua"][1]}</td><td data-label="Spellbook">{spells}</td></tr>')
-head3 = [head(['<th class="col-sm">Personality</th>', "<th>Bonuses</th>", "<th>Starting Bonuses</th>", "<th>Unique Ability</th>", '<th class="col-md">Spellbook</th>'])]
+head3 = [head(['<th class="col-sm">Personality</th>', "<th>Bonuses &amp; Starting Bonuses</th>", "<th>Unique Ability</th>", '<th class="col-md">Spellbook</th>'])]
 
 page = f'''<!--
 title: Current Changes: Age {age}

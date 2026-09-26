@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Scriptorium">
-  <title>Scriptorium</title>
-  <!-- tile: the site's plum accent -->
-  <rect width="64" height="64" rx="14" fill="#6b2d5c"/>
-  <!-- inset frame, like a manuscript page border -->
-  <rect x="5" y="5" width="54" height="54" rx="10" fill="none" stroke="#f3e9d2" stroke-opacity=".35" stroke-width="1.5"/>
-  <!-- the S: two stacked circular arcs (top bowl opens right, bottom bowl opens left) -->
-  <path d="M38.9 17.2 A9 9 0 1 0 32 32 A9 9 0 1 1 25.1 46.8" fill="none" stroke="#f3e9d2" stroke-width="7" stroke-linecap="round"/>
-</svg>

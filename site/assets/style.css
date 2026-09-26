@@ -113,7 +113,6 @@ a:visited { color: var(--link-visited); }
 .site-sidebar { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; background: var(--sidebar-bg); border-right: 1px solid var(--border); }   /* the sidebar itself never scrolls: the brand stays put, only .site-nav scrolls */
 .site-sidebar__brand { flex: none; display: flex; align-items: center; justify-content: space-between; gap: .5rem; height: var(--header-h); padding: 0 1.3rem; border-bottom: 1px solid var(--border); }   /* same height as .site-header so their bottom borders line up */   /* pinned to the top of the sidebar */
 .site-sidebar__brand-link, .site-sidebar__brand-link:visited { display: flex; align-items: center; gap: .65rem; text-decoration: none; color: var(--accent); line-height: 1.2; }
-.site-sidebar__brand-mark { flex: none; border-radius: 9px; }
 .site-sidebar__brand-text { display: flex; flex-direction: column; }
 .site-sidebar__brand-name { font: 400 1.45rem var(--font-heading); letter-spacing: .02em; }
 .site-sidebar__brand-tagline { font-size: .76rem; color: var(--muted); letter-spacing: .03em; }
@@ -243,19 +242,22 @@ a:visited { color: var(--link-visited); }
 .page__body table.table--names td:first-child b { font-weight: inherit; }   /* IM Fell has no bold */
 .page__body table.table--mono td:not(.cell-num) { font: 400 .98rem/1.35 var(--font-heading); letter-spacing: .01em; }   /* every text cell (not the figure cells) in the page-title font */
 .page__body table.table--mono b.ability { font-weight: 400; color: var(--accent); letter-spacing: .03em; }   /* an ability's name: accent colour instead of bold (IM Fell has no bold) */
-.page__body table.table--mono .num { font-family: var(--font-mono); font-size: .88em; letter-spacing: 0; }   /* a figure set in the monospace font inside text set in another font */
+.page__body table.table--mono .num { font-family: var(--font-mono); font-size: .88em; letter-spacing: 0; line-height: 1; }   /* line-height 1: the monospace font's own metrics must not make a line taller than the lines around it */   /* a figure set in the monospace font inside text set in another font */
 .page__body table.table--mono th[rowspan] { vertical-align: middle; }   /* a header cell that spans both header rows (Race) sits in the middle of its box */
 .page__body table.table--mono tr:first-child > th { padding-top: .95rem; padding-bottom: .6rem; }   /* the top header row (group headers on the units table, the column headings on the other) gets extra height, mostly above the text */
 
 .cell-yes  { background: var(--yes-bg); color: var(--yes-text); text-align: center; font-weight: 600; }
 .cell-no   { background: var(--no-bg);  color: var(--no-text);  text-align: center; font-weight: 600; }
 .cell-good { background: var(--good-bg); }
+.start-bonus { position: relative; margin-top: 1.1rem; padding-top: .9rem; color: var(--muted); }   /* a personality's starting bonus: listed under its bonuses, in a lighter colour, set off by a short faint rule, centred */
+.start-bonus::before { content: ""; position: absolute; top: 0; left: 50%; width: 3rem; transform: translateX(-50%); border-top: 1px solid var(--border); border-top-color: color-mix(in srgb, currentColor 40%, transparent); }
 .cell-bad  { background: var(--bad-bg); }
 .cell-band { background: var(--band-bg); }
 .cell-head { background: var(--head-bg); color: var(--head-text); font-weight: 700; }
 .cell-dark { background: var(--dark-bg); color: var(--dark-text); font-weight: 700; }
 .cell-center { text-align: center; }
 .cell-muted { color: var(--muted); color: color-mix(in srgb, var(--muted) 40%, var(--surface)); }   /* de-emphasised figure (NW, Cost): the muted colour blended 60% toward the background; the plain colour first is the fallback */
+.cell-muted a, .cell-muted a:visited { color: inherit; }   /* a link inside a de-emphasised cell (a race or personality no longer in play) takes the muted colour too */
 .page__body table .cell-num { text-align: right; padding-right: 1rem; }   /* right-aligned figure with breathing room on the right; also used on its column header */
 .page__body table.table--fixed { table-layout: fixed; }                   /* columns without a width share the space equally */
 .page__body table .col-sm { width: 7.5rem; }                              /* set on a header cell of a table--fixed table */

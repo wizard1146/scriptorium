@@ -112,8 +112,9 @@ Add `status: needs-update` or `status: retired` to a page's header comment (opti
 
 ## Logo and icons
 
-`site/assets/logo.svg` is the mark (plum tile, parchment "S" built from two arcs). `favicon.svg`, `favicon-32.png`, `favicon.ico`
-and `apple-touch-icon.png` are derived from it. The mark is pure geometry, so edit the SVG and re-export the PNGs.
+The sidebar has no logo image, only the "Scriptorium" wordmark. The sword drawn on the sidebar scrollbar handle is `site/assets/sword.png`
+(khaki, point down). The favicons (`favicon-32.png`, `favicon-192.png`, `favicon.ico`, `apple-touch-icon.png`) are a parchment sword on a khaki
+tile, made from the original black `sword.png` (point up). Re-export them from that source if the artwork changes.
 
 ## Values (`{{name}}`)
 
