@@ -62,7 +62,9 @@ for r in RACES:
         "sol": unit(b, "Soldier"), "off": unit(b, "Offensive Specialist"), "def": unit(b, "Defensive Specialist"), "elite": unit(b, "Elite Unit"),
     }
 
-def ul(items): return "<ul>" + "".join(f"<li>{html.escape(i)}</li>" for i in items) + "</ul>" if items else ""
+def ul(items):
+    """Bonuses / penalties: no bullets, with a small gap between items so a wrapped line doesn't blur into the next one."""
+    return '<ul class="list-plain list-spaced">' + "".join(f"<li>{html.escape(i)}</li>" for i in items) + "</ul>" if items else ""
 
 def fmt_column(values):
     """Give every value in a column the same number of decimals (the most any of them has), so digits line up: 7 and 7.5 -> 7.0 and 7.5."""
@@ -88,12 +90,14 @@ for r in RACES:
     rows2.append(f'<tr><td><b>{r}</b></td><td class="cell-good" data-label="Bonuses">{ul(d["bonuses"])}</td><td class="cell-bad" data-label="Penalties">{ul(d["penalties"])}</td>'
                  f'<td data-label="Unique Ability"><b>{html.escape(d["ua"][0])}</b><br>{html.escape(d["ua"][1])}</td><td data-label="Spellbook">{spells}</td></tr>')
 
-def table(head_rows, rows, cls="table--mono"):
-    return f'<div class="table-scroll">\n<table class="{cls}">\n' + "\n".join(head_rows) + "\n" + "\n".join(rows) + "\n</table>\n</div>"
+def table(head_rows, rows, cls="table--mono", colgroup=""):
+    return f'<div class="table-scroll">\n<table class="{cls}">\n{colgroup}' + "\n".join(head_rows) + "\n" + "\n".join(rows) + "\n</table>\n</div>"
 def head(cells): return "<tr>" + "".join(cells) + "</tr>"
 def subs(*names): return "".join(f'<th class="{NUM}">{n}</th>' for n in names)
 
-head1 = [head(['<th rowspan="2">Race</th>', '<th colspan="3">Soldier</th>', '<th colspan="3">Off. Specialist</th>', '<th colspan="3">Def. Specialist</th>', '<th colspan="4">Elite</th>']),
+# fixed column widths for the units table: Race, twelve equal figure columns, then the (wider) Cost column
+UNITS_COLS = '<colgroup><col class="col-w-race"><col class="col-w-num" span="12"><col class="col-w-cost"></colgroup>\n'
+head1 = [head(['<th rowspan="2">Race</th>', '<th colspan="3">Soldier</th>', '<th colspan="3">Offense Specialist</th>', '<th colspan="3">Defense Specialist</th>', '<th colspan="4">Elite</th>']),
          head([subs("Att", "Def", "NW") * 3 + subs("Att", "Def", "NW", "Cost (gc)")])]
 # second table: fixed layout, so Bonuses / Penalties / Unique Ability get equal widths; Race and Spellbook are set narrow
 head2 = [head(['<th class="col-sm">Race</th>', "<th>Bonuses</th>", "<th>Penalties</th>", "<th>Unique Ability</th>", '<th class="col-md">Spellbook</th>'])]
@@ -108,7 +112,7 @@ updated: {updated}
 
 <h2 id="Units_and_Costs">Units and costs</h2>
 
-{table(head1, rows1, "table--mono table--sticky-first")}
+{table(head1, rows1, "table--mono table--sticky-first table--borderless table--units table--hover", UNITS_COLS)}
 
 <h2 id="Bonuses_Penalties_and_Abilities">Bonuses, penalties and abilities</h2>
 

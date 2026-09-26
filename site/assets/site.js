@@ -48,3 +48,15 @@
   });
   update();
 })();
+
+// Title in the header (desktop): show the condensed title in the header once the big page title has scrolled out from under it.
+// Enabled by class="title-in-header" on <html>; without it none of this runs.
+(() => {
+  if (!document.documentElement.classList.contains('title-in-header')) return;
+  const header = document.getElementById('site-header');
+  const title = document.querySelector('.page__title');
+  if (!header || !title || title.classList.contains('page__title--hidden')) return;   // pages with a hidden title (home) have nothing to condense
+  const show = entry => header.classList.toggle('is-title-shown', !entry.isIntersecting && entry.boundingClientRect.bottom < header.offsetHeight + 1);
+  new IntersectionObserver(entries => show(entries[entries.length - 1]),
+    { rootMargin: `-${header.offsetHeight}px 0px 0px 0px`, threshold: 0 }).observe(title);
+})();

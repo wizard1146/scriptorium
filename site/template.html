@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="title-in-header">   <!-- remove this class to go back to the pinned title bar on desktop -->
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -58,6 +58,8 @@
       <button class="site-header__menu-button" id="nav-open-button" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-sidebar">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><line x1="2.5" y1="5.5" x2="17.5" y2="5.5"/><line x1="2.5" y1="10" x2="17.5" y2="10"/><line x1="2.5" y1="14.5" x2="17.5" y2="14.5"/></svg>
       </button>
+      <!-- REGION: site-header__title (desktop only: the page title condenses in here once the big one has scrolled away; a visual copy, hidden from screen readers) -->
+      <a class="site-header__title" href="#page" tabindex="-1" aria-hidden="true" title="{{title}}">{{title}}</a>
       <!-- REGION: site-search -->
       <form class="site-search" role="search" onsubmit="return false">
         <input class="site-search__input" type="search" placeholder="Search the wiki…" aria-label="Search" autocomplete="off">
