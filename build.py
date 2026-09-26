@@ -101,6 +101,9 @@ class Links(HTMLParser):
 
 
 # Page status, set with `status:` in a page's header comment. Optional `status_note:` adds a sentence to the banner.
+# The site has no separate home page: the root (and the sidebar wordmark) go straight to Getting Started.
+REDIRECTS = {"index.html": "getting-started-with-utopia.html"}
+
 STATUSES = {
     "needs-update": {"label": "Needs update", "list_slug": "needs-update", "list_title": "Pages that need an update",
                      "banner": "This page may contain out-of-date information.",
@@ -263,7 +266,7 @@ def main():
                       "categories": [], "credits": [], "status": "", "status_note": ""})
 
     everything = pages + generated
-    known = {p["url"] for p in everything} | {"search-index.json"}
+    known = {p["url"] for p in everything} | set(REDIRECTS) | {"search-index.json"}
     broken = []
     for p in everything:
         (DIST / p["url"]).write_text(render(template, nav, p), encoding="utf-8")
@@ -278,7 +281,11 @@ def main():
     for p in pages:
         if p["status"] and p["status"] not in STATUSES:
             print(f"WARNING: {p['slug']}: unknown status '{p['status']}' (use: {', '.join(STATUSES)})", file=sys.stderr)
-    if "index" not in by_slug: print("WARNING: no content/index.html (home page)", file=sys.stderr)
+    for src, dest in REDIRECTS.items():
+        (DIST / src).write_text(f'<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><title>Scriptorium</title>\n'
+                                f'<meta http-equiv="refresh" content="0; url={dest}"><link rel="canonical" href="{dest}">\n'
+                                f'<script>location.replace("{dest}" + location.hash);</script></head>\n'
+                                f'<body><p><a href="{dest}">Continue to Getting Started</a></p></body></html>\n', encoding="utf-8")
     unused = sorted(set(VALUES) - USED)
     if unused: print(f"note: unused values in _values.json: {', '.join(unused)}", file=sys.stderr)
     if UNKNOWN:
