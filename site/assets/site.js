@@ -29,10 +29,10 @@
   addEventListener('pagehide', save);
 })();
 
-// The table of contents starts collapsed on phones so it doesn't push the article down the screen.
+// Below 80rem the table of contents is a block above the article; start it collapsed so it doesn't push the text down.
 (() => {
   const toc = document.getElementById('toc');
-  if (toc && matchMedia('(max-width: 47.99rem)').matches) toc.removeAttribute('open');
+  if (toc && matchMedia('(max-width: 79.99rem)').matches) toc.removeAttribute('open');
 })();
 
 // Scroll-to-top button: appears once you are a screenful or so down the page.

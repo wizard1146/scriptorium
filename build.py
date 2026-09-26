@@ -124,23 +124,9 @@ TOC_MIN_HEADINGS = 4     # a table of contents appears when a page has at least 
 TOC_SCAN = re.compile(r"<(/?)(table|details)\b[^>]*>|<(h[23])\b([^>]*)>(.*?)</\3>", re.S)
 
 
-def leading_tables_end(body):
-    """Index just past the run of <div class="table-scroll"> wrappers a page opens with (0 if it doesn't open with one)."""
-    pos = 0
-    while True:
-        m = re.match(r'\s*<div class="table-scroll"[^>]*>', body[pos:])
-        if not m: return pos
-        depth, end = 1, None
-        for tok in re.finditer(r"<div\b|</div>", body[pos + m.end():]):
-            depth += 1 if tok.group() == "<div" else -1
-            if depth == 0: end = pos + m.end() + tok.end(); break
-        if end is None: return pos
-        pos = end
-
-
 def add_toc(page):
     """Give every h2/h3 an id and, if the page has enough of them, build a table of contents.
-    Headings inside tables or <details> are skipped (layout boxes / collapsed content). Returns (body, toc_html)."""
+    Headings inside tables or <details> are skipped (layout boxes / collapsed content). Returns (body, toc_html); the box is placed by the template, beside the article on wide screens and above it otherwise."""
     body = page["body"]
     used = set(re.findall(r'\bid="([^"]+)"', body))
     out, pos, depth, items = [], 0, 0, []
@@ -180,12 +166,7 @@ def add_toc(page):
     if sub_open: rows.append("</ol></li>")
     toc = (f'<details class="toc" id="toc" open><summary class="toc__title">On this page</summary>'
            f'<ol class="toc__list">{"".join(rows)}</ol></details>')
-    # Float the box beside the first real text: after any leading tables (intro boxes), which can't sit beside a float.
-    # If the page is nothing but tables, put it on top at full width instead.
-    off = leading_tables_end(body)
-    if off and len(plain(body[off:])) < 200:
-        toc, off = toc.replace('class="toc"', 'class="toc toc--block"', 1), 0
-    return body[:off] + toc + "\n" + body[off:], ""
+    return body, toc
 
 
 def category_slug(name):
@@ -220,7 +201,7 @@ def render(template, nav, page, extra_body=""):
                 f'<strong class="status-banner__label">{st["label"]}.</strong> {st["banner"]}{note}{help_link}</aside>\n') + body
     body += extra_body
     tab = page.get("tab_title") or f'{page["title"]} · Scriptorium'
-    return fill(template, toc=toc, title_class=" page__title--hidden" if page.get("hide_title") else "", tab_title=html.escape(tab), title=html.escape(page["title"]), body=body, nav=nav, categories=cats, credits=credits,
+    return fill(template, toc=toc, body_class=" page__body--with-toc" if toc else "", title_class=" page__title--hidden" if page.get("hide_title") else "", tab_title=html.escape(tab), title=html.escape(page["title"]), body=body, nav=nav, categories=cats, credits=credits,
                 description=html.escape(plain(page["body"])[:160]))
 
 

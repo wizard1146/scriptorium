@@ -32,10 +32,22 @@
     GF('EB Garamond', '400;600;700'), GF('Libre Baskerville', '400;700'), GF('Merriweather', '400;700'),
   ];
 
+  const GFM = (name, weights) => ({ ...GF(name, weights), stack: `"${name}", monospace` });
+  // Monospace choices for table--mono tables (Current Changes). Groups: system, then clean coding fonts, then character fonts.
+  const MONO = [
+    SYS('Spline Sans Mono, JetBrains Mono  (current)', '"Spline Sans Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace'),
+    SYS('System mono only', 'ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace'),
+    GFM('IBM Plex Mono', '400;700'), GFM('Source Code Pro', '400;700'), GFM('Fira Code', '400;700'),
+    GFM('Roboto Mono', '400;700'), GFM('DM Mono', '400;500'), GFM('Red Hat Mono', '400;700'),
+    GFM('Azeret Mono', '400;700'), GFM('Martian Mono', '400;700'), GFM('Sometype Mono', '400;700'), GFM('Overpass Mono', '400;700'),
+    GFM('Inconsolata', '400;700'), GFM('Ubuntu Mono', '400;700'), GFM('Anonymous Pro', '400;700'),
+    GFM('Courier Prime', '400;700'), GFM('Space Mono', '400;700'), GFM('Cutive Mono'), GFM('Xanh Mono'),
+  ];
+
   const KEY = 'scriptorium-dev-fonts';
   const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; } };
   const save = v => { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch {} };
-  const state = { h: 0, b: 0, scale: 1, open: false, ...load() };
+  const state = { h: 0, b: 0, m: 0, scale: 1, open: false, ...load() };
   const root = document.documentElement;
 
   const loaded = new Set();
@@ -47,14 +59,15 @@
     document.head.appendChild(l);
   };
   const apply = () => {
-    const h = HEADING[state.h] || HEADING[0], b = BODY[state.b] || BODY[0];
-    ensure(h); ensure(b);
+    const h = HEADING[state.h] || HEADING[0], b = BODY[state.b] || BODY[0], m = MONO[state.m] || MONO[0];
+    ensure(h); ensure(b); ensure(m);
     root.style.setProperty('--font-heading', h.stack);
     root.style.setProperty('--font-body', b.stack);
+    root.style.setProperty('--font-mono', m.stack);
     root.style.setProperty('--font-scale', state.scale);
     save(state);
-    out.value = `:root {\n  --font-heading: ${h.stack};\n  --font-body: ${b.stack};\n  --font-scale: ${state.scale};\n}`;
-    const note = [h, b].filter(f => f.gf).map(f => f.label.replace('  (Google)', '')).join(', ');
+    out.value = `:root {\n  --font-heading: ${h.stack};\n  --font-body: ${b.stack};\n  --font-mono: ${m.stack};\n  --font-scale: ${state.scale};\n}`;
+    const note = [h, b, m].filter(f => f.gf).map(f => f.label.replace('  (Google)', '')).join(', ');
     hint.textContent = note ? `Google font${note.includes(',') ? 's' : ''}: ${note}. Tell Claude to vendor it into the repo.` : 'System fonts only: nothing to download.';
   };
 
@@ -79,6 +92,7 @@
       <div class="title">Font tester (dev only)</div>
       <label for="dev-h">Headings: brand, page title, h2</label><select id="dev-h"></select>
       <label for="dev-b">Body text</label><select id="dev-b"></select>
+      <label for="dev-m">Tables in monospace (Current Changes)</label><select id="dev-m"></select>
       <label for="dev-s">Text size: <span id="dev-sv"></span></label><input id="dev-s" type="range" min="0.85" max="1.3" step="0.05">
       <div class="row"><button type="button" id="dev-reset">Reset</button><button type="button" id="dev-copy">Copy CSS</button></div>
       <textarea id="dev-out" readonly aria-label="CSS for the chosen fonts"></textarea>
@@ -90,13 +104,14 @@
   const $ = id => panel.querySelector('#' + id);
   const out = $('dev-out'), hint = $('dev-hint');
   const fill = (sel, list) => list.forEach((f, i) => sel.add(new Option(f.label, i)));
-  fill($('dev-h'), HEADING); fill($('dev-b'), BODY);
-  const sync = () => { $('dev-h').value = state.h; $('dev-b').value = state.b; $('dev-s').value = state.scale; $('dev-sv').textContent = Math.round(state.scale * 100) + '%'; panel.classList.toggle('open', state.open); };
+  fill($('dev-h'), HEADING); fill($('dev-b'), BODY); fill($('dev-m'), MONO);
+  const sync = () => { $('dev-h').value = state.h; $('dev-b').value = state.b; $('dev-m').value = state.m; $('dev-s').value = state.scale; $('dev-sv').textContent = Math.round(state.scale * 100) + '%'; panel.classList.toggle('open', state.open); };
 
   $('dev-h').onchange = e => { state.h = +e.target.value; apply(); };
   $('dev-b').onchange = e => { state.b = +e.target.value; apply(); };
+  $('dev-m').onchange = e => { state.m = +e.target.value; apply(); };
   $('dev-s').oninput = e => { state.scale = +e.target.value; $('dev-sv').textContent = Math.round(state.scale * 100) + '%'; apply(); };
-  $('dev-reset').onclick = () => { state.h = 0; state.b = 0; state.scale = 1; sync(); apply(); };
+  $('dev-reset').onclick = () => { state.h = 0; state.b = 0; state.m = 0; state.scale = 1; sync(); apply(); };
   $('dev-copy').onclick = () => { out.select(); navigator.clipboard?.writeText(out.value).catch(() => document.execCommand('copy')); };
   panel.querySelector('.toggle').onclick = () => { state.open = !state.open; sync(); save(state); };
 

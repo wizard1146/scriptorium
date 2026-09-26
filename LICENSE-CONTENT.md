@@ -13,4 +13,4 @@ Utopia is a game by MUGA Gaming, LLC. This is an unofficial fan project and is n
 
 ## Fonts
 
-`site/assets/fonts/` contains **IM Fell English** (Igino Marini) and **Lora** (Cyreal), both licensed under the SIL Open Font License 1.1 (see the `OFL-*.txt` files in that folder). It is self-hosted, so the site makes no third-party requests.
+`site/assets/fonts/` contains **IM Fell English** (Igino Marini), **Lora** (Cyreal), **Spline Sans Mono** (Sorkin Type) and **JetBrains Mono** (JetBrains), both licensed under the SIL Open Font License 1.1 (see the `OFL-*.txt` files in that folder). It is self-hosted, so the site makes no third-party requests.

@@ -69,9 +69,11 @@
     <!-- REGION: page -->
     <main class="page" id="page">
       <h1 class="page__title{{title_class}}">{{title}}</h1>
-      <article class="page__body">
-{{toc}}
+      <article class="page__body{{body_class}}">
+        <div class="page__content">
 {{body}}
+        </div>
+{{toc}}
       </article>
       <!-- REGION: page-footer -->
       <footer class="page__footer">

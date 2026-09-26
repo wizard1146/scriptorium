@@ -63,17 +63,40 @@ for r in RACES:
     }
 
 def ul(items): return "<ul>" + "".join(f"<li>{html.escape(i)}</li>" for i in items) + "</ul>" if items else ""
-def plain_unit(u): return f"{u[0]} / {u[1]} ({u[3]}nw)"
+
+def fmt_column(values):
+    """Give every value in a column the same number of decimals (the most any of them has), so digits line up: 7 and 7.5 -> 7.0 and 7.5."""
+    dp = max((len(v.split(".")[1]) if "." in v else 0) for v in values)
+    return [f"{float(v):.{dp}f}" for v in values]
+
+# NW precision is normalised per unit column (Soldier NW: 0.75 everywhere; Off. Specialist NW: 1 decimal everywhere; ...)
+nw = {k: dict(zip(RACES, fmt_column([data[r][k][3] for r in RACES]))) for k in ("sol", "off", "def", "elite")}
+
+# ---- table 1: per unit Att | Def | NW (NW muted, all numbers right-aligned); Elite adds a muted Cost ----
+NUM, MUTED = "cell-num", "cell-num cell-muted"
 rows1, rows2 = [], []
 for r in RACES:
     d = data[r]; e = d["elite"]
-    rows1.append(f'<tr><td><b>{r}</b></td>' + "".join(f'<td class="cell-center">{c}</td>' for c in
-        [plain_unit(d["sol"]), plain_unit(d["off"]), plain_unit(d["def"]), f"{e[0]} / {e[1]} ({e[2]}gc, {e[3]}nw)", e[2], e[3]]) + "</tr>")
-    rows2.append(f'<tr><td><b>{r}</b></td><td class="cell-good">{ul(d["bonuses"])}</td><td class="cell-bad">{ul(d["penalties"])}</td>'
-                 f'<td><b>{html.escape(d["ua"][0])}</b><br>{html.escape(d["ua"][1])}</td><td>{", ".join(spell_link(s) for s in d["spells"])}</td></tr>')
-def table(headers, rows):
-    return ('<div class="table-scroll">\n<table class="table--mono">\n<tr>' + "".join(f"<th>{h}</th>" for h in headers) + "</tr>\n"
-            + "\n".join(rows) + "\n</table>\n</div>")
+    cells = [f"<td><b>{r}</b></td>"]
+    for key in ("sol", "off", "def"):
+        u = d[key]
+        cells += [f'<td class="{NUM}">{u[0]}</td>', f'<td class="{NUM}">{u[1]}</td>', f'<td class="{MUTED}">{nw[key][r]}</td>']
+    cells += [f'<td class="{NUM}">{e[0]}</td>', f'<td class="{NUM}">{e[1]}</td>', f'<td class="{MUTED}">{nw["elite"][r]}</td>', f'<td class="{MUTED}">{e[2]}</td>']
+    rows1.append("<tr>" + "".join(cells) + "</tr>")
+    spells = '<ul class="list-plain">' + "".join(f"<li>{spell_link(s)}</li>" for s in d["spells"]) + "</ul>"
+    # data-label is the caption shown above each section when the table turns into cards on narrow screens
+    rows2.append(f'<tr><td><b>{r}</b></td><td class="cell-good" data-label="Bonuses">{ul(d["bonuses"])}</td><td class="cell-bad" data-label="Penalties">{ul(d["penalties"])}</td>'
+                 f'<td data-label="Unique Ability"><b>{html.escape(d["ua"][0])}</b><br>{html.escape(d["ua"][1])}</td><td data-label="Spellbook">{spells}</td></tr>')
+
+def table(head_rows, rows, cls="table--mono"):
+    return f'<div class="table-scroll">\n<table class="{cls}">\n' + "\n".join(head_rows) + "\n" + "\n".join(rows) + "\n</table>\n</div>"
+def head(cells): return "<tr>" + "".join(cells) + "</tr>"
+def subs(*names): return "".join(f'<th class="{NUM}">{n}</th>' for n in names)
+
+head1 = [head(['<th rowspan="2">Race</th>', '<th colspan="3">Soldier</th>', '<th colspan="3">Off. Specialist</th>', '<th colspan="3">Def. Specialist</th>', '<th colspan="4">Elite</th>']),
+         head([subs("Att", "Def", "NW") * 3 + subs("Att", "Def", "NW", "Cost (gc)")])]
+# second table: fixed layout, so Bonuses / Penalties / Unique Ability get equal widths; Race and Spellbook are set narrow
+head2 = [head(['<th class="col-sm">Race</th>', "<th>Bonuses</th>", "<th>Penalties</th>", "<th>Unique Ability</th>", '<th class="col-md">Spellbook</th>'])]
 
 page = f'''<!--
 title: Current Changes: Age {age}
@@ -85,11 +108,11 @@ updated: {updated}
 
 <h2 id="Units_and_Costs">Units and costs</h2>
 
-{table(["Race", "Soldier", "Off. Specialist", "Def. Specialist", "Elite (Off/Def)", "Cost (gc)", "Networth"], rows1)}
+{table(head1, rows1, "table--mono table--sticky-first")}
 
 <h2 id="Bonuses_Penalties_and_Abilities">Bonuses, penalties and abilities</h2>
 
-{table(["Race", "Bonuses", "Penalties", "Unique Ability", "Spellbook"], rows2)}
+{table(head2, rows2, "table--mono table--fixed table--cards")}
 '''
 (ROOT / "content/current-changes.html").write_text(page)
 print("wrote content/current-changes.html:", ", ".join(RACES))

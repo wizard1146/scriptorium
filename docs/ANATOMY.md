@@ -45,7 +45,7 @@ Every part of the site has one stable name. Use these names in issues, PRs and c
 |---|---|
 | *(none)* | Plain `<table>` is styled automatically inside the page body (full width, borders, blue header cells); no class needed |
 | `wiki-table--center` | Centre all cells |
-| `table--mono` | Monospace font (system stack, `--font-mono`) for the whole table. Put it on the `<table>`. Used on Current Changes |
+| `table--mono` | Monospace font (`--font-mono`: Spline Sans Mono, then JetBrains Mono, then the system monospace) for the whole table. Put it on the `<table>`. Used on Current Changes |
 | `table-scroll` | Wrapper div that lets wide tables scroll sideways on phones |
 | `cell-yes` / `cell-no` | Bold green "Yes" / red "No" cells |
 | `cell-good` / `cell-bad` | Soft green / red background (bonuses / penalties) |
@@ -53,6 +53,13 @@ Every part of the site has one stable name. Use these names in issues, PRs and c
 | `cell-band` | Grey banding |
 | `cell-dark` | Black cell with white text |
 | `cell-center` | Centre the text |
+| `cell-muted` | Muted grey text for secondary figures (NW, cost) |
+| `cell-num` | Right-aligned figure with right padding (also put it on the column header). Keep decimals equal within a column so digits line up |
+| `table--fixed` | Fixed layout: columns with no width share the space equally |
+| `col-sm` / `col-md` | Width (7.5rem / 12rem) for a header cell of a `table--fixed` table |
+| `table--sticky-first` | The first column stays in view while the table scrolls sideways (for two-row headers whose first header cell spans both rows) |
+| `table--cards` | Below 64rem each row turns into a card; each cell's `data-label="…"` becomes its caption. For text-heavy tables |
+| `list-plain` | A list with no bullets or indent (e.g. a stacked spell list) |
 
 **Dates on numbers.** Every data table gets a `data-note` line under it: "Numbers last updated 13 Feb 2026".
 
@@ -81,8 +88,8 @@ Every part of the site has one stable name. Use these names in issues, PRs and c
 
 | Name | What it is |
 |---|---|
-| `toc` (`toc__title`, `toc__list`, `toc__sublist`, `toc__link`) | "On this page" box, generated at build time from h2/h3 headings. Floats top-right on wide screens; collapsed block on phones. Appears when a page has at least `TOC_MIN_HEADINGS` (4) headings. `toc: no` / `toc: yes` in the page header overrides. |
-| `toc--block` | Full-width variant, used automatically on pages that open with a table |
+| `toc` (`toc__title`, `toc__list`, `toc__sublist`, `toc__link`) | "On this page", generated at build time from h2/h3 headings when a page has at least `TOC_MIN_HEADINGS` (4). On windows 80rem+ wide it is a right-hand column pinned under the header and page title; below that it is a collapsed block above the article. `toc: no` / `toc: yes` in the page header overrides. |
+| `page__content` | The article text itself; the `toc` sits beside it (wide screens) or above it |
 | `faq-item` (`faq-item__answer`) | A collapsible question: `<details class="faq-item"><summary>Question</summary><div class="faq-item__answer">…</div></details>` |
 
 ## Page status
