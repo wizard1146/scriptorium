@@ -44,10 +44,27 @@
     GFM('Courier Prime', '400;700'), GFM('Space Mono', '400;700'), GFM('Cutive Mono'), GFM('Xanh Mono'),
   ];
 
+  // FAQ colour schemes: sets of --fq-* overrides (see the faq-item block in style.css). The shipped default is the block marked
+  // "FAQ colour scheme" in style.css; entries here override it. Alternatives are spelled out fully so nothing leaks through from the default.
+  const PREV = { '--fq-bg': 'var(--surface)', '--fq-border': 'var(--border)', '--fq-weight': '400', '--fq-hover': 'var(--band-bg)', '--fq-open-bg': 'transparent',
+    '--fq-open-text': 'var(--accent)', '--fq-open-hover': 'var(--band-bg)', '--fq-a-bg': 'var(--answer-bg)', '--fq-a-text': 'inherit', '--fq-bar': 'var(--border)',
+    '--fq-bar-open': 'var(--border)', '--fq-bw': '1px', '--fq-radius': '.5rem', '--fq-font': 'var(--font-body)', '--fq-size': '1rem', '--fq-chevron': 'var(--muted)', '--fq-chevron-open': 'var(--muted)' };
+  const FAQ = [
+    { label: 'Current: Accent bar (bar marks the open one)', vars: {} },
+    { label: 'Previous look (white boxes, tinted answer)', vars: { ...PREV } },
+    { label: 'Parchment question, white answer', vars: { ...PREV, '--fq-bg': '#eee9d8', '--fq-border': '#d0c9ae', '--fq-weight': '600', '--fq-open-bg': '#eee9d8',
+        '--fq-open-text': '#29261c', '--fq-a-bg': '#ffffff', '--fq-hover': '#e5dfc9' } },
+    { label: 'Ledger: dark open-question bar, white answer', vars: { ...PREV, '--fq-bg': '#e8e3d1', '--fq-border': '#c5bd9f', '--fq-weight': '600', '--fq-hover': '#ddd7c1',
+        '--fq-open-bg': '#3e3b2c', '--fq-open-text': '#f6f1df', '--fq-open-hover': '#4a4636', '--fq-a-bg': '#ffffff', '--fq-chevron-open': '#f6f1df' } },
+    { label: 'Flat list: no boxes, heading-font questions', vars: { ...PREV, '--fq-bg': 'transparent', '--fq-a-bg': 'transparent', '--fq-radius': '0', '--fq-bw': '0 0 1px 0',
+        '--fq-border': '#cdc5aa', '--fq-font': 'var(--font-heading)', '--fq-size': '1.18rem', '--fq-weight': '400', '--fq-open-text': '#29261c', '--fq-hover': '#f1eddf' } },
+  ];
+  const FAQ_KEYS = [...new Set(FAQ.flatMap(f => Object.keys(f.vars)))];
+
   const KEY = 'scriptorium-dev-fonts';
   const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; } };
   const save = v => { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch {} };
-  const state = { h: 0, b: 0, m: 0, scale: 1, open: false, ...load() };
+  const state = { h: 0, b: 0, m: 0, f: 0, scale: 1, open: false, ...load() };
   const root = document.documentElement;
 
   const loaded = new Set();
@@ -64,9 +81,12 @@
     root.style.setProperty('--font-heading', h.stack);
     root.style.setProperty('--font-body', b.stack);
     root.style.setProperty('--font-mono', m.stack);
+    const fq = FAQ[state.f] || FAQ[0];
+    FAQ_KEYS.forEach(k => root.style.removeProperty(k));
+    Object.entries(fq.vars).forEach(([k, v]) => root.style.setProperty(k, v));
     root.style.setProperty('--font-scale', state.scale);
     save(state);
-    out.value = `:root {\n  --font-heading: ${h.stack};\n  --font-body: ${b.stack};\n  --font-mono: ${m.stack};\n  --font-scale: ${state.scale};\n}`;
+    out.value = `:root {\n  --font-heading: ${h.stack};\n  --font-body: ${b.stack};\n  --font-mono: ${m.stack};\n  --font-scale: ${state.scale};\n}` + (Object.keys(fq.vars).length ? `\n\n/* FAQ colours: ${fq.label.trim()} */\n:root {\n${Object.entries(fq.vars).map(([k, v]) => `  ${k}: ${v};`).join('\n')}\n}` : '');
     const note = [h, b, m].filter(f => f.gf).map(f => f.label.replace('  (Google)', '')).join(', ');
     hint.textContent = note ? `Google font${note.includes(',') ? 's' : ''}: ${note}. Tell Claude to vendor it into the repo.` : 'System fonts only: nothing to download.';
   };
@@ -93,6 +113,7 @@
       <label for="dev-h">Headings: brand, page title, h2</label><select id="dev-h"></select>
       <label for="dev-b">Body text</label><select id="dev-b"></select>
       <label for="dev-m">Tables in monospace (Current Changes)</label><select id="dev-m"></select>
+      <label for="dev-f">FAQ colours (open the FAQ page)</label><select id="dev-f"></select>
       <label for="dev-s">Text size: <span id="dev-sv"></span></label><input id="dev-s" type="range" min="0.85" max="1.3" step="0.05">
       <div class="row"><button type="button" id="dev-reset">Reset</button><button type="button" id="dev-copy">Copy CSS</button></div>
       <textarea id="dev-out" readonly aria-label="CSS for the chosen fonts"></textarea>
@@ -104,14 +125,15 @@
   const $ = id => panel.querySelector('#' + id);
   const out = $('dev-out'), hint = $('dev-hint');
   const fill = (sel, list) => list.forEach((f, i) => sel.add(new Option(f.label, i)));
-  fill($('dev-h'), HEADING); fill($('dev-b'), BODY); fill($('dev-m'), MONO);
-  const sync = () => { $('dev-h').value = state.h; $('dev-b').value = state.b; $('dev-m').value = state.m; $('dev-s').value = state.scale; $('dev-sv').textContent = Math.round(state.scale * 100) + '%'; panel.classList.toggle('open', state.open); };
+  fill($('dev-h'), HEADING); fill($('dev-b'), BODY); fill($('dev-m'), MONO); fill($('dev-f'), FAQ);
+  const sync = () => { $('dev-h').value = state.h; $('dev-b').value = state.b; $('dev-m').value = state.m; $('dev-f').value = state.f; $('dev-s').value = state.scale; $('dev-sv').textContent = Math.round(state.scale * 100) + '%'; panel.classList.toggle('open', state.open); };
 
   $('dev-h').onchange = e => { state.h = +e.target.value; apply(); };
   $('dev-b').onchange = e => { state.b = +e.target.value; apply(); };
   $('dev-m').onchange = e => { state.m = +e.target.value; apply(); };
+  $('dev-f').onchange = e => { state.f = +e.target.value; apply(); };
   $('dev-s').oninput = e => { state.scale = +e.target.value; $('dev-sv').textContent = Math.round(state.scale * 100) + '%'; apply(); };
-  $('dev-reset').onclick = () => { state.h = 0; state.b = 0; state.m = 0; state.scale = 1; sync(); apply(); };
+  $('dev-reset').onclick = () => { state.h = 0; state.b = 0; state.m = 0; state.f = 0; state.scale = 1; sync(); apply(); };
   $('dev-copy').onclick = () => { out.select(); navigator.clipboard?.writeText(out.value).catch(() => document.execCommand('copy')); };
   panel.querySelector('.toggle').onclick = () => { state.open = !state.open; sync(); save(state); };
 

@@ -328,19 +328,42 @@ a:visited { color: var(--link-visited); }
     max-height: min(30rem, calc(100vh - var(--header-h) - 7.5rem)); overflow-y: auto; }   /* 4.5rem = room for the pinned page title */
 }
 
-/* faq-item: one collapsible question/answer (native <details>, no JavaScript). Used on the FAQ page. */
-.page__body .faq-item { margin: .5rem 0; padding: 0; background: var(--surface); border: 1px solid var(--border); border-radius: .5rem; overflow: hidden; }
-.page__body .faq-item > summary { position: relative; padding: .8rem 2.6rem .8rem 1rem; font-weight: 400; cursor: pointer; list-style: none; }
+/* faq-item: one collapsible question/answer (native <details>, no JavaScript). Used on the FAQ page.
+   Every colour is a --fq-* variable with the current look as its fallback, so a colour scheme is just a set of overrides:
+   --fq-bg / --fq-text / --fq-weight / --fq-font / --fq-size   the closed question row
+   --fq-open-bg / --fq-open-text                               the open question row     --fq-hover / --fq-open-hover   hover tints
+   --fq-a-bg / --fq-a-text                                     the answer panel          --fq-border / --fq-bw / --fq-radius   the box
+   --fq-bar / --fq-bar-open                                    left accent bar colour (closed / open)      --fq-chevron / --fq-chevron-open */
+.page__body .faq-item { margin: .5rem 0; padding: 0; background: var(--fq-bg, var(--surface)); border-style: solid; border-width: var(--fq-bw, 1px);
+  border-color: var(--fq-border, var(--border)); border-left-color: var(--fq-bar, var(--fq-border, var(--border))); border-radius: var(--fq-radius, .5rem); overflow: hidden; }
+.page__body .faq-item[open] { border-left-color: var(--fq-bar-open, var(--fq-bar, var(--fq-border, var(--border)))); }
+.page__body .faq-item > summary { position: relative; padding: .8rem 2.6rem .8rem 1rem; cursor: pointer; list-style: none;
+  font: var(--fq-weight, 400) var(--fq-size, 1rem)/1.5 var(--fq-font, var(--font-body)); color: var(--fq-text, var(--text)); }
 .page__body .faq-item > summary::-webkit-details-marker { display: none; }
-.page__body .faq-item > summary::after { content: ""; position: absolute; right: 1.1rem; top: 50%; width: .5rem; height: .5rem; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: translateY(-70%) rotate(45deg); transition: transform .15s; }
-.page__body .faq-item[open] > summary::after { transform: translateY(-25%) rotate(-135deg); }
-.page__body .faq-item > summary:hover { background: var(--band-bg); }
+.page__body .faq-item > summary::after { content: ""; position: absolute; right: 1.1rem; top: 50%; width: .5rem; height: .5rem; border-right: 2px solid var(--fq-chevron, var(--muted)); border-bottom: 2px solid var(--fq-chevron, var(--muted)); transform: translateY(-70%) rotate(45deg); transition: transform .15s; }
+.page__body .faq-item[open] > summary { color: var(--fq-open-text, var(--accent)); background: var(--fq-open-bg, transparent); border-bottom: 1px solid var(--fq-border, var(--border)); }
+.page__body .faq-item[open] > summary::after { transform: translateY(-25%) rotate(-135deg); border-color: var(--fq-chevron-open, var(--fq-chevron, var(--muted))); }
+.page__body .faq-item > summary:hover { background: var(--fq-hover, var(--band-bg)); }
+.page__body .faq-item[open] > summary:hover { background: var(--fq-open-hover, var(--fq-open-bg, var(--fq-hover, var(--band-bg)))); }
 .page__body .faq-item > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
-.page__body .faq-item[open] > summary { color: var(--accent); border-bottom: 1px solid var(--border); }
-.faq-item__answer { padding: .3rem 1rem .9rem; background: var(--answer-bg); }
+@media (prefers-reduced-motion: reduce) { .page__body .faq-item > summary::after { transition: none; } }
+.faq-item__answer { padding: .3rem 1rem .9rem; background: var(--fq-a-bg, var(--answer-bg)); color: var(--fq-a-text, inherit); }
 .faq-item__answer > :first-child { margin-top: .6rem; }
 .faq-item__answer > :last-child { margin-bottom: 0; }
-@media (prefers-reduced-motion: reduce) { .page__body .faq-item > summary::after { transition: none; } }
+
+/* ---- FAQ colour scheme: "Accent bar" (a left bar that darkens on the open one) ----------------------------
+   Everything in this block is a --fq-* override. TO REVERT to the previous look (white boxes, tinted answer, olive open
+   question), delete this whole block; the faq-item rules above fall back to it. ---------------------------------------------- */
+:root {
+  --fq-bg: var(--surface); --fq-a-bg: var(--surface); --fq-a-text: var(--text);       /* question and answer on the same white, so the bar does the separating */
+  --fq-border: #cfc8b0; --fq-weight: 400; --fq-hover: #f5f2e7;                        /* regular-weight questions, a firmer border than before */
+  --fq-open-text: #94938d;                                                            /* the open question is muted to 50% (the text colour at 50% over white), so the answer takes the focus */
+  --fq-bar: #b9b08a; --fq-bar-open: #6f674a; --fq-bw: 1px 1px 1px 5px;                /* a 5px bar on the left: soft khaki when closed, dark olive when open */
+}
+@media (prefers-color-scheme: dark) {
+  :root { --fq-border: #4a4536; --fq-hover: #2a2620; --fq-bar: #6b6448; --fq-bar-open: #c2b78a; --fq-open-text: #85808a; }   /* dark counterpart (open question at 50% over the dark surface) */
+}
+/* ---- end of FAQ colour scheme -------------------------------------------------------------------------------------------- */
 
 /* ---- content vocabulary: boxes ---- */
 .infobox { float: right; clear: right; margin: 0 0 1rem 1.5rem; width: min(22rem, 100%); }
