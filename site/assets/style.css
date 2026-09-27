@@ -151,7 +151,10 @@ a:visited { color: var(--link-visited); }
 .nav-group__list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 1px; }
 .nav-group__list a, .nav-group__list a:visited { display: block; padding: .54rem .7rem .3rem; border-radius: .3rem; text-decoration: none; color: var(--text-dim); transition: background-color .12s, color .12s; }
 .nav-group__list a:hover { background: var(--surface); color: var(--text); }
-.nav-group__list a[aria-current="page"] { background: var(--surface); color: var(--text); box-shadow: inset -3px 0 0 var(--accent); }
+.nav-group__list a[aria-current="page"] { position: relative; background: var(--surface); color: var(--text); }
+.nav-group__list a[aria-current="page"]::after { content: ""; position: absolute; top: 50%; right: -7px; width: 22px; height: 22px; transform: translateY(-50%);
+    background-color: var(--accent); -webkit-mask: url("broken-shield.png") center / contain no-repeat; mask: url("broken-shield.png") center / contain no-repeat; }   /* the current page's marker: a broken shield instead of the old accent bar, coloured to match the theme via mask.
+    Sits right on the row's edge, with its right third overhanging past the highlighted background. */
 .nav-group--pinned { margin-top: auto; padding-top: .9rem; border-top: 1px solid var(--border); }   /* stays at the bottom of the rail, like Settings in Hegemoney */
 
 /* ---- site-header: sticky bar above the page ---- */
