@@ -1,49 +1,92 @@
 <!--
 title: Explore
 category: Main, Guide
-updated: 2024-09-11
+updated: 2026-09-27
 credits: Bishop, Stupid, Scav, Procariot, Crystopher, Utopia wolf, Avenger, Icebuckle, Sonja says, Fanadin
 -->
-<p>Exploration is one of the main ways of growing your Province. Via the Explore page, a province may send out <a href="units.html#Units">soldiers</a>, at the cost of <a href="throne.html#Top_Bar">gc</a>, to acquire additional <a href="throne.html#Top_Bar">acres</a>.</p>
-<p>On this page you will have the following information:</p>
+<p>Exploring is one of the main ways to grow your province. You send out <a href="units.html#Units">soldiers</a> and pay <a href="throne.html#Top_Bar">gold coins (gc)</a> to claim new <a href="throne.html#Top_Bar">acres</a> from a shared pool of unclaimed land. It matters because land is the base of everything else you build, and the price rises sharply once you are bigger than most of your kingdom.</p>
+
+<div class="callout">
+<p><strong>In short</strong></p>
+<ul>
+<li>Exploring costs soldiers and gold. Both are shown on the Explore page.</li>
+<li>Your acres come out of the Explore Pool (also called Available Uncharted Acres). It starts at 200 acres and grows by 2 acres per tick.</li>
+<li>The pool is soft capped at 1000 acres.</li>
+<li>Costs rise significantly when you are over the Kingdom Median in acres.</li>
+<li>During war, exploring costs 600% of normal.</li>
+</ul>
+</div>
+
+<h2 id="How_exploring_works">How exploring works</h2>
+
+<p>On the Explore page you see five things:</p>
 
 <ul>
 <li>Exploration Costs (Soldiers)</li>
 <li>Exploration Costs (Gold)</li>
-<li><a href="explore.html#Available_Uncharted_Acres">Available Uncharted Acres</a> (also known as the Explore Pool)</li>
+<li>Available Uncharted Acres, also known as the <a href="#Available_Uncharted_Acres">Explore Pool</a></li>
 <li>Currently Exploring</li>
-<li>Maximum Explorable Now</li></ul>
+<li>Maximum Explorable Now</li>
+</ul>
 
-<p>If you have the Soldiers and the Gold, you will be able to explore for Acres to grow your Province. Explore costs increase significantly when over Kingdom Median in acres.</p>
+<p>If you have the soldiers and the gold, you can explore for acres to grow your province.</p>
 
-<h2 id="Available_Uncharted_Acres">Available Uncharted Acres</h2>
+<h3 id="Kingdom_Median">Kingdom Median</h3>
 
-<p>Available Uncharted Acres, also know as the Explore Pool, has the following features:</p>
+<p>Explore costs increase significantly when you are over the Kingdom Median in acres. The Median is the middle value of acres among the provinces in your <a href="kingdom.html">kingdom</a>. Staying at or below it keeps exploring cheaper, and it also matters during war (see below).</p>
+<!-- TODO: unclear: the original page never defines Kingdom Median or gives the size of the over-median cost increase. The one-line definition above is the usual meaning of "median"; confirm and add the multiplier if known. -->
+
+<h2 id="Available_Uncharted_Acres">The Explore Pool</h2>
+
+<p>Available Uncharted Acres, also known as the Explore Pool, is the land you can draw from when you explore. It behaves like this:</p>
 
 <ul>
-<li>Starts at 200 Acres at the start of the Age.</li>
-<li>It grows by 2 Acres per Tick.</li>
-<li>It is soft capped at 1000 Acres.</li>
-<li>When a War ends, a provision of additional Pool is added to each Province for both Kingdoms.</li>
-<li>Each Province will have 5% of their Land removed and added to their Explore Pool (minimum of 100 Acres added to Pool, regardless of how many are lost).</li>
-<li>Pool Acres over the soft cap of 1000 Acres at War's end are added to land .</li></ul>
+<li><strong>Start:</strong> 200 acres at the start of the Age.</li>
+<li><strong>Growth:</strong> 2 acres per tick.</li>
+<li><strong>Soft cap:</strong> 1000 acres.</li>
+</ul>
+
+<p class="data-note">Numbers last updated 27 Sep 2026.</p>
+<!-- TODO: unclear: the separate page explore-pool.html (2017) gives different figures (5000 start, +100 per hour, 0.5% decay). This page's figures are kept; explore-pool.html looks outdated. -->
+
+<h3 id="Pool_after_a_war">Pool after a war</h3>
+
+<p>When a war ends, both kingdoms get extra pool.</p>
+
+<ul>
+<li>Each province has 5% of its land removed and added to its Explore Pool.</li>
+<li>At least 100 acres are added to the pool, however few acres are lost.</li>
+<li>Any pool acres over the 1000-acre soft cap at war's end are added to your land.</li>
+</ul>
 
 <h2 id="Restrictions">Restrictions</h2>
 
-<p>The following restrictions are in place:</p>
+<p>You can only explore when all of these are true:</p>
 
 <ul>
-<li>Provinces may not explore without the resources to cover the costs.</li>
-<li>At least 50% of existing <a href="throne.html#Top_Bar">Acres</a> must be built or undergoing construction.</li>
-<li>The Explore Pool must be greater than 0 Acres.</li>
-<li>Provinces can not explore more than their current Acres at once.</li>
-<li>Kingdoms with less than 10 Provinces will have an explore penalty.</li></ul>
+<li>You have the resources to cover the costs.</li>
+<li>At least 50% of your existing <a href="throne.html#Top_Bar">acres</a> are built or under construction.</li>
+<li>The Explore Pool is greater than 0 acres.</li>
+<li>You are not exploring more than your current acres at once.</li>
+</ul>
 
-<h3 id="Effects_of_War_on_Exploration">Effects of War on Exploration</h3>
+<p>Kingdoms with fewer than 10 provinces have an explore penalty.</p>
 
-<p>The following penalties apply during war:</p>
+<h2 id="Effects_of_War_on_Exploration">Effects of war on exploring</h2>
 
 <ul>
-<li>Exploration costs increased to 600% during active War and End of War Cease-Fire (or 300% during End-of-War Cease-Fire for Provinces below the Kingdom Median, including incoming explored Acres).</li>
-<li>During End-of-War Cease-Fire, when under Median, explore time is reduced by 50%.</li></ul>
+<li>Exploration costs rise to 600% during active war and during the End-of-War Cease-Fire.</li>
+<li>During the End-of-War Cease-Fire, provinces below the Kingdom Median pay 300% instead (this includes incoming explored acres).</li>
+<li>During the End-of-War Cease-Fire, when you are under the Median, explore time is reduced by 50%.</li>
+</ul>
 
+<h2>See also</h2>
+
+<ul>
+<li><a href="growth.html">Growth</a></li>
+<li><a href="throne.html">Throne</a></li>
+<li><a href="economy.html">Economy</a></li>
+<li><a href="kingdom.html">Kingdom</a></li>
+<li><a href="war-score.html">War Score</a></li>
+<li><a href="exploring-construction-building-formulas.html">Exploring, Construction and Building Formulas</a></li>
+</ul>

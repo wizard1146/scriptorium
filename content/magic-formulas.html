@@ -1,62 +1,81 @@
 <!--
 title: Magic Formulas
 category: Guide, Formulas
-updated: 2024-11-25
+updated: 2026-09-27
 credits: Bishop, Puppy101, Kmhrvv, Cgg, Givenchy, Stupid, BT, Vraid, Pestermenot, Ordray, Paranoidkitten, Procariot, Eucariot, Crystopher, Persain, Spahrep, Francis, Leonidas, Utopia wolf, Panthira, Avenger, BigShotFancyMan, Umajon911, Sonja says, Fanadin
 -->
-<h2 id="Calculating_Percent_Guilds">Calculating Percent Guilds</h2>
+<p>Magic in Utopia runs on <strong>wizards</strong> and <strong>runes</strong>. This page explains how your wizards are trained, what makes a spell last longer or land more often, what a spell costs, and gives the formulas and full spell tables behind it. If you only want to know what each spell does, read <a href="mystics.html">Mystics</a> first; come here for the numbers.</p>
 
-<p>Unlike all your other units, either the military footmen or the thieves, wizards are not trained by using gold. Your ascendant wizards will have to go through intensive studies in Guilds before being able to serve you properly. They are an absolute necessity for Mages.</p>
-<p>Trains 0.02 Wizards Daily (2% chance to train a Wizard per Guild)
-Unaffected by BE (Building Efficiency)
-Guilds also increase the duration of your self spells and offensive spells.
-Guilds are unaffected by Building Efficiency for the purposes of calculating spell duration or wizards trained.</p>
-<p>Percent Guilds, or % Guilds, refers to the current percentage of guilds a province has.</p>
+<div class="callout">
+<p><strong>In short</strong></p>
+<ul>
+<li>Wizards are not bought with gold. Your <a href="growth.html#Guilds">Guilds</a> train them slowly: 0.02 wizards per Guild per day.</li>
+<li>Percent Guilds (Guilds divided by acres) makes your spells last longer. At 20% Guilds, spells reach their maximum duration.</li>
+<li>Wizards per acre (WPA) decides whether offensive spells succeed. What counts is your modified WPA divided by your opponent's.</li>
+<li>Self spells never depend on WPA. Their success depends on Percent Guilds.</li>
+<li>Every spell costs runes. The cost grows with your land size and the spell's cost multiplier.</li>
+<li>The spell tables at the bottom list every spell with its bonus, difficulty, cost, duration and who can cast it.</li>
+</ul>
+</div>
 
+<h2 id="How_Magic_Works">How magic works</h2>
+
+<p>Unlike footmen or thieves, wizards are not trained with gold. Your ascendant wizards study in Guilds before they can serve you, which makes Guilds an absolute necessity for Mages.</p>
+
+<h3 id="Guilds_and_Wizards">Guilds and wizards</h3>
+
+<ul>
+<li>Guilds train 0.02 wizards daily (a 2% chance to train a wizard per Guild).</li>
+<li>Guilds are unaffected by Building Efficiency (BE), both for spell duration and for wizards trained.</li>
+<li>Guilds also increase the duration of your self spells and offensive spells.</li>
+<li>Guilds train wizards only while your number of wizards is below the maximum allowed. See <a href="#Limit_Wizard_Training">the training limit</a>.</li>
+</ul>
+
+<h3 id="Effects_of_Percent_Guilds">What Percent Guilds does</h3>
+
+<p>Percent Guilds (% Guilds) is the share of your land that is Guilds. The higher it is, the longer a spell lasts, until the spell reaches its own maximum duration. You reach every spell's maximum when 20% of your land is Guilds (unaffected by Building Efficiency). Some Races or Personalities have a bonus or penalty to spell duration. <a href="thievery.html#Destabilize_Guilds">Destabilize Guilds</a> lowers spell duration.</p>
+
+<h3 id="Self_Spells">Self spells</h3>
+<p>A higher Percent Guilds gives a greater:</p>
+<ul>
+<li>Spell duration</li>
+<li>Chance of a successful cast</li></ul>
+<p>WPA does not influence self spells.</p>
+
+<h3 id="Offensive_Spells">Offensive spells</h3>
+<p>A higher Percent Guilds gives a greater spell duration. Success also depends on wizards per acre, below.</p>
+
+<h3 id="Effects_of_Mod_WPA">Wizards per acre and success</h3>
+<p>The ratio of your WPA to your opponent's WPA determines how often your offensive spells succeed. Magic Effectiveness raises your WPA without changing your number of wizards; the result is called <strong>mod WPA</strong> (see the formulas below). The higher your mod WPA is compared with your opponent's, the greater your:</p>
+<ul>
+<li>Chance of a successful cast</li>
+<li>Chance of preventing an opponent's spell</li></ul>
+
+<h2 id="Formulas">Formulas</h2>
+<p class="data-note">Numbers last updated 25 Nov 2024.</p>
+
+<h3 id="Calculating_Percent_Guilds">Percent Guilds</h3>
+<p>Divide your Guilds by your acres.</p>
 <div class="formula"><span class="formula__name">% Guilds</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">Total Number of <a href="growth.html#Guilds">Guilds</a></span></span><span class="formula__step"><span class="formula__op">÷</span><span class="formula__term">Total <a href="throne.html#Top_Bar">Acres</a></span></span></div>
 
-<h2 id="Effects_of_Percent_Guilds">Effects of Percent Guilds</h2>
-
-<h3 id="Spell_Duration">Spell Duration</h3>
-
-<p>Percent Guilds determines Spell Duration. The higher the percent Guilds, the longer a spell will last. This remains true until the maximum Duration for that particular Spell is reached. Maximum durations can be attained when 20% of your Land dedicated to Guilds (unaffected by Building Efficiency).<br>
-Some Races or Personalities may have a bonus or penalty to Spell Duration. <a href="thievery.html#Destabilize_Guilds">Destabilize Guilds</a> lowers Spell Duration.</p>
-
-<h3 id="Self_Spells">Self Spells</h3>
-
-<p>For Self Spells, a higher percent Guilds results in a greater:</p>
-
-<ul>
-<li>Spell Duration</li>
-<li>Chance of a Successful Cast</li></ul>
-
-<h3 id="Offensive_Spells">Offensive Spells</h3>
-
-<p>For Offensive Spells, a higher percent Guilds results in a greater:</p>
-
-<ul>
-<li>Spell Duration</li></ul>
-
-<h2 id="Wizards_Per_Acre">Wizards Per Acre</h2>
-
-<p>The ratio of your WPA to your opponent's WPA will determine the success rate of your conducted magic spells.</p>
+<h3 id="Limit_Wizard_Training">Wizard training limit</h3>
+<p>Guilds train wizards if it is allowed and your current number of wizards is less than the maximum allowed.</p>
+<div class="formula"><span class="formula__name">Maximum Wizards Allowed to Train</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term"><a href="units.html">Peasants</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">2</span></span></div>
 
 <h3 id="Raw_WPA">Raw WPA</h3>
-
+<p>Divide your wizards by your acres.</p>
 <pre><b>Raw WPA =</b> Number of <a href="units.html">Wizards</a> /<a href="throne.html#Top_Bar">Acres</a>
 </pre>
 
-<h3 id="Calculating_Mod_WPA">Calculating Mod WPA</h3>
-
-<p>Magic Effectiveness increases the WPA without changing the number of Wizards. This is known as mod WPA.</p>
-
+<h3 id="Calculating_Mod_WPA">Modified WPA</h3>
+<p>Modified WPA is raw WPA multiplied by each modifier that applies. Use the offensive version when you cast and the defensive version when you are the target. The modifier values follow the two formulas.</p>
 <div class="formula"><span class="formula__name">Offensive Modified WPA</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">Raw WPA</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="science-formulas.html">Channeling Science</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Race Mod</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="honor.html">Honor Mod</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="mystics.html#Mage.27s_Fury">Mage's Fury Mod</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Dragon Mod</span></span></div>
 
 <div class="formula"><span class="formula__name">Defensive Modified WPA</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">Raw WPA</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="science-formulas.html">Channeling Science</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Race Mod</span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="honor.html">Honor Mod</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="mystics.html#Mage.27s_Fury">Mage's Fury Mod</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term"><a href="mystics.html#Magic_Shield">Magic Shield Mod</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">Dragon Mod</span></span></div>
 
-<div class="table-scroll">
+<div class="table-scroll" data-updated="2024-11-25">
 <table>
-<tr><td><b>Modifier Type</b></td><td><b>Active</b></td><td><b>Otherwise</b></td></tr>
+<tr><th><b>Modifier Type</b></th><th><b>Active</b></th><th><b>Otherwise</b></th></tr>
 <tr><td><b>Race: <a href="race.html#Dark_Elves">Dark Elf</a></b></td><td>1.1</td><td>1</td></tr>
 <tr><td><b>Race: <a href="race.html#Elves">Elf</a></b></td><td>1.25</td><td>1</td></tr>
 <tr><td><b>Race: <a href="race.html#Humans">Human</a></b></td><td>0.7</td><td>1</td></tr>
@@ -65,36 +84,21 @@ Some Races or Personalities may have a bonus or penalty to Spell Duration. <a hr
 <tr><td><b>Ritual: Havoc</b></td><td>1.25 (off)</td><td>1</td></tr>
 <tr><td><b>Dragon: Sapphire</b></td><td>0.7</td><td>1</td></tr></table></div>
 
-<h2 id="Effects_of_Mod_WPA">Effects of Mod WPA</h2>
-
-<h3 id="Offensive_Spells_2">Offensive Spells</h3>
-
+<h3 id="Mod_WPA_Ratio">WPA ratio for offensive spells</h3>
+<p>Your chance of success depends on this ratio. Higher is better for you.</p>
 <div class="formula"><span class="formula__name">Modifier</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term">Your Mod WPA</span></span><span class="formula__step"><span class="formula__op">÷</span><span class="formula__term">Opponent's Mod WPA</span></span></div>
 
-<p>The higher this modifier is, the greater the:</p>
-
-<ul>
-<li>Chance of a Successful Cast</li>
-<li>Chance of Preventing an Opponent's Spell</li></ul>
-
-<h3 id="Self_Spells_2">Self Spells</h3>
-
-<p>WPA does not influence self spells.</p>
-
-<h2 id="Limit_Wizard_Training">Limit Wizard Training</h2>
-
-<p>Guilds train Wizards if it allowed and current number of Wizards is less then Maximum Allowed</p>
-
-<div class="formula"><span class="formula__name">Maximum Wizards Allowed to Train</span><span class="formula__equals">=</span><span class="formula__step"><span class="formula__term"><a href="units.html">Peasants</a></span></span><span class="formula__step"><span class="formula__op">×</span><span class="formula__term">2</span></span></div>
-
-<h2 id="Runes_Cost_Formula">Runes Cost Formula</h2>
-
+<h3 id="Runes_Cost_Formula">Runes cost</h3>
+<p>The runes a spell costs depend on your land size and the spell's cost multiplier (see the spell tables).</p>
 <pre><b>Runes cost =</b> <i>ROUNDDOWN</i> ( (0.6 * Size + 200) * Spell Cost Multiplier * 1.5 )
 </pre>
 
-<h2 id="Spell_Table_.5BSelf_Spells.5D">Spell Table [Self Spells]</h2>
+<h2 id="Spell_Tables">Spell tables</h2>
 
-<div class="table-scroll">
+<p>Each row is one spell. <em>Spell Bonus</em> is the effect size, and <em>Difficulty</em>, <em>Cost Multiplier</em> and <em>Duration (Average)</em> are the spell's cast difficulty, runes cost multiplier and typical length. The last columns show, for each race and personality, whether it can cast the spell. Click "Details" for what the spell does. For full descriptions see <a href="mystics.html">Mystics</a>.</p>
+
+<h3 id="Spell_Table_.5BSelf_Spells.5D">Self spells</h3>
+<div class="table-scroll" data-updated="2024-11-25">
 <table>
 <tr><th class="cell-bad">Spell</th><th class="cell-bad">Description</th><th class="cell-bad">Spell<br> Bonus</th><th class="cell-bad">Difficulty</th><th class="cell-bad">Cost<br> Multiplier</th><th class="cell-bad">Duration<br> (Average)</th><th class="cell-bad">Support<br> Spell</th><th class="cell-bad">Av</th><th class="cell-bad">DE</th><th class="cell-bad">Dry</th><th class="cell-bad">Dw</th><th class="cell-bad">Elf</th><th class="cell-bad">Fa</th><th class="cell-bad">Ha</th><th class="cell-bad">Hu</th><th class="cell-bad">Or</th><th class="cell-bad">Art</th><th class="cell-bad">Cle</th><th class="cell-bad">Her</th><th class="cell-bad">Mys</th><th class="cell-bad">Rog</th><th class="cell-bad">Shep</th><th class="cell-bad">Tact</th><th class="cell-bad">WH</th><th class="cell-bad">Warr</th></tr>
 <tr><th class="cell-bad cell-center">Minor Protection</th><td><details>
@@ -177,9 +181,8 @@ Some Races or Personalities may have a bonus or penalty to Spell Duration. <a hr
 <summary>Details</summary> Increases progress towards the chosen ritual for each cast. Only available on the <a href="ritual.html">Ritual</a> tab.</details></td><td class="cell-center"></td><td class="cell-center">N/A</td><td class="cell-center">6.0</td><td class="cell-center">N/A</td><td class="cell-center cell-no">No</td><td class="cell-center cell-yes">Yes</td><td class="cell-center cell-yes">Yes</td><td class="cell-center cell-yes">Yes</td><td class="cell-center cell-yes">Yes</td><td class="cell-center cell-yes">Yes</td><td class="cell-center cell-yes">Yes</td><td class="cell-center cell-yes">Yes</td><td class="cell-center cell-yes">Yes</td><td class="cell-center cell-yes">Yes</td><td class="cell-center cell-no">No</td><td class="cell-center cell-no">No</td><td class="cell-center cell-no">No</td><td class="cell-center cell-no">No</td><td class="cell-center cell-no">No</td><td class="cell-center cell-no">No</td><td class="cell-center cell-no">No</td><td class="cell-center cell-no">No</td><td class="cell-center cell-no">No</td></tr>
 <tr><th class="cell-bad">Spell</th><th class="cell-bad">Description</th><th class="cell-bad">Spell<br> Bonus</th><th class="cell-bad">Difficulty</th><th class="cell-bad">Cost<br> Multiplier</th><th class="cell-bad">Duration<br> (Average)</th><th class="cell-bad">Support<br> Spell</th><th class="cell-bad">Av</th><th class="cell-bad">DE</th><th class="cell-bad">Dry</th><th class="cell-bad">Dw</th><th class="cell-bad">Elf</th><th class="cell-bad">Fa</th><th class="cell-bad">Ha</th><th class="cell-bad">Hu</th><th class="cell-bad">Or</th><th class="cell-bad">Art</th><th class="cell-bad">Cle</th><th class="cell-bad">Her</th><th class="cell-bad">Mys</th><th class="cell-bad">Rog</th><th class="cell-bad">Shep</th><th class="cell-bad">Tact</th><th class="cell-bad">WH</th><th class="cell-bad">Warr</th></tr></table></div>
 
-<h2 id="Spell_Table_.5BOffensive_Spells.5D">Spell Table [Offensive Spells]</h2>
-
-<div class="table-scroll">
+<h3 id="Spell_Table_.5BOffensive_Spells.5D">Offensive spells</h3>
+<div class="table-scroll" data-updated="2024-11-25">
 <table>
 <tr><th class="cell-bad">Spell</th><th class="cell-bad">Description</th><th class="cell-bad">Spell<br> Bonus</th><th class="cell-bad">Difficulty</th><th class="cell-bad">Cost<br> Multiplier</th><th class="cell-bad">Duration<br> (Average)</th><th class="cell-bad">Av</th><th class="cell-bad">DE</th><th class="cell-bad">Dry</th><th class="cell-bad">Dw</th><th class="cell-bad">Elf</th><th class="cell-bad">Fa</th><th class="cell-bad">Ha</th><th class="cell-bad">Hu</th><th class="cell-bad">Or</th><th class="cell-bad">Art</th><th class="cell-bad">Cle</th><th class="cell-bad">Her</th><th class="cell-bad">Mys</th><th class="cell-bad">Rog</th><th class="cell-bad">Shep</th><th class="cell-bad">Tact</th><th class="cell-bad">WH</th><th class="cell-bad">Warr</th></tr>
 <tr><th class="cell-bad cell-center">Crystal Ball</th><td><details>
@@ -230,9 +233,9 @@ Some Races or Personalities may have a bonus or penalty to Spell Duration. <a hr
 <summary>Details</summary><i>Unfriendly + Hostile + War</i>: Captures between 1 and 1.25% of opponents Acres.</details></td><td class="cell-center"></td><td class="cell-center">0.04</td><td class="cell-center">4</td><td class="cell-center">N/A</td><td class="cell-center cell-yes">Yes</td><td class="cell-center cell-yes">Yes</td><td class="cell-center cell-yes">Yes</td><td class="cell-center cell-yes">Yes</td><td class="cell-center cell-yes">Yes</td><td class="cell-center cell-yes">Yes</td><td class="cell-center cell-yes">Yes</td><td class="cell-center cell-yes">Yes</td><td class="cell-center cell-yes">Yes</td><td class="cell-center cell-no">No</td><td class="cell-center cell-no">No</td><td class="cell-center cell-no">No</td><td class="cell-center cell-no">No</td><td class="cell-center cell-no">No</td><td class="cell-center cell-no">No</td><td class="cell-center cell-no">No</td><td class="cell-center cell-no">No</td><td class="cell-center cell-no">No</td></tr>
 <tr><th class="cell-bad">Spell</th><th class="cell-bad">Description</th><th class="cell-bad">Spell<br> Bonus</th><th class="cell-bad">Difficulty</th><th class="cell-bad">Cost<br> Multiplier</th><th class="cell-bad">Duration<br> (Average)</th><th class="cell-bad">Av</th><th class="cell-bad">DE</th><th class="cell-bad">Dry</th><th class="cell-bad">Dw</th><th class="cell-bad">Elf</th><th class="cell-bad">Fa</th><th class="cell-bad">Ha</th><th class="cell-bad">Hu</th><th class="cell-bad">Or</th><th class="cell-bad">Art</th><th class="cell-bad">Cle</th><th class="cell-bad">Her</th><th class="cell-bad">Mys</th><th class="cell-bad">Rog</th><th class="cell-bad">Shep</th><th class="cell-bad">Tact</th><th class="cell-bad">WH</th><th class="cell-bad">Warr</th></tr></table></div>
 
-<h2 id="Spells_and_Ability_to_Cast">Spells and Ability to Cast</h2>
+<h2 id="Spells_and_Ability_to_Cast">Who can cast what</h2>
 
-<p>For full information on all of the current Spells refer to <a href="mystics.html">Mystics</a>.</p>
+<p>For full information on all of the current spells refer to <a href="mystics.html">Mystics</a>. The first table lists the races and personalities used in the spell tables; the second lists every spell in the spellbook by type.</p>
 
 <div class="table-scroll" data-updated="none">
 <table>
@@ -242,6 +245,7 @@ Some Races or Personalities may have a bonus or penalty to Spell Duration. <a hr
 <tr><th class="cell-dark">Personalities</th><td><a href="personality.html#The_Artisan">The Artisan</a>  •  <a href="personality.html#The_Cleric">The Cleric</a>  •  <a href="personality.html#The_General">The General</a>  •  <a href="personality.html#The_Heretic">The Heretic</a>  •  <a href="personality.html#The_Mystic">The Mystic</a>  •  <a href="personality.html#The_Rogue">The Rogue</a>  •  <a href="personality.html#The_Tactician">The Tactician</a>  •  <a href="personality.html#The_Warrior">The Warrior</a></td></tr>
 <tr><th class="cell-dark">Extinct Personalities</th><td><a href="personality.html#The_Freak">The Freak</a>  •  <a href="personality.html#The_Paladin">The Paladin</a>  •  <a href="personality.html#The_Raider">The Raider</a>  •  <a href="personality.html#The_Undead">The Undead</a>  •  <a href="personality.html#The_Necromancer">The Necromancer</a>  •  <a href="personality.html#The_Merchant">The Merchant</a>  •  <a href="personality.html#The_Sage">The Sage</a>  •  <a href="personality.html#The_Shepherd">The Shepherd</a>  •  <a href="personality.html#The_War_Hero">The War Hero</a></td></tr></table></div>
 
+<h3 id="The_Spell_Book">The spellbook</h3>
 <div class="table-scroll" data-updated="none">
 <table>
 <tr><th colspan="4" class="cell-dark"><b>The Spellbook</b></th></tr>
@@ -259,3 +263,12 @@ Some Races or Personalities may have a bonus or penalty to Spell Duration. <a hr
 <tr><th class="cell-dark"></th><th class="cell-dark"></th><th class="cell-dark">Hostile</th><td><a href="mystics.html#Meteor_Showers">Meteor Showers</a></td></tr>
 <tr><th class="cell-dark"></th><th class="cell-dark">Interaction Spells</th><th class="cell-head">Friendly</th><td><a href="mystics.html#Crystal_Ball">Crystal Ball</a>  •  <a href="mystics.html#Crystal_Eye">Crystal Eye</a>  •  <a href="mystics.html#Pitfalls">Pitfalls</a></td></tr>
 <tr><th class="cell-dark"></th><th class="cell-dark"></th><th class="cell-head">Unfriendly</th><td><a href="mystics.html#Expose_Thieves">Expose Thieves</a>  •  <a href="mystics.html#Mystic_Vortex">Mystic Vortex</a></td></tr></table></div>
+
+<h2 id="See_Also">See also</h2>
+<ul>
+<li><a href="mystics.html">Mystics</a>: what each spell does</li>
+<li><a href="spell-uses.html">Spell Uses</a></li>
+<li><a href="science-formulas.html">Science Formulas</a>: Channeling Science</li>
+<li><a href="thievery-formulas.html">Thievery Formulas</a></li>
+<li><a href="race.html">Races</a> and <a href="personality.html">Personalities</a></li>
+</ul>
